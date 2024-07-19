@@ -220,7 +220,7 @@ export default function Home() {
 
           <Image
             alt=""
-            src={"/IMages/offer-banner.png"}
+            src={"/Images/offer-banner.png"}
             height={9000}
             width={1100}
           />
@@ -676,7 +676,7 @@ export default function Home() {
 
         <Image
           alt=""
-          src={"/IMages/banner-xm-1024x630.jpg"}
+          src={"/Images/banner-xm-1024x630.jpg"}
           height={9000}
           width={1100}
         />
