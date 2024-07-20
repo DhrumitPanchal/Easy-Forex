@@ -114,13 +114,13 @@ export default function Home() {
   return (
     <>
       <section className="w-full h-[calc(100vh-4.6rem)] bg-cover bg-fixed bg-hero-image">
-        <div className="flex items-center justify-center w-full h-full">
-          <div className="flex flex-col items-center w-1/2 text-white">
-            <div>
+        <div className="flex items-center justify-center w-full h-full max-sm:flex-col">
+          <div className="flex flex-col items-center w-1/2 text-white max-sm:w-full">
+            <div className="">
               <h4 className="pl-[.2rem] text-[1.2rem] font-medium">
                 Trading Education end Tools
               </h4>
-              <h2 className="text-[4.6rem] font-semibold leading-[4.2rem]">
+              <h2 className="text-[4.6rem] max-sm:text-[2.6rem] font-semibold leading-[4.2rem]">
                 Easy Forex Pips
               </h2>
               <div className="mt-[2rem] flex gap-[2rem]">
@@ -136,7 +136,7 @@ export default function Home() {
 
           <div className="w-1/2 text-white "></div>
         </div>
-        <div className="flex justify-center h-[4.6rem] flex-col pl-[8rem]  bg-[#242b32] text-white">
+        <div className="flex justify-center max-sm:items-center h-[4.6rem] flex-col pl-[8rem] max-sm:pl-0  bg-[#242b32] text-white">
           <h3 className="text-[1.1rem] font-normal">
             Join our{" "}
             <span className="font-semibold">Free Telegram Channel</span>
@@ -223,6 +223,7 @@ export default function Home() {
             src={"/Images/offer-banner.png"}
             height={9000}
             width={1100}
+            className="max-sm:w-[26rem]"
           />
 
           <button className="mt-[.8rem] h-[2.6rem] w-[16rem] rounded-[.4rem] tracking-[.2px] text-[.8rem] text-white bg-[#ff695d]">
@@ -230,8 +231,8 @@ export default function Home() {
           </button>
         </section>
 
-        <div className="flex justify-center h-[11rem] w-full bg-[#fff3f2]">
-          <div className="flex gap-[8rem]">
+        <div className="flex justify-center h-[11rem] max-sm:h-fit w-full bg-[#fff3f2]">
+          <div className="flex max-sm:flex-col gap-[8rem] max-sm:gap-[3rem] max-sm:py-[2rem]">
             <div className="flex flex-col items-center justify-center">
               <h2 className="text-[1.6rem] font-semibold">240000+</h2>
               <h4>People In Free channel</h4>
@@ -256,10 +257,10 @@ export default function Home() {
           <div className="h-[.2rem] w-[1.6rem] bg-[#f4645a]"></div>
         </div>
 
-        <div className="flex gap-[6rem] py-[2rem] w-full px-[8rem]">
+        <div className="flex max-sm:flex-col max-sm:items-center gap-[6rem] max-sm:gap-[3rem] py-[2rem] w-full max-sm:px-[2rem] px-[8rem]">
           <Image
             alt=""
-            className="w-[35rem]"
+            className="max-sm:mt-[1rem] w-[35rem] max-sm:w-[20rem]"
             src={"/Images/mokup.png"}
             height={400}
             width={500}
@@ -340,8 +341,8 @@ export default function Home() {
             Turn yourself into a WINNER with our PREMIUM program
           </h1>
 
-          <div className="flex px-[8rem] gap-[6rem] mt-[1rem] w-full">
-            <div className="w-1/2">
+          <div className="flex max-sm:flex-col  px-[8rem] max-sm:px-[2rem] gap-[6rem] max-sm:gap-[2rem] mt-[1rem] w-full">
+            <div className="w-1/2 max-sm:w-full">
               <Image
                 src={"/Images/graph-2.png"}
                 width={550}
@@ -350,7 +351,7 @@ export default function Home() {
               />
             </div>
 
-            <div className="flex flex-col gap-[1.6rem] pt-[1.4rem]  w-1/2">
+            <div className="flex flex-col gap-[1.6rem] pt-[1.4rem] w-1/2 max-sm:w-full">
               <h2 className="text-[1.3rem] tracking-[.6px] font-semibold">
                 We will show you the best trading opportunities!
               </h2>
@@ -400,7 +401,7 @@ export default function Home() {
                 tools to help your trading.
               </p>
 
-              <button className="mt-[.8rem] h-[2.6rem] w-[16rem] rounded-[.4rem] tracking-[.2px] text-[.8rem] text-white bg-[#ff695d]">
+              <button className="mx-auto mt-[.8rem] h-[2.6rem] w-[16rem] rounded-[.4rem] tracking-[.2px] text-[.8rem] text-white bg-[#ff695d]">
                 GET 12 MONTHS PROMO NOW!
               </button>
             </div>
@@ -461,19 +462,18 @@ export default function Home() {
         <div className="h-[.1px] w-[80%] bg-black" />
       </section>
 
-      <section className="flex flex-col gap-[1.6rem]  items-center py-[4rem] bg-[#fff3f2]">
+      <section className="flex flex-col gap-[1.6rem] max-sm:gap-[1rem]  items-center py-[4rem] bg-[#fff3f2]">
         <h2 className="text-center text-[1.6rem] font-bold">
           MyFxBook Performance
         </h2>
         <div className=" flex items-center gap-[1rem]">
-          <Image src={"/Images/check.png"} width={25} height={25} alt="" />
           <h3 className="text-[1.1rem] font-semibold">
-            3+ Years Verified Performance
+            ✅ 3+ Years Verified Performance
           </h3>
         </div>
 
         <Image
-          className="mt-[1rem]"
+          className="mt-[1rem] max-sm:w-[26rem]"
           src={"/Images/graph.png"}
           width={1100}
           height={1200}
@@ -486,18 +486,16 @@ export default function Home() {
           <h2 className="text-center text-[1.6rem] font-bold">VIP PLANS</h2>
           <div className="h-[.2rem] w-[1.6rem] bg-[#f4645a]"></div>
         </div>
-        <button className="mt-[.8rem] h-[2.6rem] w-[16rem] rounded-[.4rem] tracking-[.2px] text-[.8rem] text-white bg-[#ff695d]">
-          View Full Results
-        </button>
+
         <Image
-          className="mt-[1rem]"
+          className="mt-[1rem] max-sm:w-[26rem]"
           src={"/Images/vip-plans.png"}
           width={800}
           height={500}
           alt=""
         />
 
-        <div className="flex justify-center gap-[4rem] w-full ">
+        <div className="flex max-sm:flex-col max-sm:items-center justify-center gap-[4rem] w-full ">
           {Plans?.map((item, index) => {
             return (
               <div
@@ -589,20 +587,20 @@ export default function Home() {
         </button>
       </section>
 
-      <section className="flex flex-col gap-[2rem] py-[4rem] w-full">
+      <section className="flex flex-col gap-[2rem] py-[4rem]  w-full">
         <h1 className="text-center text-[1.6rem] font-bold">
           Forex Trading Course{" "}
         </h1>
 
-        <div className="flex px-[8rem] gap-[6rem] mt-[1rem] w-full">
-          <div className="flex flex-col gap-[2rem] w-1/2 ">
+        <div className="flex max-sm:flex-col px-[8rem] max-sm:px-[2rem] gap-[6rem] max-sm:gap-[2rem] mt-[1rem] w-full">
+          <div className="flex flex-col gap-[2rem] w-1/2 max-sm:w-full">
             <h2 className="text-[1.1rem] font-semibold">
               A Complete Smart Money Concepts Course : Master The Forex Market
             </h2>
             <Image src={"/Images/forex.webp"} width={590} height={540} alt="" />
           </div>
 
-          <div className="flex flex-col gap-[1.6rem]  w-1/2">
+          <div className="flex flex-col gap-[1.6rem] w-1/2 max-sm:w-full">
             <h2 className="text-[1.3rem] tracking-[.6px] font-semibold">
               Upgrade your trading with the Forex Trading Course!{" "}
             </h2>
@@ -628,9 +626,9 @@ export default function Home() {
       </section>
 
       <section className="flex flex-col gap-[2rem] py-[4rem] w-full text-white bg-[#242b32]">
-        <div className="flex px-[8rem] gap-[6rem] mt-[1rem] w-full">
-          <div className="flex flex-col gap-[2rem] w-1/2 ">
-            <h2 className="text-[1.6rem] font-semibold">
+        <div className="flex max-sm:flex-col px-[8rem] max-sm:px-[2rem] gap-[6rem] max-sm:gap-[2rem] mt-[1rem] w-full">
+          <div className="flex flex-col gap-[2rem] w-1/2 max-sm:w-full">
+            <h2 className="text-[1.6rem] max-sm:text-[1.4rem] font-semibold">
               BUY/SELL Indicator for TradingView
             </h2>
             <Image
@@ -642,7 +640,7 @@ export default function Home() {
             />
           </div>
 
-          <div className="flex flex-col gap-[1.6rem]  w-1/2">
+          <div className="flex flex-col gap-[1.6rem]  w-1/2 max-sm:w-full">
             <h2 className="text-[1.2rem] tracking-[.6px] font-semibold">
               Best TradingView indicator for buy and sell signals. Accurate
               trend reversal detector. Support and resistance breakouts. Trend
@@ -675,6 +673,7 @@ export default function Home() {
         </div>
 
         <Image
+          className="max-sm:w-[26rem]"
           alt=""
           src={"/Images/banner-xm-1024x630.jpg"}
           height={9000}
@@ -687,9 +686,9 @@ export default function Home() {
       </section>
 
       <section className="flex flex-col gap-[2rem] py-[4rem] w-full text-white bg-[#242b32]">
-        <div className="flex px-[8rem] gap-[6rem] mt-[1rem] w-full">
-          <div className="flex flex-col justify-between gap-[2rem] w-1/2 ">
-            <h2 className="text-[1.6rem] font-semibold">
+        <div className="flex max-sm:flex-col px-[8rem] max-sm:px-[2rem] gap-[6rem] max-sm:gap-[2rem] mt-[1rem] w-full">
+          <div className="flex flex-col justify-between gap-[2rem] w-1/2 max-sm:w-full">
+            <h2 className="text-[1.6rem] max-sm:text-[1.4rem] font-semibold">
               🆕 Support and Resistance Indicator{" "}
             </h2>
             <Image
@@ -701,7 +700,7 @@ export default function Home() {
             />
           </div>
 
-          <div className="flex flex-col gap-[1.6rem]  w-1/2">
+          <div className="flex flex-col gap-[1.6rem]  w-1/2 max-sm:w-full">
             <h2 className="text-[1.2rem] tracking-[.6px] font-semibold">
               Support and Resistance indicator helps you to reduce the risks and
               find more accurate points of entry to the market. Accurate support

@@ -10,8 +10,8 @@ import {
 function Footer() {
   return (
     <>
-      <footer className=" left-0 w-full px-[14rem] pt-[1rem] bg-[#f7f7f7] ">
-        <div className="w-full  max-sm:px-[2.6rem] py-[3rem] flex max-sm:flex-col gap-[4rem] max-sm:gap-[2rem]">
+      <footer className=" left-0 w-full px-[14rem] max-sm:px-0 pt-[1rem] bg-[#f7f7f7] ">
+        <div className="w-full max-sm:px-[2.6rem] py-[3rem] flex max-sm:flex-col gap-[4rem] max-sm:gap-[2rem]">
           <div className="flex flex-col justify-between w-3/6 max-sm:w-full">
             <h2 className="text-[1.4rem] font-semibold">Easy forex</h2>
             <p className="mt-[.6rem] text-[1rem] font-light tracking-[.1rem]">
@@ -35,7 +35,7 @@ function Footer() {
             </div>
           </div>
 
-          <div className="flex flex-col w-1/6 gap-[1rem]">
+          <div className="flex flex-col w-1/6 max-sm:w-full gap-[1rem]">
             <h2>FOLLOW US</h2>
 
             <div className="flex gap-[1rem]">
@@ -68,7 +68,7 @@ function Footer() {
           </div>
         </div>
 
-        <div className=" w-full  py-[1.4rem] border-t-[1px] border-black/20">
+        <div className=" w-full py-[1.4rem] max-sm:px-[2rem] border-t-[1px] border-black/20">
           <h2 className="text-center text-[.9rem]">
             Caution: Trading involves the possibility of financial loss. Only
             trade with money that you are prepared to lose, you must recognize
@@ -78,13 +78,7 @@ function Footer() {
             more money than is in your account. Easy Forex Ltd. takes not
             responsibility for loss incurred as a result of our trading signals.
             By signing up as a member you acknowledge that we are not providing
-            financial advice and that you are making a the decision to copy our
-            trades on your own account. We have no knowledge on the level of
-            money you are trading with or the level of risk you are taking with
-            each trade. You must make your own financial decisions, we take no
-            responsibility for money made or lost as a result of our signals or
-            advice on forex related products on this website. Terms And
-            Conditions C) Copyright Easy Forex Ltd. 2023. All Rights Reserved.
+            financial advice and that you are making.
           </h2>
         </div>
       </footer>

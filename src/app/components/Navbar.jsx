@@ -10,7 +10,9 @@ import { IoIosArrowDown } from "react-icons/io";
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("HOME");
-  const [bgColor, setBgColor] = useState("bg-transparent backdrop-blur-[5px]");
+  const [bgColor, setBgColor] = useState(
+    "bg-transparent backdrop-blur-[5px] max-sm:bg-black"
+  );
 
   const router = useRouter();
   const pathname = usePathname();
@@ -23,6 +25,10 @@ function Navbar() {
     {
       name: "ABOUT US",
       path: "/about",
+    },
+    {
+      name: "COURSE",
+      path: "/course",
     },
     {
       name: "FOREX SIGNALS PLANS",
@@ -51,10 +57,7 @@ function Navbar() {
       name: "TELEGRAM TO MT5",
       path: "telegramtomt5",
     },
-    {
-      name: "FOREX COURSE",
-      path: "forexcourse",
-    },
+
     {
       name: "TESTIMONIALS & REVIEWS",
       path: "testimonials",
@@ -66,7 +69,7 @@ function Navbar() {
       if (window.scrollY > 600) {
         setBgColor("bg-black");
       } else {
-        setBgColor("bg-transparent backdrop-blur-[5px]");
+        setBgColor("bg-transparent backdrop-blur-[5px] max-sm:bg-black");
       }
     };
 
@@ -83,7 +86,7 @@ function Navbar() {
 
   return (
     <nav
-      className={`fixed top-0 left-0 pt-[.6rem] z-40 w-full flex justify-between items-center px-[2rem] max-sm:px-[2rem] py-[.2rem] ${bgColor} transition-colors duration-300`}
+      className={`fixed top-0 left-0 right-0 pt-[.6rem] z-40 w-full flex justify-between items-center px-[2rem] max-sm:px-[2rem] py-[.2rem] ${bgColor} transition-colors duration-300`}
     >
       <a
         href="#home"
@@ -94,22 +97,31 @@ function Navbar() {
 
       <FaBars
         onClick={() => setMenuOpen(!menuOpen)}
-        className="cursor-pointer text-[1.5rem] max-sm:block hidden text-secondaryColor"
+        className="cursor-pointer text-white text-[1.5rem] max-sm:block hidden text-secondaryColor"
       />
 
       <div
         className={`flex max-sm:fixed max-sm:top-0 ${
           menuOpen ? "max-sm:left-0" : "max-sm:-left-[100%]"
-        } max-sm:h-screen max-sm:w-full max-sm:justify-center max-sm:items-center  max-sm:flex-col max-sm:text-[1.3rem] max-sm:gap-[.6rem]  max-sm:z-[50] gap-[1rem] text-[1.1rem] font-semibold tracking-[.5px] transition-all duration-300`}
+        } max-sm:h-screen max-sm:w-full max-sm:justify-center max-sm:bg-black max-sm:items-center max-sm:flex-col max-sm:text-[1.3rem] max-sm:gap-[.6rem]  max-sm:z-[50] gap-[1rem] text-[1.1rem] font-semibold tracking-[.5px] transition-all duration-300`}
       >
-        <button className=" hidden max-sm:block right-[1.6rem] text-[1.4rem]  absolute top-[1.4rem]  font-semibold text-secondaryColor ">
-          <FaTimes
-            className="cursor-pointer text-[1.6rem]"
-            onClick={() => setMenuOpen(!menuOpen)}
-          />
-        </button>
+        <div className="px-[1.2rem] pr-[1.6rem] py-[.8rem] absolute top-0 justify-between hidden max-sm:flex max-sm:w-full ">
+          <Image
+            className=""
+            alt=""
+            src={"/Images/Logo.png"}
+            height={50}
+            width={50}
+          />{" "}
+          <button className="hidden max-sm:block text-[1.4rem] font-semibold ">
+            <FaTimes
+              className="cursor-pointer text-white text-[1.6rem]"
+              onClick={() => setMenuOpen(!menuOpen)}
+            />
+          </button>
+        </div>
 
-        <div className="flex items-center justify-center w-full h-full">
+        <div className="flex w-full h-full max-sm:flex-col max-sm:mt-[6rem] max-sm:px-[.8rem]">
           {NavItems?.map((item) => {
             return (
               <Link
@@ -120,7 +132,7 @@ function Navbar() {
                 }}
                 className={`px-[.8rem] py-[.6rem] flex items-center gap-[.6rem] text-white transition-colors duration-200 ${
                   activeSection === item?.name && "text-red-500"
-                } hover:text-slate-300 text-[.8rem] font-medium`}
+                } hover:text-slate-300 text-[.8rem] max-sm:text-[1.2rem] font-medium max-sm:border-b-[.1px] max-sm:border-white/60`}
                 href={item?.path}
               >
                 {item?.name}
