@@ -1,7 +1,7 @@
 import Image from "next/image";
 import React, { useState, useContext, useEffect } from "react";
 import Link from "next/link";
-import { Context } from "../Context/Index.jsx";
+import { Context } from "@app/Context/Index.jsx";
 function AdminCourseCard({ data }) {
   const { name, description, price, desc_price, image, _id } = data;
   const { courseData, handelDeleteCourse } = useContext(Context);
