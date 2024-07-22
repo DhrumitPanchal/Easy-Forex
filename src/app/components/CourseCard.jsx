@@ -5,7 +5,7 @@ function CourseCard({ data }) {
   return (
     <Link
       href={"course/232323232"}
-      className="cursor-pointer flex flex-col gap-[.6rem] w-[21rem] h-fit "
+      className="cursor-pointer flex flex-col gap-[.6rem] w-[21rem] max-sm:w-full h-fit "
     >
       <div className="w-full overflow-hidden group ">
         <Image
@@ -18,9 +18,9 @@ function CourseCard({ data }) {
       </div>
 
       <div>
-        <h4 className="text-[.7rem] text-black/60">FOREX MEMBERSHIP</h4>
-        <h2 className="text-[1rem] capitalize font-medium">{data?.name}</h2>
-        <div className="flex gap-[.8rem] text-[.9rem]">
+        <h4 className="text-[.7rem] max-sm:text-[.9rem ] text-black/60">FOREX MEMBERSHIP</h4>
+        <h2 className="text-[1rem] max-sm:text-[1.4rem] capitalize font-medium">{data?.name}</h2>
+        <div className="flex gap-[.8rem] text-[.9rem] max-sm:text-[1.2rem]">
           {data?.desPrice && (
             <h2 className="font-medium line-through">
               <span>$</span>

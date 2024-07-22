@@ -64,6 +64,11 @@ function Navbar() {
     },
   ];
 
+  if (pathname.match(/^\/admin/)) {
+    return null;
+  }
+
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 600) {

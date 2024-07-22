@@ -26,10 +26,10 @@ function Page() {
     },
   ];
   return (
-    <div className="mb-[4rem] w-full min-h-screen max-h-fit pt-[6rem] px-[8rem] max-sm:px-[1rem]">
-      <div className="flex justify-between gap-[4rem] w-full ">
+    <div className="mb-[4rem] w-full min-h-screen max-h-fit pt-[6rem] px-[8rem] max-sm:px-[2rem]">
+      <div className="flex justify-between max-sm:flex-col gap-[4rem] max-sm:gap-[2rem] w-full ">
         <Image
-          className="w-[80%] transition-all duration-150 h-fit "
+          className="w-[80%] max-sm:w-full transition-all duration-150 h-fit "
           alt=""
           height={0}
           width={300}
@@ -65,7 +65,7 @@ function Page() {
 
           <div className=" w-full h-[.1px] bg-black/30" />
 
-          <div className="flex gap-[1rem]">
+          <div className="flex overflow-x-scroll max-sm:pb-[1rem] gap-[1rem]">
             {packsData?.map((item, index) => {
               return (
                 <div

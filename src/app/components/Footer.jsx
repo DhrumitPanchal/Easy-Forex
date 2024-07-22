@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import Link from "next/link";
 import {
@@ -6,8 +7,14 @@ import {
   FaTwitter,
   FaTelegram,
 } from "react-icons/fa";
+import { usePathname } from "next/navigation";
 
 function Footer() {
+  const pathname = usePathname();
+
+  if (pathname.match(/^\/admin/)) {
+    return null;
+  }
   return (
     <>
       <footer className=" left-0 w-full px-[14rem] max-sm:px-0 pt-[1rem] bg-[#f7f7f7] ">
