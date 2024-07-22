@@ -1,24 +1,25 @@
 "use client";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Link from "next/link";
 import SideMenu from "@/app/components/Admin/SideMenu";
+import { Context } from "@/app/Context/Index";
 function Page() {
+  const { handelAddCourse } = useContext(Context);
   const [formData, setFromData] = useState({
-    product_name: "",
-    product_description: "",
-    product_category: "",
-    product_for: "",
-    product_price: null,
-    discount_rate: null,
-    product_stock: null,
-    Image_url: "",
+    name: "",
+    description: "",
+    price: null,
+    desc_price: null,
+    image: "",
   });
 
   const handelSubmit = (e) => {
     e.preventDefault();
-    isForAdd
-      ? handelAddProduct(formData)
-      : handelUpdateProduct(formData?._id, formData);
+    handelAddCourse(formData);
+  };
+
+  const handelInput = (e) => {
+    setFromData({ ...formData, [e.target.name]: e.target.value });
   };
   return (
     <div className="relative flex w-full h-full ">
@@ -36,21 +37,21 @@ function Page() {
           >
             <input
               type="text"
-              name="product_name"
+              name="name"
               placeholder="Course Name"
               required
               onChange={(e) => handelInput(e)}
-              value={formData.product_name}
+              value={formData.name}
               className="px-[1.4rem] py-[.2rem] rounded-[.4rem] text-[1.2rem] w-full border-[2px] focus:border-black border-black/30 placeholder:text-black/50"
             />
 
             <textarea
               type="text"
               rows={3}
-              name="product_description"
+              name="description"
               required
               onChange={(e) => handelInput(e)}
-              value={formData.product_description}
+              value={formData.description}
               placeholder="Course Description"
               className="px-[1.4rem] py-[.2rem] rounded-[.4rem] text-[1.2rem] w-full border-[2px] focus:border-black border-black/30 placeholder:text-black/50"
             />
@@ -61,16 +62,16 @@ function Page() {
                 min={1}
                 required
                 onChange={(e) => handelInput(e)}
-                value={formData.product_price}
-                name="product_price"
-                placeholder="Product Price"
+                value={formData.price}
+                name="price"
+                placeholder="Course Price"
                 className="w-1/2 px-[1.4rem] py-[.2rem] rounded-[.4rem] text-[1.2rem] max-sm:w-full border-[2px] focus:border-black border-black/30 placeholder:text-black/50"
               />
               <input
                 type="number"
                 onChange={(e) => handelInput(e)}
-                value={formData.discount_rate}
-                name="discount_rate"
+                value={formData.desc_price}
+                name="desc_price"
                 placeholder="Product Discount Rate"
                 className="w-1/2 px-[1.4rem] py-[.2rem] rounded-[.4rem] text-[1.2rem] max-sm:w-full border-[2px] focus:border-black border-black/30 placeholder:text-black/50"
               />
@@ -79,10 +80,10 @@ function Page() {
             <input
               type="url"
               min={1}
-              name="Image_url"
+              name="image"
               required
               onChange={(e) => handelInput(e)}
-              value={formData.Image_url}
+              value={formData.image}
               placeholder="Product Image Url"
               className=" px-[1.4rem] py-[.2rem] rounded-[.4rem] text-[1.2rem] max-sm:w-full border-[2px] focus:border-black border-black/30 placeholder:text-black/50"
             />

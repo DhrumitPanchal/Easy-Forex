@@ -34,7 +34,7 @@ export async function POST(req) {
     });
     newCourse.save();
     return NextResponse.json(
-      { message: "Course Added", Course: newCourse },
+      { message: "Course Added", course: newCourse },
       { status: 201 }
     );
   } catch (error) {
@@ -70,7 +70,7 @@ export async function PUT(req) {
     const newCourse = await Course.findByIdAndUpdate(ID, data, { new: true });
 
     return NextResponse.json(
-      { message: "Course Updated", Course: newCourse },
+      { message: "Course Updated", course: newCourse },
       { status: 200 }
     );
   } catch (error) {
@@ -84,7 +84,7 @@ export async function PUT(req) {
 export async function DELETE(req) {
   try {
     const { ID } = await req.json();
-
+    console.log(ID);
     if (!ID) {
       return NextResponse.json(
         { message: " course ID not found" },
@@ -103,6 +103,7 @@ export async function DELETE(req) {
     await Course.findByIdAndDelete(ID);
     return NextResponse.json({ message: "Course Deleted" }, { status: 200 });
   } catch (error) {
+    console.log(error);
     return NextResponse.json(
       { message: "Server Error", error },
       { status: 500 }

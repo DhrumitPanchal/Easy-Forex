@@ -36,7 +36,7 @@ function SideMenu() {
           Orders
         </Link>
         <Link
-          href={"/admin/course"}
+          href={"/admin/courses"}
           onClick={() => setOpenMenu(!openMenu)}
           className="cursor-pointer px-[1rem] py-[.6rem] h-fit w-full border-b-[1px] border-black/50 text-[1.2rem] transition-colors duration-300 text-black/50 font-bold hover:bg-black/10"
         >

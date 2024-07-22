@@ -8,6 +8,9 @@ const nextConfig = {
       "www.smallcase.com",
       "media.assettype.com",
       "cdn.pixabay.com",
+      "static.vecteezy.com",
+      "easyforexpips.com",
+      "encrypted-tbn0.gstatic.com",
     ],
   },
 };

@@ -1,6 +1,8 @@
 /* eslint-disable react/no-unescaped-entities */
+"use client";
 import Image from "next/image";
 import { FaStar } from "react-icons/fa6";
+import { toast } from "react-toastify";
 
 export default function Home() {
   const tableHading = [
@@ -111,6 +113,7 @@ export default function Home() {
         "More analysis than I actually want, but once I saw the success rate, I realized that it doesnt matter how many strategies there are!",
     },
   ];
+
   return (
     <>
       <section className="w-full h-[calc(100vh-4.6rem)] bg-cover bg-fixed bg-hero-image">
@@ -415,48 +418,54 @@ export default function Home() {
           </h1>
 
           <table className="w-[70%] border-[1px] border-black">
-            <tr className=" bg-slate-200">
-              {tableHading?.map((item, index) => {
+            <thead>
+              <tr className=" bg-slate-200">
+                {tableHading?.map((item, index) => {
+                  return (
+                    <td
+                      key={item}
+                      className="px-[1rem] py-[.6rem]  text-[1.1rem] font-semibold  border-[1px] border-black/50"
+                    >
+                      {item}
+                    </td>
+                  );
+                })}
+              </tr>
+            </thead>
+            <tbody>
+              {tableData?.map((item, index) => {
                 return (
-                  <td
-                    key={item}
-                    className="px-[1rem] py-[.6rem]  text-[1.1rem] font-semibold  border-[1px] border-black/50"
+                  <tr
+                    key={item?.currency}
+                    className={`${
+                      index % 2 !== 0 && "bg-slate-100"
+                    } text-[1rem]`}
                   >
-                    {item}
-                  </td>
+                    <td className="px-[1rem] py-[.8rem] border-[1px] text-black/80 font-semibold  border-black/50">
+                      {item?.currency}
+                    </td>
+                    <td
+                      className={`${
+                        item?.buy_sell === "SELL"
+                          ? "text-red-500"
+                          : "text-green-500"
+                      } px-[1rem] py-[.6rem] border-[1px] border-black/50`}
+                    >
+                      {item?.buy_sell}
+                    </td>
+                    <td className="px-[1rem] py-[.8rem] border-[1px] border-black/50">
+                      {item?.closed_at}
+                    </td>
+                    <td className="px-[1rem] py-[.8rem] text-green-700 border-[1px] border-black/50">
+                      {item?.hit_tp_sl}
+                    </td>
+                    <td className="px-[1rem] py-[.8rem] border-[1px] font-semibold border-black/50">
+                      + {item?.profit_loss} pips
+                    </td>
+                  </tr>
                 );
               })}
-            </tr>
-            {tableData?.map((item, index) => {
-              return (
-                <tr
-                  key={item}
-                  className={`${index % 2 !== 0 && "bg-slate-100"} text-[1rem]`}
-                >
-                  <td className="px-[1rem] py-[.8rem] border-[1px] text-black/80 font-semibold  border-black/50">
-                    {item?.currency}
-                  </td>
-                  <td
-                    className={`${
-                      item?.buy_sell === "SELL"
-                        ? "text-red-500"
-                        : "text-green-500"
-                    } px-[1rem] py-[.6rem] border-[1px] border-black/50`}
-                  >
-                    {item?.buy_sell}
-                  </td>
-                  <td className="px-[1rem] py-[.8rem] border-[1px] border-black/50">
-                    {item?.closed_at}
-                  </td>
-                  <td className="px-[1rem] py-[.8rem] text-green-700 border-[1px] border-black/50">
-                    {item?.hit_tp_sl}
-                  </td>
-                  <td className="px-[1rem] py-[.8rem] border-[1px] font-semibold border-black/50">
-                    + {item?.profit_loss} pips
-                  </td>
-                </tr>
-              );
-            })}
+            </tbody>
           </table>
         </section>
         <div className="h-[.1px] w-[80%] bg-black" />
@@ -560,7 +569,7 @@ export default function Home() {
           {Testimonials?.map((item) => {
             return (
               <div
-                key={item}
+                key={item?.name}
                 className="mb-[2rem] flex flex-col gap-[.6rem] w-[32rem] "
               >
                 <div className="flex items-center gap-[.8rem]">
@@ -608,7 +617,7 @@ export default function Home() {
               Learn how trade the markets!
             </h4>
 
-            <li className=" flex flex-col gap-[.2rem]">
+            <div className=" flex flex-col gap-[.2rem]">
               <li>Step by Step: How to trade with Smart Money Concepts</li>
               <li>8+ hours of Video Lessons</li>
               <li>18 Articles </li>
@@ -617,7 +626,7 @@ export default function Home() {
               <li>Become a PRO trader course</li>
               <li>Order Blocks</li>
               <li>A-Z Smart Money Concept</li>
-            </li>
+            </div>
             <button className="mt-[.6rem] h-[2.6rem] w-[16rem] rounded-[.4rem] tracking-[.2px] text-[.8rem] text-white bg-[#ff695d]">
               LEARN MOR
             </button>
