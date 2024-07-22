@@ -31,8 +31,7 @@ export default function MyContext(props) {
     console.log("data : " + Data);
     try {
       const { data } = await axios.post(BaseURL + "/courses", {
-        ID,
-        data: Data,
+        ...Data,
       });
       toast.success(data?.message);
       router.push("/admin/courses");

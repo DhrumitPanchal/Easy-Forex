@@ -4,7 +4,7 @@ import React, { useContext, useEffect } from "react";
 import Link from "next/link";
 import { FaPlus } from "react-icons/fa";
 import { FaMagnifyingGlass } from "react-icons/fa6";
-import AdminCourseCard from "../../components/AdminCourseCard";
+import AdminCourseCard from "@/app/components/Admin/AdminCourseCard";
 import SideMenu from "@/app/components/Admin/SideMenu";
 import { Context } from "@/app/Context/Index";
 function Page() {
