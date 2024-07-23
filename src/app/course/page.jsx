@@ -1,31 +1,17 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { FaMagnifyingGlass } from "react-icons/fa6";
-import { useNavigate } from "next/navigation";
 import CourseCard from "../components/CourseCard";
-import coursesData from "../components/coursesData";
+import { Context } from "../Context/Index";
 function Page() {
-  const [filterIsActive, setFilterIsActive] = useState(false);
-  const [filtProducts, setFiltProducts] = useState([]);
+  const { courseData } = useContext(Context);
+
   const [search, setSearch] = useState("");
 
   const handelSearch = (e) => {
     setSearch(e.target.value);
     console.log(search);
-  };
-
-  const handelSearchProducts = () => {
-    if (search) {
-      setFilterIsActive(true);
-    }
-    const lowerserch = search.toLowerCase();
-    const result = productData.filter((product) => {
-      if (product.product_name.toLowerCase().includes(lowerserch))
-        return priceRange;
-    });
-
-    setFiltProducts(result);
   };
 
   return (
@@ -52,8 +38,8 @@ function Page() {
           {/* {filterIsActive
             ? filtProducts?.map((e) => <CourseCard key={e._id} data={e} />)
             : productData?.map((e) => <CourseCard key={e._id} data={e} />)} */}
-          {coursesData?.map((item) => (
-            <CourseCard key={item} data={item} />
+          {courseData?.map((item) => (
+            <CourseCard key={item?._id} data={item} />
           ))}
         </div>
       </section>

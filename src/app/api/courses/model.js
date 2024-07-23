@@ -4,23 +4,28 @@ const courseSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
-    unique: true,   
+    unique: true,
   },
   description: {
     type: String,
     required: true,
   },
-  price: {
-    type: Number,
-    required: true,
-  },
-  desc_price: {
-    type: Number,
-  },
   image: {
     type: String,
     required: true,
   },
+  membership: [
+    {
+      months: { type: Number },
+      price: { type: Number },
+      desc_price: { type: Number },
+    },
+  ],
+  benefits: [
+    {
+      type: String,
+    },
+  ],
 });
 
 export const Course =

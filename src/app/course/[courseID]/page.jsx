@@ -1,30 +1,20 @@
 "use client";
-
-import React, { useState } from "react";
+import { Context } from "@/app/Context/Index";
+import React, { useState, useContext, useEffect } from "react";
 import Image from "next/image";
-function Page() {
+function Page({ params }) {
+  const [data, setData] = useState({});
+  const { courseData } = useContext(Context);
   const [pack, setPack] = useState(1);
-  const packsData = [
-    {
-      months: 1,
-      price: 100,
-      discPrice: 300,
-    },
-    {
-      months: 3,
-      price: 200,
-    },
-    {
-      months: 6,
-      price: 300,
-      discPrice: 400,
-    },
-    {
-      months: 12,
-      price: 500,
-      discPrice: 700,
-    },
-  ];
+  const { courseID } = params;
+  console.log("courseID : " + courseID);
+
+  useEffect(() => {
+    const course = courseData?.filter((item) => item?._id === courseID);
+    course && setData(course[0]);
+    console.log(course);
+  }, [courseID, courseData]);
+
   return (
     <div className="mb-[4rem] w-full min-h-screen max-h-fit pt-[6rem] px-[8rem] max-sm:px-[2rem]">
       <div className="flex justify-between max-sm:flex-col gap-[4rem] max-sm:gap-[2rem] w-full ">
@@ -33,40 +23,28 @@ function Page() {
           alt=""
           height={0}
           width={300}
-          src={"/Images/forex.webp"}
+          src={data?.image}
         />
 
         <div className="flex flex-col gap-[1rem] w-full">
           <div>
-            <h2 className="text-[1.8rem] font-sans font-bold">
-              12 Months Membership
-            </h2>
-            <p>
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-              Quisquam, impedit sapiente! Hic aliquid soluta fugit laborum
-              placeat tempore saepe quidem explicabo sint corporis? Mollitia
-              rerum, iste odio voluptatem consequuntur labore.
-            </p>
+            <h2 className="text-[1.8rem] font-sans font-bold">{data?.name}</h2>
+            <p>{data?.description}</p>
           </div>
 
           <div className="flex flex-col gap-[.4rem]">
             <h2 className="text-[1.2rem] font-medium ">Benefits</h2>
             <ul className="flex flex-col gap-[.2rem] font-semibold text-black/80">
-              <li>✅ Daily market overview</li>
-              <li>✅ Short term strate</li>
-              <li>✅ Long term strategy</li>
-              <li>✅ 1-3 Targets strategy</li>
-              <li>✅ 4000+pips per month</li>
-              <li>✅ Clear entry and exit trade points</li>
-              <li>✅ In-depth technical analysis</li>
-              <li>✅ Live Support</li>
+              {data?.benefits?.map((item) => {
+                return <li key={item}>✅ {item}</li>;
+              })}
             </ul>
           </div>
 
           <div className=" w-full h-[.1px] bg-black/30" />
 
-          <div className="flex overflow-x-scroll max-sm:pb-[1rem] gap-[1rem]">
-            {packsData?.map((item, index) => {
+          <div className="flex overflow-x-auto pb-[1rem] max-sm:pb-[1rem] gap-[.8rem]">
+            {data?.membership?.map((item, index) => {
               return (
                 <div
                   onClick={() => setPack(item?.months)}
@@ -84,7 +62,7 @@ function Page() {
                   >
                     <div
                       className={`flex items-center justify-center h-[2.4rem] ${
-                        packsData.length === index + 1
+                        data?.membership?.length === index + 1
                           ? "bg-gradient-to-l from-indigo-500 via-purple-500 to-pink-500"
                           : "bg-black"
                       }  text-white w-full`}
@@ -94,10 +72,10 @@ function Page() {
                       </h2>
                     </div>
                     <div className="px-[1.6rem] flex justify-center items-center h-[2.6rem] gap-[.6rem]">
-                      {item?.discPrice && (
+                      {item?.desc_price && (
                         <h2 className="font-semibold line-through text-black/60">
                           <span className="pr-[.2rem] ">$</span>
-                          {item?.discPrice}
+                          {item?.desc_price}
                         </h2>
                       )}
                       <h2 className="font-semibold text-green-600">

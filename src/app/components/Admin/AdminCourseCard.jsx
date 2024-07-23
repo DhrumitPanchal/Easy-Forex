@@ -3,30 +3,9 @@ import React, { useState, useContext, useEffect } from "react";
 import Link from "next/link";
 import { Context } from "../../Context/Index.jsx";
 function AdminCourseCard({ data }) {
-  const { name, description, price, desc_price, image, _id } = data;
+  const { name, description, price, desc_price, image, _id, membership } = data;
   const { courseData, handelDeleteCourse } = useContext(Context);
   const [pack, setPack] = useState(1);
-  const packsData = [
-    {
-      months: 1,
-      price: 100,
-      discPrice: 300,
-    },
-    {
-      months: 3,
-      price: 200,
-    },
-    {
-      months: 6,
-      price: 300,
-      discPrice: 400,
-    },
-    {
-      months: 12,
-      price: 500,
-      discPrice: 700,
-    },
-  ];
 
   useEffect(() => {}, [courseData]);
 
@@ -38,7 +17,7 @@ function AdminCourseCard({ data }) {
           <h2 className="text-[1.2rem] font-semibold">{name}</h2>
           <p>{description}</p>
           <div className="flex gap-[1rem]">
-            {packsData?.map((item) => {
+            {membership?.map((item) => {
               return (
                 <div
                   onClick={() => setPack(item?.months)}
@@ -53,7 +32,7 @@ function AdminCourseCard({ data }) {
                     </h2>
                   </div>
                   <div className="px-[1.6rem] flex justify-center items-center h-[2.6rem] gap-[.6rem]">
-                    {item?.discPrice && (
+                    {item?.desc_price && (
                       <h2 className="font-semibold line-through text-black/60">
                         <span className="pr-[.2rem] ">$</span>
                         {item?.desc_price}

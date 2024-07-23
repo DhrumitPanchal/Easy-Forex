@@ -1,31 +1,41 @@
 "use client";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Link from "next/link";
 import SideMenu from "@/app/components/Admin/SideMenu";
 import { FaPlus } from "react-icons/fa";
 import { Context } from "@/app/Context/Index";
+import { CldUploadWidget } from "next-cloudinary";
+
 function Page() {
   const { handelAddCourse } = useContext(Context);
   const [formData, setFromData] = useState({
     name: "",
     description: "",
-    price: null,
-    desc_price: null,
+    price: undefined,
+    desc_price: undefined,
     image: "",
   });
 
   const [packData, setPackData] = useState({
-    months: 0,
-    price: 0,
-    desc_price: 0,
+    months: undefined,
+    price: undefined,
+    desc_price: undefined,
   });
+  const [benefitData, setBenefitData] = useState("");
+  const [imageURL, setImageURL] = useState("");
 
   const [membershipMenu, setMembershipMenu] = useState(false);
   const [membership, setMembership] = useState([]);
+  const [benefits, setBenefits] = useState([]);
 
   const handelSubmit = (e) => {
     e.preventDefault();
-    handelAddCourse(formData);
+    handelAddCourse(formData, membership, benefits);
+  };
+
+  const AddBenefits = () => {
+    setBenefits([...benefits, benefitData]);
+    setBenefitData("");
   };
 
   const handelAddPack = (e) => {
@@ -33,9 +43,9 @@ function Page() {
 
     setMembership([...membership, packData]);
     setPackData({
-      months: 0,
-      price: 0,
-      discPrice: 0,
+      months: undefined,
+      price: undefined,
+      desc_price: undefined,
     });
     setMembershipMenu(false);
   };
@@ -45,10 +55,14 @@ function Page() {
       : setFromData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  useEffect(() => {
+    console.log("image url : " + imageURL);
+  }, [imageURL]);
+
   return (
     <>
       {membershipMenu && (
-        <div className="flex justify-center items-center absolute top-0 bottom-0 left-[15rem] right-0 z-20  h-screen bg-slate-400/10 backdrop-blur-[2px]">
+        <div className=" flex justify-center items-center fixed top-0 bottom-0 left-[15rem] right-0 z-20  h-screen bg-slate-400/10 backdrop-blur-[2px]">
           <form
             onSubmit={(e) => handelAddPack(e)}
             className="flex flex-col gap-[1rem] p-[2rem] rounded-[.4rem] h-fit w-[30rem] shadow-md bg-white"
@@ -101,11 +115,11 @@ function Page() {
       )}
 
       {/* -------------------------------------------------------------------------- */}
-      <div className="relative flex w-full h-full ">
+      <div className="relative flex w-full h-fit">
         <SideMenu />
 
         <div className="absolute left-[15rem] max-sm:left-0 right-0 ">
-          <section className="px-[8rem] max-sm:px-[1rem] pt-[2rem] max-sm:pt-[.8rem] pb-[2rem] h-[calc(100vh-3.5rem)] flex flex-col gap-[1.2rem]">
+          <section className="px-[8rem] max-sm:px-[1rem] pt-[2rem] max-sm:pt-[.8rem] pb-[2rem] h-fit flex flex-col gap-[1.2rem]">
             <h2 className="max-sm:text-end ml-[.2rem] text-[1.4rem] underline font-bold">
               Add New Course
             </h2>
@@ -134,7 +148,7 @@ function Page() {
                 placeholder="Course Description"
                 className="px-[1.4rem] py-[.2rem] rounded-[.4rem] text-[1.2rem] w-full border-[2px] focus:border-black border-black/30 placeholder:text-black/50"
               />
-
+              {/* 
               <div className="flex max-sm:flex-col gap-[1rem]">
                 <input
                   type="number"
@@ -154,9 +168,9 @@ function Page() {
                   placeholder="Product Discount Rate"
                   className="w-1/2 px-[1.4rem] py-[.2rem] rounded-[.4rem] text-[1.2rem] max-sm:w-full border-[2px] focus:border-black border-black/30 placeholder:text-black/50"
                 />
-              </div>
+              </div> */}
 
-              <input
+              {/* <input
                 type="url"
                 min={1}
                 name="image"
@@ -165,9 +179,28 @@ function Page() {
                 value={formData.image}
                 placeholder="Course Image Url"
                 className=" px-[1.4rem] py-[.2rem] rounded-[.4rem] text-[1.2rem] max-sm:w-full border-[2px] focus:border-black border-black/30 placeholder:text-black/50"
-              />
+              /> */}
 
-              <div className="flex flex-col gap-[1rem]">
+              <CldUploadWidget
+                signatureEndpoint="/api/cloudinary"
+                onSuccess={(result, { widget }) => {
+                  setFromData({ ...formData, image: result?.info?.secure_url });
+                  widget.close();
+                }}
+              >
+                {({ open }) => {
+                  return (
+                    <div
+                      className="cursor-pointer flex justify-center items-center h-[3rem] w-[20rem] rounded-[.4rem] bg-black text-white"
+                      onClick={() => open()}
+                    >
+                      Upload an Image
+                    </div>
+                  );
+                }}
+              </CldUploadWidget>
+
+              <div className="border-t-[.1rem] pt-[1rem] border-black/30 flex flex-col gap-[1rem] ">
                 <div className="text-[1.1rem] font-semibold">Membership</div>
 
                 <div className="flex  gap-[1rem]">
@@ -211,7 +244,34 @@ function Page() {
                 </div>
               </div>
 
-              <div className="mt-[2rem] flex justify-between w-full ">
+              <div className="border-t-[.1rem] pt-[1rem] border-black/30 flex flex-col gap-[1rem] w-full">
+                <h2 className="text-[1.1rem] font-semibold">Benefits</h2>
+
+                <div className="flex gap-[2rem] w-full">
+                  <input
+                    type="text"
+                    onChange={(e) => setBenefitData(e?.target?.value)}
+                    value={benefitData}
+                    placeholder="Benefits"
+                    className=" px-[1.4rem] py-[.2rem] rounded-[.4rem] text-[1.2rem] w-[30rem] max-sm:w-full border-[2px] focus:border-black border-black/30 placeholder:text-black/50"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => AddBenefits()}
+                    className="cursor-pointer flex items-center px-[2rem] h-[2.6rem] w-fit rounded-[.4rem] text-[1.1rem] font-semibold text-white bg-black"
+                  >
+                    Add
+                  </button>
+                </div>
+
+                <div>
+                  {benefits?.map((item) => {
+                    return <li key={item}>{item}</li>;
+                  })}
+                </div>
+              </div>
+
+              <div className="border-t-[.1rem] pt-[1rem] border-black/30 mt-[2rem] flex justify-between w-full ">
                 <button
                   type="submit"
                   className="cursor-pointer flex items-center px-[2rem] h-[2.6rem] w-fit rounded-[.4rem] text-[1.1rem] font-semibold text-white bg-green-600"

@@ -27,11 +27,15 @@ export default function MyContext(props) {
   };
 
   //  Add Course -------------------------------------------------
-  const handelAddCourse = async (Data) => {
-    console.log("data : " + Data);
+  const handelAddCourse = async (courseData, membership, benefits) => {
+    console.table(courseData);
+    console.table(membership);
+    console.table(benefits);
     try {
       const { data } = await axios.post(BaseURL + "/courses", {
-        ...Data,
+        courseData,
+        membership,
+        benefits,
       });
       toast.success(data?.message);
       router.push("/admin/courses");
