@@ -3,8 +3,10 @@
 import Image from "next/image";
 import { FaStar } from "react-icons/fa6";
 import { toast } from "react-toastify";
-
+import { Context } from "./Context/Index";
+import { useContext } from "react";
 export default function Home() {
+  const { plansData } = useContext(Context);
   const tableHading = [
     "Currency Pair",
     "Buy Sell",
@@ -505,7 +507,7 @@ export default function Home() {
         />
 
         <div className="flex max-sm:flex-col max-sm:items-center justify-center gap-[4rem] w-full ">
-          {Plans?.map((item, index) => {
+          {plansData?.map((item, index) => {
             return (
               <div
                 key={item?.months}

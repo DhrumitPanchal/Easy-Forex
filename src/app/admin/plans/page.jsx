@@ -1,80 +1,18 @@
-import React from "react";
+"use client";
+
+import React, { useContext, useEffect } from "react";
 import SideMenu from "@/app/components/Admin/SideMenu";
 import { FaMagnifyingGlass } from "react-icons/fa6";
 import { FaPlus } from "react-icons/fa";
+import { Context } from "@/app/Context/Index.jsx";
 import Link from "next/link";
-function page() {
-  const Plans = [
-    {
-      months: 1,
-      price: 45,
-      benefits: [
-        "Trade with Pro Trader",
-        "Daily market signals",
-        "Short term strategies",
-        "Long term strategies",
-        "1-3 Targets strategy",
-        "Management tools",
-        "Live Chat Support",
-      ],
-    },
+function Page() {
+  const { plansData } = useContext(Context);
 
-    {
-      months: 3,
-      price: 75,
-      benefits: [
-        "Trade with Pro Trader",
-        "Daily market signals",
-        "Short term strategies",
-        "Long term strategies",
-        "1-3 Targets strategy",
-        "Management tools",
-        "Live Chat Support",
-      ],
-    },
+  useEffect(() => {
+    console.log(plansData);
+  }, [plansData]);
 
-    {
-      months: 12,
-      price: 100,
-      benefits: [
-        "Trade with Pro Trader",
-        "Daily market signals",
-        "Short term strategies",
-        "Long term strategies",
-        "1-3 Targets strategy",
-        "Management tools",
-        "Live Chat Support",
-      ],
-    },
-
-    {
-      months: 12,
-      price: 100,
-      benefits: [
-        "Trade with Pro Trader",
-        "Daily market signals",
-        "Short term strategies",
-        "Long term strategies",
-        "1-3 Targets strategy",
-        "Management tools",
-        "Live Chat Support",
-      ],
-    },
-
-    {
-      months: 12,
-      price: 100,
-      benefits: [
-        "Trade with Pro Trader",
-        "Daily market signals",
-        "Short term strategies",
-        "Long term strategies",
-        "1-3 Targets strategy",
-        "Management tools",
-        "Live Chat Support",
-      ],
-    },
-  ];
   return (
     <div className="relative flex w-full h-fit">
       <SideMenu />
@@ -102,15 +40,16 @@ function page() {
         </div>
         {/* ------------------------------------------------------------------------------- */}
         <div className="px-[2rem] mt-[1rem] flex flex-wrap max-sm:flex-col max-sm:items-center  gap-[2rem] w-full ">
-          {Plans?.map((item, index) => {
+          {plansData?.map((item, index) => {
             return (
-              <div
-                key={item?.months}
+              <Link
+                href={`/admin/plans/update/${item?._id}`}
+                key={item?._id}
                 className="flex flex-col items-center w-[18rem] border-[1px] border-black/20"
               >
                 <div
                   className={`h-[3rem] w-full  flex justify-center items-center font-light text-white  ${
-                    Plans.length === index + 1
+                    plansData?.length === index + 1
                       ? "bg-[#f4645a]"
                       : "bg-[#2e353e] "
                   }`}
@@ -144,7 +83,7 @@ function page() {
                     );
                   })}
                 </div>
-              </div>
+              </Link>
             );
           })}
         </div>
@@ -153,4 +92,4 @@ function page() {
   );
 }
 
-export default page;
+export default Page;

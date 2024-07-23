@@ -19,6 +19,7 @@ export async function GET(req) {
 
 export async function POST(req) {
   const { months, price, benefits } = await req.json();
+  console.table({ months, price, benefits });
   try {
     if (!months) {
       return NextResponse.json(
@@ -63,12 +64,12 @@ export async function POST(req) {
 }
 
 export async function PUT(req) {
-  const { ID, data } = await req.json();
+  const { ID, planData } = await req.json();
 
   if (!ID) {
     return NextResponse.json({ message: "Plan ID not found" }, { status: 404 });
   }
-  if (!data) {
+  if (!planData) {
     return NextResponse.json({ message: "Data not found" }, { status: 404 });
   }
 
@@ -78,7 +79,7 @@ export async function PUT(req) {
       return NextResponse.json({ message: "Plan not found" }, { status: 404 });
     }
 
-    const newPlan = await Plan.findByIdAndUpdate(ID, data, { new: true });
+    const newPlan = await Plan.findByIdAndUpdate(ID, planData, { new: true });
 
     return NextResponse.json(
       { message: "Course Updated", plan: newPlan },

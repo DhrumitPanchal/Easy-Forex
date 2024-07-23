@@ -1,18 +1,18 @@
 "use client";
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { FaTimes } from "react-icons/fa";
 import Link from "next/link";
 import SideMenu from "@/app/components/Admin/SideMenu";
 import { Context } from "@/app/Context/Index";
-function Page() {
-  const { handelAddPlan } = useContext(Context);
+function Page({ params }) {
+  const { handelUpdatePlan, plansData, handelDeletePlan } = useContext(Context);
   const [formData, setFormData] = useState({
     months: undefined,
     price: undefined,
     benefits: [],
   });
   const [benefitData, setBenefitData] = useState("");
-
+  const { ID } = params;
   const AddBenefits = () => {
     if (benefitData == "") {
       return;
@@ -38,7 +38,7 @@ function Page() {
 
   const handelSubmit = (e) => {
     e.preventDefault();
-    handelAddPlan(formData);
+    handelUpdatePlan(formData?._id, formData);
     setFormData({
       months: undefined,
       price: undefined,
@@ -46,6 +46,10 @@ function Page() {
     });
   };
 
+  useEffect(() => {
+    const plan = plansData?.filter((item) => item?._id === ID[0]);
+    plan && setFormData(plan[0]);
+  }, [ID, plansData]);
   return (
     <div className="relative flex w-full h-fit">
       <SideMenu />
@@ -121,7 +125,15 @@ function Page() {
                 type="submit"
                 className="cursor-pointer flex items-center px-[2rem] h-[2.6rem] w-fit rounded-[.4rem] text-[1.1rem] font-semibold text-white bg-green-600"
               >
-                Add
+                Update
+              </button>
+
+              <button
+                type="button"
+                onClick={() => handelDeletePlan(formData?._id)}
+                className="cursor-pointer flex items-center px-[2rem] h-[2.6rem] w-fit rounded-[.4rem] text-[1.1rem] font-semibold text-white bg-orange-600"
+              >
+                Delete
               </button>
 
               <Link href="/admin/courses">
