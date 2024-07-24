@@ -1,6 +1,10 @@
 import mongoose, { Types } from "mongoose";
 
 const courseSchema = new mongoose.Schema({
+  isMembership: {
+    type: Boolean,
+    default: false,
+  },
   name: {
     type: String,
     required: true,
@@ -9,6 +13,12 @@ const courseSchema = new mongoose.Schema({
   description: {
     type: String,
     required: true,
+  },
+  price: {
+    type: Number,
+  },
+  desc_price: {
+    type: Number,
   },
   image: {
     type: String,

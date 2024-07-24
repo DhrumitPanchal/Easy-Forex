@@ -3,7 +3,17 @@ import React, { useState, useContext, useEffect } from "react";
 import Link from "next/link";
 import { Context } from "../../Context/Index.jsx";
 function AdminCourseCard({ data }) {
-  const { name, description, price, desc_price, image, _id, membership } = data;
+  const {
+    _id,
+    isMembership,
+    name,
+    description,
+    desc_price,
+    price,
+    image,
+    membership,
+    benefits,
+  } = data;
   const { courseData, handelDeleteCourse } = useContext(Context);
   const [pack, setPack] = useState(1);
 
@@ -17,35 +27,50 @@ function AdminCourseCard({ data }) {
           <h2 className="text-[1.2rem] font-semibold">{name}</h2>
           <p>{description}</p>
           <div className="flex gap-[1rem]">
-            {membership?.map((item) => {
-              return (
-                <div
-                  onClick={() => setPack(item?.months)}
-                  key={item}
-                  className={` cursor-pointer overflow-hidden flex flex-col min-w-[8rem] w-fit rounded-[.4rem] border-[.12rem] border-black`}
-                >
+            {isMembership ? (
+              membership?.map((item) => {
+                return (
                   <div
-                    className={`flex items-center justify-center h-[2.4rem]  bg-black text-white w-full`}
+                    onClick={() => setPack(item?.months)}
+                    key={item}
+                    className={` cursor-pointer overflow-hidden flex flex-col min-w-[8rem] w-fit rounded-[.4rem] border-[.12rem] border-black`}
                   >
-                    <h2>
-                      <span>{item?.months}</span> Months
-                    </h2>
-                  </div>
-                  <div className="px-[1.6rem] flex justify-center items-center h-[2.6rem] gap-[.6rem]">
-                    {item?.desc_price && (
-                      <h2 className="font-semibold line-through text-black/60">
-                        <span className="pr-[.2rem] ">$</span>
-                        {item?.desc_price}
+                    <div
+                      className={`flex items-center justify-center h-[2.4rem]  bg-black text-white w-full`}
+                    >
+                      <h2>
+                        <span>{item?.months}</span> Months
                       </h2>
-                    )}
-                    <h2 className="font-semibold text-green-600">
-                      <span className="pr-[.2rem]">$</span>
-                      {item?.price}
-                    </h2>
+                    </div>
+                    <div className="px-[1.6rem] flex justify-center items-center h-[2.6rem] gap-[.6rem]">
+                      {item?.desc_price && (
+                        <h2 className="font-semibold line-through text-black/60">
+                          <span className="pr-[.2rem] ">$</span>
+                          {item?.desc_price}
+                        </h2>
+                      )}
+                      <h2 className="font-semibold text-green-600">
+                        <span className="pr-[.2rem]">$</span>
+                        {item?.price}
+                      </h2>
+                    </div>
                   </div>
-                </div>
-              );
-            })}
+                );
+              })
+            ) : (
+              <div className="text-[1.2rem] flex justify-center items-center h-[2.6rem] gap-[1rem]">
+                {desc_price && (
+                  <h2 className="font-semibold line-through text-black/60">
+                    <span className="pr-[.1rem] ">$</span>
+                    {desc_price}
+                  </h2>
+                )}
+                <h2 className="font-semibold text-green-600">
+                  <span className="pr-[.1rem]">$</span>
+                  {price}
+                </h2>
+              </div>
+            )}
           </div>
         </div>
       </div>

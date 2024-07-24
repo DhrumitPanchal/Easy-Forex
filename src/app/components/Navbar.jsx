@@ -31,6 +31,10 @@ function Navbar() {
       path: "/course",
     },
     {
+      name: "CART",
+      path: "/cart",
+    },
+    {
       name: "FOREX SIGNALS PLANS",
       path: "/forexsignalsplans",
       Children: [

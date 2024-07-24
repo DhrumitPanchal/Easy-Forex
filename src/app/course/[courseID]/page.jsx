@@ -2,12 +2,30 @@
 import { Context } from "@/app/Context/Index";
 import React, { useState, useContext, useEffect } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 function Page({ params }) {
   const [data, setData] = useState({});
-  const { courseData } = useContext(Context);
-  const [pack, setPack] = useState(1);
+  const { courseData, handelAddToCart } = useContext(Context);
+  const [pack, setPack] = useState(0);
   const { courseID } = params;
-  console.log("courseID : " + courseID);
+  const router = useRouter();
+  const addToCart = () => {
+    const name = data?.isMembership
+      ? data.membership[pack].months + " months " + data?.name
+      : data?.name;
+    const Price = data?.isMembership
+      ? data?.membership[pack]?.price
+      : data?.price;
+
+    handelAddToCart({
+      productId: data?._id,
+      name: name,
+      description: data?.description,
+      price: Price,
+      quantity: 1,
+      image: data?.image,
+    });
+  };
 
   useEffect(() => {
     const course = courseData?.filter((item) => item?._id === courseID);
@@ -43,56 +61,75 @@ function Page({ params }) {
 
           <div className=" w-full h-[.1px] bg-black/30" />
 
-          <div className="flex overflow-x-auto pb-[1rem] max-sm:pb-[1rem] gap-[.8rem]">
-            {data?.membership?.map((item, index) => {
-              return (
-                <div
-                  onClick={() => setPack(item?.months)}
-                  key={item}
-                  className={`p-[.2rem] rounded-[.6rem] border-[.35rem] ${
-                    item?.months === pack
-                      ? "border-black"
-                      : "border-transparent"
-                  } `}
-                >
+          {data?.isMembership ? (
+            <div className="flex overflow-x-auto pb-[1rem] max-sm:pb-[1rem] gap-[.8rem]">
+              {data?.membership?.map((item, index) => {
+                return (
                   <div
-                    className={`${
-                      item.months !== pack && "opacity-[.5]"
-                    } cursor-pointer overflow-hidden flex flex-col min-w-[8rem] w-fit rounded-[.4rem] border-[.12rem] border-black`}
+                    onClick={() => setPack(index)}
+                    key={item}
+                    className={`p-[.2rem] rounded-[.6rem] border-[.35rem] ${
+                      index === pack ? "border-black" : "border-transparent"
+                    } `}
                   >
                     <div
-                      className={`flex items-center justify-center h-[2.4rem] ${
-                        data?.membership?.length === index + 1
-                          ? "bg-gradient-to-l from-indigo-500 via-purple-500 to-pink-500"
-                          : "bg-black"
-                      }  text-white w-full`}
+                      className={`${
+                        index !== pack && "opacity-[.5]"
+                      } cursor-pointer overflow-hidden flex flex-col min-w-[8rem] w-fit rounded-[.4rem] border-[.12rem] border-black`}
                     >
-                      <h2>
-                        <span>{item?.months}</span> Months
-                      </h2>
-                    </div>
-                    <div className="px-[1.6rem] flex justify-center items-center h-[2.6rem] gap-[.6rem]">
-                      {item?.desc_price && (
-                        <h2 className="font-semibold line-through text-black/60">
-                          <span className="pr-[.2rem] ">$</span>
-                          {item?.desc_price}
+                      <div
+                        className={`flex items-center justify-center h-[2.4rem] ${
+                          data?.membership?.length === index + 1
+                            ? "bg-gradient-to-l from-indigo-500 via-purple-500 to-pink-500"
+                            : "bg-black"
+                        }  text-white w-full`}
+                      >
+                        <h2>
+                          <span>{item?.months}</span> Months
                         </h2>
-                      )}
-                      <h2 className="font-semibold text-green-600">
-                        <span className="pr-[.2rem]">$</span>
-                        {item?.price}
-                      </h2>
+                      </div>
+                      <div className="px-[1.6rem] flex justify-center items-center h-[2.6rem] gap-[.6rem]">
+                        {item?.desc_price && (
+                          <h2 className="font-semibold line-through text-black/60">
+                            <span className="pr-[.2rem] ">$</span>
+                            {item?.desc_price}
+                          </h2>
+                        )}
+                        <h2 className="font-semibold text-green-600">
+                          <span className="pr-[.2rem]">$</span>
+                          {item?.price}
+                        </h2>
+                      </div>
                     </div>
                   </div>
-                </div>
-              );
-            })}
-          </div>
+                );
+              })}
+            </div>
+          ) : (
+            <div className="text-[1.4rem] flex  items-center h-[2.6rem] gap-[1rem]">
+              {data?.desc_price && (
+                <h2 className="font-semibold line-through text-black/60">
+                  <span className="pr-[.1rem] ">$</span>
+                  {data?.desc_price}
+                </h2>
+              )}
+              <h2 className="font-semibold text-green-600">
+                <span className="pr-[.1rem]">$</span>
+                {data?.price}
+              </h2>
+            </div>
+          )}
 
           <div className=" w-full h-[.1px] bg-black/30" />
 
-          <button className="h-[3rem] w-[10rem] rounded-[.4rem] bg-black text-white">
-            Buy Now
+          <button
+            onClick={() => {
+              addToCart();
+              router.push("/cart");
+            }}
+            className="h-[3rem] w-[10rem] rounded-[.4rem] bg-black text-white"
+          >
+            Add to Cart
           </button>
         </div>
       </div>

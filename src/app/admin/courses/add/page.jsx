@@ -5,15 +5,23 @@ import SideMenu from "@/app/components/Admin/SideMenu";
 import { FaPlus } from "react-icons/fa";
 import { Context } from "@/app/Context/Index";
 import { CldUploadWidget } from "next-cloudinary";
+import { FaTimes } from "react-icons/fa";
 
 function Page() {
   const { handelAddCourse } = useContext(Context);
+
+  const [membershipMenu, setMembershipMenu] = useState(false);
+  const [benefitData, setBenefitData] = useState("");
+
   const [formData, setFromData] = useState({
+    isMembership: false,
     name: "",
     description: "",
     price: undefined,
     desc_price: undefined,
     image: "",
+    membership: [],
+    benefits: [],
   });
 
   const [packData, setPackData] = useState({
@@ -21,27 +29,35 @@ function Page() {
     price: undefined,
     desc_price: undefined,
   });
-  const [benefitData, setBenefitData] = useState("");
-  const [imageURL, setImageURL] = useState("");
-
-  const [membershipMenu, setMembershipMenu] = useState(false);
-  const [membership, setMembership] = useState([]);
-  const [benefits, setBenefits] = useState([]);
 
   const handelSubmit = (e) => {
     e.preventDefault();
-    handelAddCourse(formData, membership, benefits);
+    handelAddCourse(formData);
   };
 
   const AddBenefits = () => {
-    setBenefits([...benefits, benefitData]);
+    setFromData({
+      ...formData,
+      benefits: [...formData?.benefits, benefitData],
+    });
+    setBenefitData("");
+  };
+
+  const RemoveBenefits = (data) => {
+    const NewBenefits = formData?.benefits.filter((item) => item !== data);
+    setFromData({
+      ...formData,
+      benefits: NewBenefits,
+    });
     setBenefitData("");
   };
 
   const handelAddPack = (e) => {
     e.preventDefault();
-
-    setMembership([...membership, packData]);
+    setFromData({
+      ...formData,
+      membership: [...formData?.membership, packData],
+    });
     setPackData({
       months: undefined,
       price: undefined,
@@ -49,15 +65,12 @@ function Page() {
     });
     setMembershipMenu(false);
   };
+
   const handelInput = (e, isPack) => {
     isPack
       ? setPackData({ ...packData, [e.target.name]: e.target.value })
       : setFromData({ ...formData, [e.target.name]: e.target.value });
   };
-
-  useEffect(() => {
-    console.log("image url : " + imageURL);
-  }, [imageURL]);
 
   return (
     <>
@@ -80,22 +93,20 @@ function Page() {
             <input
               type="number"
               name="price"
-              placeholder="price"
+              placeholder="final price"
               required
               onChange={(e) => handelInput(e, true)}
               value={packData?.price}
               className="pl-[1rem] pr-[.4rem] py-[.2rem] rounded-[.4rem] text-[1.2rem] w-full border-[2px] focus:border-black border-black/30 placeholder:text-black/50"
             />
-
             <input
               type="number"
               name="desc_price"
-              placeholder="discount rate"
+              placeholder="original price"
               onChange={(e) => handelInput(e, true)}
               value={packData?.desc_price}
               className="pl-[1rem] pr-[.4rem] py-[.2rem] rounded-[.4rem] text-[1.2rem] w-full border-[2px] focus:border-black border-black/30 placeholder:text-black/50"
             />
-
             <div className="mt-[1.6rem] flex justify-between w-full ">
               <button
                 type="submit"
@@ -128,10 +139,47 @@ function Page() {
               onSubmit={(e) => handelSubmit(e)}
               className="mt-[1rem] flex flex-col gap-[1rem] "
             >
+              <div className="flex  gap-[2rem]">
+                <div className=" flex items-center gap-[.4rem]">
+                  <input
+                    type="radio"
+                    id="course"
+                    name="isMembership"
+                    className="h-[1.1rem] w-[1.1rem]"
+                    defaultChecked={!formData.isMembership}
+                    onChange={() =>
+                      setFromData({ ...formData, isMembership: false })
+                    }
+                  />
+                  <label htmlFor="course" className="text-[1.2rem] -mt-[.3rem]">
+                    Course
+                  </label>
+                </div>
+
+                <div className=" flex items-center gap-[.4rem]">
+                  <input
+                    type="radio"
+                    name="isMembership"
+                    id="membership"
+                    className="h-[1.1rem] w-[1.1rem]"
+                    defaultChecked={formData.isMembership}
+                    onChange={() =>
+                      setFromData({ ...formData, isMembership: true })
+                    }
+                  />
+                  <label
+                    htmlFor="membership"
+                    className="text-[1.2rem] -mt-[.3rem]"
+                  >
+                    Membership
+                  </label>
+                </div>
+              </div>
+
               <input
                 type="text"
                 name="name"
-                placeholder="Course Name"
+                placeholder="Name"
                 required
                 onChange={(e) => handelInput(e)}
                 value={formData.name}
@@ -145,104 +193,106 @@ function Page() {
                 required
                 onChange={(e) => handelInput(e)}
                 value={formData.description}
-                placeholder="Course Description"
+                placeholder="Description"
                 className="px-[1.4rem] py-[.2rem] rounded-[.4rem] text-[1.2rem] w-full border-[2px] focus:border-black border-black/30 placeholder:text-black/50"
               />
-              {/* 
-              <div className="flex max-sm:flex-col gap-[1rem]">
-                <input
-                  type="number"
-                  min={1}
-                  required
-                  onChange={(e) => handelInput(e)}
-                  value={formData.price}
-                  name="price"
-                  placeholder="Course Price"
-                  className="w-1/2 px-[1.4rem] py-[.2rem] rounded-[.4rem] text-[1.2rem] max-sm:w-full border-[2px] focus:border-black border-black/30 placeholder:text-black/50"
-                />
-                <input
-                  type="number"
-                  onChange={(e) => handelInput(e)}
-                  value={formData.desc_price}
-                  name="desc_price"
-                  placeholder="Product Discount Rate"
-                  className="w-1/2 px-[1.4rem] py-[.2rem] rounded-[.4rem] text-[1.2rem] max-sm:w-full border-[2px] focus:border-black border-black/30 placeholder:text-black/50"
-                />
-              </div> */}
 
-              {/* <input
-                type="url"
-                min={1}
-                name="image"
-                required
-                onChange={(e) => handelInput(e)}
-                value={formData.image}
-                placeholder="Course Image Url"
-                className=" px-[1.4rem] py-[.2rem] rounded-[.4rem] text-[1.2rem] max-sm:w-full border-[2px] focus:border-black border-black/30 placeholder:text-black/50"
-              /> */}
-
-              <CldUploadWidget
-                signatureEndpoint="/api/cloudinary"
-                onSuccess={(result, { widget }) => {
-                  setFromData({ ...formData, image: result?.info?.secure_url });
-                  widget.close();
-                }}
-              >
-                {({ open }) => {
-                  return (
-                    <div
-                      className="cursor-pointer flex justify-center items-center h-[3rem] w-[20rem] rounded-[.4rem] bg-black text-white"
-                      onClick={() => open()}
-                    >
-                      Upload an Image
-                    </div>
-                  );
-                }}
-              </CldUploadWidget>
-
-              <div className="border-t-[.1rem] pt-[1rem] border-black/30 flex flex-col gap-[1rem] ">
-                <div className="text-[1.1rem] font-semibold">Membership</div>
-
-                <div className="flex  gap-[1rem]">
-                  <div
-                    onClick={() => setMembershipMenu(!membershipMenu)}
-                    className="cursor-pointer flex rounded-[.4rem] justify-center items-center h-[5.1rem] w-[8rem] bg-slate-100"
-                  >
-                    <FaPlus className="text-[2rem] text-black/50" />
-                  </div>
-
-                  {membership &&
-                    membership?.map((item) => {
-                      return (
-                        <div
-                          onClick={() => setPack(item?.months)}
-                          key={item}
-                          className={`cursor-pointer overflow-hidden flex flex-col h-fit min-w-[8rem] w-fit rounded-[.4rem] border-[.12rem] border-black`}
-                        >
-                          <div
-                            className={`flex items-center justify-center h-[2.4rem] bg-black text-white w-full`}
-                          >
-                            <h2>
-                              <span>{item?.months}</span> Months
-                            </h2>
-                          </div>
-                          <div className="px-[1.6rem] flex justify-center items-center h-[2.6rem] gap-[.6rem] ">
-                            {item?.desc_price && (
-                              <h2 className="font-semibold line-through text-black/60">
-                                <span className="pr-[.2rem] ">$</span>
-                                {item?.desc_price}
-                              </h2>
-                            )}
-                            <h2 className="font-semibold text-green-600">
-                              <span className="pr-[.2rem]">$</span>
-                              {item?.price}
-                            </h2>
-                          </div>
-                        </div>
-                      );
-                    })}
+              {!formData.isMembership && (
+                <div className="flex max-sm:flex-col gap-[1rem]">
+                  <input
+                    type="number"
+                    min={1}
+                    required
+                    onChange={(e) => handelInput(e)}
+                    value={formData.price}
+                    name="price"
+                    placeholder="Final Price"
+                    className="w-1/2 px-[1.4rem] py-[.2rem] rounded-[.4rem] text-[1.2rem] max-sm:w-full border-[2px] focus:border-black border-black/30 placeholder:text-black/50"
+                  />
+                  <input
+                    type="number"
+                    onChange={(e) => handelInput(e)}
+                    value={formData.desc_price}
+                    name="desc_price"
+                    placeholder="Original Price"
+                    className="w-1/2 px-[1.4rem] py-[.2rem] rounded-[.4rem] text-[1.2rem] max-sm:w-full border-[2px] focus:border-black border-black/30 placeholder:text-black/50"
+                  />
                 </div>
-              </div>
+              )}
+
+              {formData?.image === "" ? (
+                <CldUploadWidget
+                  signatureEndpoint="/api/cloudinary"
+                  onSuccess={(result, { widget }) => {
+                    setFromData({
+                      ...formData,
+                      image: result?.info?.secure_url,
+                    });
+                    widget.close();
+                  }}
+                >
+                  {({ open }) => {
+                    return (
+                      <div
+                        className="cursor-pointer flex justify-center items-center h-[3rem] w-[20rem] rounded-[.4rem] bg-black text-white"
+                        onClick={() => open()}
+                      >
+                        Upload an Image
+                      </div>
+                    );
+                  }}
+                </CldUploadWidget>
+              ) : (
+                <div className="cursor-pointer flex justify-center items-center h-[3rem] w-[20rem] rounded-[.4rem] bg-black/50 text-white">
+                  Image Uploaded successful
+                </div>
+              )}
+
+              {formData?.isMembership && (
+                <div className="border-t-[.1rem] pt-[1rem] border-black/30 flex flex-col gap-[1rem] ">
+                  <div className="text-[1.1rem] font-semibold">Membership</div>
+
+                  <div className="flex  gap-[1rem]">
+                    <div
+                      onClick={() => setMembershipMenu(!membershipMenu)}
+                      className="cursor-pointer flex rounded-[.4rem] justify-center items-center h-[5.1rem] w-[8rem] bg-slate-100"
+                    >
+                      <FaPlus className="text-[2rem] text-black/50" />
+                    </div>
+
+                    {formData?.membership &&
+                      formData?.membership?.map((item) => {
+                        return (
+                          <div
+                            onClick={() => setPack(item?.months)}
+                            key={item}
+                            className={`cursor-pointer overflow-hidden flex flex-col h-fit min-w-[8rem] w-fit rounded-[.4rem] border-[.12rem] border-black`}
+                          >
+                            <div
+                              className={`flex items-center justify-center h-[2.4rem] bg-black text-white w-full`}
+                            >
+                              <h2>
+                                <span>{item?.months}</span> Months
+                              </h2>
+                            </div>
+                            <div className="px-[1.6rem] flex justify-center items-center h-[2.6rem] gap-[.6rem] ">
+                              {item?.desc_price && (
+                                <h2 className="font-semibold line-through text-black/60">
+                                  <span className="pr-[.2rem] ">$</span>
+                                  {item?.desc_price}
+                                </h2>
+                              )}
+                              <h2 className="font-semibold text-green-600">
+                                <span className="pr-[.2rem]">$</span>
+                                {item?.price}
+                              </h2>
+                            </div>
+                          </div>
+                        );
+                      })}
+                  </div>
+                </div>
+              )}
 
               <div className="border-t-[.1rem] pt-[1rem] border-black/30 flex flex-col gap-[1rem] w-full">
                 <h2 className="text-[1.1rem] font-semibold">Benefits</h2>
@@ -264,9 +314,20 @@ function Page() {
                   </button>
                 </div>
 
-                <div>
-                  {benefits?.map((item) => {
-                    return <li key={item}>{item}</li>;
+                <div className="w-[30rem] flex flex-col gap-[.4rem]">
+                  {formData?.benefits?.map((item) => {
+                    return (
+                      <div
+                        className="px-[1rem] py-[.3rem] rounded-[.2rem] flex items-center justify-between gap-[2rem] w-full bg-slate-200"
+                        key={item}
+                      >
+                        <h2 key={item}>{item}</h2>
+                        <FaTimes
+                          onClick={() => RemoveBenefits(item)}
+                          className="cursor-pointer  text-[1.2rem]"
+                        />
+                      </div>
+                    );
                   })}
                 </div>
               </div>

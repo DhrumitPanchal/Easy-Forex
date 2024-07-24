@@ -4,9 +4,8 @@ import React, { createContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import Cookies from "js-cookie";
 
-// import { useNavigate, pathname } from "next/navigation";
-// import Cookies from "js-cookie";
 
 export const Context = createContext(null);
 
@@ -14,8 +13,9 @@ export default function MyContext(props) {
   const router = useRouter();
   const [courseData, setCourseData] = useState(null);
   const [plansData, setPlansData] = useState(null);
+  const [cart, setCart] = useState([]);
 
-  const BaseURL = "http://localhost:3000/api";
+  const BaseURL = process.env.NEXT_PUBLIC_BACK_END_URL;
 
   // get all products ---------------------------------------------
   const getAllCourses = async () => {
@@ -28,13 +28,9 @@ export default function MyContext(props) {
   };
 
   //  Add Course -------------------------------------------------
-  const handelAddCourse = async (courseData, membership, benefits) => {
+  const handelAddCourse = async (courseData) => {
     try {
-      const { data } = await axios.post(BaseURL + "/courses", {
-        courseData,
-        membership,
-        benefits,
-      });
+      const { data } = await axios.post(BaseURL + "/courses", { courseData });
       toast.success(data?.message);
       router.push("/admin/courses");
       getAllCourses();
@@ -73,7 +69,6 @@ export default function MyContext(props) {
         prevCourseData.filter((course) => course._id !== courseID)
       );
     } catch (error) {
-      console.log(error);
       toast.error(error?.response?.data?.message);
     }
   };
@@ -83,7 +78,6 @@ export default function MyContext(props) {
     try {
       const { data } = await axios.get(BaseURL + "/plans");
       setPlansData(data);
-      console.table(data);
     } catch ({ response }) {
       toast.error(response?.data?.message);
     }
@@ -130,19 +124,62 @@ export default function MyContext(props) {
       );
       router.push("/admin/plans");
     } catch (error) {
-      console.log(error);
       toast.error(error?.response?.data?.message);
     }
+  };
+
+  //  add to cart -----------------------------------------------------------------
+
+  const handelAddToCart = (data) => {
+    setCart((prevCart) => [...prevCart, data]);
+    console.log("check for name : " + data?.name);
+    Cookies.set("cart-products", JSON.stringify([...cart, data]));
+    toast.success("Added in cart");
+  };
+
+  //  get cart data -----------------------------------------------------------------
+
+  const handelGetCartData = () => {
+    const data = Cookies.get("cart-products");
+    if (data) {
+      setCart(JSON.parse(data));
+    }
+  };
+
+  //  update cart data -----------------------------------------------------------------
+
+  const handelUpdateCartData = (ID, quantity) => {
+    const newData = cart.map((item) => {
+      if (item.productId === ID) {
+        return { ...item, quantity };
+      }
+      return item;
+    });
+    setCart(newData);
+    Cookies.set("cart-products", JSON.stringify(newData));
+  };
+
+  // remove from cart --------------------------------------------------------------------
+  const handelRemoveFromCart = (ID) => {
+    const newData = cart.filter((item) => item.productId !== ID);
+    setCart(newData);
+    Cookies.set("cart-products", JSON.stringify(newData));
+    toast.success("Removed from cart");
   };
 
   useEffect(() => {
     getAllCourses();
     getAllPlans();
+    handelGetCartData();
   }, []);
+
+  useEffect(() => {}, [cart]);
 
   return (
     <Context.Provider
       value={{
+        cart,
+        setCart,
         courseData,
         plansData,
         handelAddCourse,
@@ -151,6 +188,9 @@ export default function MyContext(props) {
         handelAddPlan,
         handelUpdatePlan,
         handelDeletePlan,
+        handelAddToCart,
+        handelRemoveFromCart,
+        handelUpdateCartData,
       }}
     >
       {props.children}

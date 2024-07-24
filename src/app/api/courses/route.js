@@ -16,7 +16,8 @@ export async function GET(req) {
 
 export async function POST(req) {
   try {
-    const { courseData, membership, benefits } = await req.json();
+    const { courseData } = await req.json(); 
+    console.log(courseData);
 
     const course = await Course.findOne({ name: courseData?.name });
     if (course) {
@@ -27,8 +28,6 @@ export async function POST(req) {
     }
     const newCourse = new Course({
       ...courseData,
-      membership,
-      benefits,
     });
     newCourse.save();
     return NextResponse.json(
