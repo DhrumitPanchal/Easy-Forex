@@ -1,6 +1,6 @@
 import React from "react";
-import { country_list } from "../components/coursesData";
 import Link from "next/link";
+import country_list from "../components/country_list";
 import Image from "next/image";
 function page() {
   return (
