@@ -5,8 +5,11 @@ import { FaStar } from "react-icons/fa6";
 import { toast } from "react-toastify";
 import { Context } from "./Context/Index";
 import { useContext } from "react";
+import { useRouter } from "next/navigation";
+import Cookies from "js-cookie";
 export default function Home() {
-  const { plansData } = useContext(Context);
+  const { plansData, checkoutItems, setCheckoutItems } = useContext(Context);
+  const router = useRouter();
   const tableHading = [
     "Currency Pair",
     "Buy Sell",
@@ -550,7 +553,35 @@ export default function Home() {
                   })}
                 </div>
 
-                <button className="my-[1.4rem] h-[2.6rem] w-[8rem] rounded-[.6rem]  border-[2px] border-black hover:bg-black hover:text-white transition-colors duration-200">
+                <button
+                  onClick={() => {
+                    setCheckoutItems({
+                      items: [
+                        {
+                          name: item?.months + " Membership",
+                          price: item?.price,
+                          quantity: 1,
+                        },
+                      ],
+                      SubTotal: item?.price,
+                    });
+                    Cookies.set(
+                      "checkout-data",
+                      JSON.stringify({
+                        items: [
+                          {
+                            name: item?.months + " Membership",
+                            price: item?.price,
+                            quantity: 1,
+                          },
+                        ],
+                        SubTotal: item?.price,
+                      })
+                    );
+                    router.push("/checkout");
+                  }}
+                  className="my-[1.4rem] h-[2.6rem] w-[8rem] rounded-[.6rem]  border-[2px] border-black hover:bg-black hover:text-white transition-colors duration-200"
+                >
                   Buy
                 </button>
               </div>

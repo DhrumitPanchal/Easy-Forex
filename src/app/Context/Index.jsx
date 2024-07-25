@@ -6,7 +6,6 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 
-
 export const Context = createContext(null);
 
 export default function MyContext(props) {
@@ -14,7 +13,7 @@ export default function MyContext(props) {
   const [courseData, setCourseData] = useState(null);
   const [plansData, setPlansData] = useState(null);
   const [cart, setCart] = useState([]);
-
+  const [checkoutItems, setCheckoutItems] = useState({});
   const BaseURL = process.env.NEXT_PUBLIC_BACK_END_URL;
 
   // get all products ---------------------------------------------
@@ -167,13 +166,28 @@ export default function MyContext(props) {
     toast.success("Removed from cart");
   };
 
+  // handelPayment --------------------------------------------------------------------
+
+  const handelPayment = async () => {
+    try {
+      const { data } = await axios.post(BaseURL + "/payment");
+      console.log("check link");
+      console.table(data);
+      window.open(data?.approvalUrl, "_self");
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
+    }
+  };
+
   useEffect(() => {
     getAllCourses();
     getAllPlans();
     handelGetCartData();
-  }, []);
 
-  useEffect(() => {}, [cart]);
+    const checkoutData = Cookies.get("checkout-data");
+    checkoutData && setCheckoutItems(JSON.parse(checkoutData));
+    console.log("cheking data : " + checkoutData);
+  }, []);
 
   return (
     <Context.Provider
@@ -182,6 +196,8 @@ export default function MyContext(props) {
         setCart,
         courseData,
         plansData,
+        checkoutItems,
+        setCheckoutItems,
         handelAddCourse,
         handelUpdateCourse,
         handelDeleteCourse,
@@ -191,6 +207,7 @@ export default function MyContext(props) {
         handelAddToCart,
         handelRemoveFromCart,
         handelUpdateCartData,
+        handelPayment,
       }}
     >
       {props.children}

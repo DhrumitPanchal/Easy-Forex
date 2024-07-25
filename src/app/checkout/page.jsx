@@ -1,11 +1,37 @@
-import React from "react";
+"use client";
+
+import React, { useContext, useEffect, useState } from "react";
 import Link from "next/link";
 import country_list from "../components/country_list";
 import Image from "next/image";
-function page() {
+import { Context } from "../Context/Index";
+
+function Page({ items, total }) {
+  const { handelPayment, checkoutItems } = useContext(Context);
+
+  const [formData, setFormData] = useState({
+    first_name: "",
+    last_name: "",
+    country: "",
+    town_Ci: "",
+    phone: undefined,
+    email: "",
+  });
+
+  const handelInput = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handelSubmit = () => {
+    handelPayment();
+  };
+  useEffect(() => {}, [checkoutItems]);
   return (
     <div className="flex justify-center items-center w-full pt-[7rem] pb-[3rem] px-[8rem] h-screen">
-      <div className="flex gap-[6rem] w-full h-full ">
+      <form
+        onSubmit={() => handelSubmit()}
+        className="flex gap-[6rem] w-full h-full "
+      >
         <div className="overflow-hidden flex flex-col gap-[2rem] w-1/2 h-full border-[2px] rounded-[.6rem]  border-black">
           <div className="pl-[2rem] h-[3.8rem] flex items-center w-full text-white bg-black">
             <h2 className=" text-[1.2rem] tracking-[.2px] font-medium">
@@ -13,7 +39,7 @@ function page() {
             </h2>
           </div>
 
-          <form action="" className="px-[2rem] flex flex-col gap-[1.4rem]">
+          <div action="" className="px-[2rem] flex flex-col gap-[1.4rem]">
             <div className="flex gap-[3rem] w-full">
               <div className="flex gap-[.2rem] flex-col w-1/2">
                 <label className="text-[.9rem] text-black/70" htmlFor="name">
@@ -22,8 +48,10 @@ function page() {
                 <input
                   className="px-[.6rem] h-[2.6rem] border-[1px] font-light text-black/80 border-black/30"
                   type="text"
-                  name="name"
+                  name="first_name"
                   id="name"
+                  onChange={(e) => handelInput(e)}
+                  value={formData?.first_name}
                   required
                 />
               </div>
@@ -35,8 +63,10 @@ function page() {
                 <input
                   className="px-[.6rem] h-[2.6rem] border-[1px] font-light text-black/80 border-black/30"
                   type="text"
-                  name="name"
+                  name="last_name"
                   id="name"
+                  onChange={(e) => handelInput(e)}
+                  value={formData?.last_name}
                   required
                 />
               </div>
@@ -52,6 +82,9 @@ function page() {
                   type="text"
                   id="name"
                   list="country"
+                  name="country"
+                  onChange={(e) => handelInput(e)}
+                  value={formData?.country}
                   required
                 >
                   {country_list.map((item) => {
@@ -66,13 +99,15 @@ function page() {
 
               <div className="flex gap-[.2rem] flex-col w-full">
                 <label className="text-[.9rem] text-black/70" htmlFor="name">
-                  Town /Ci
+                  Town/Ci
                 </label>
                 <input
                   className="px-[.6rem] h-[2.6rem] border-[1px] font-light text-black/80 border-black/30"
                   type="text"
-                  name="name"
+                  name="town_Ci"
                   id="name"
+                  onChange={(e) => handelInput(e)}
+                  value={formData?.town_Ci}
                   required
                 />
               </div>
@@ -87,8 +122,10 @@ function page() {
                 <input
                   className="px-[.6rem] h-[2.6rem] border-[1px] font-light text-black/80 border-black/30"
                   type="tel"
-                  name="name"
+                  name="phone"
                   id="name"
+                  onChange={(e) => handelInput(e)}
+                  value={formData?.phone}
                   required
                 />
               </div>
@@ -100,13 +137,15 @@ function page() {
                 <input
                   className="px-[.6rem] h-[2.6rem] border-[1px] font-light text-black/80 border-black/30"
                   type="email"
-                  name="name"
+                  name="email"
                   id="name"
+                  onChange={(e) => handelInput(e)}
+                  value={formData?.email}
                   required
                 />
               </div>
             </div>
-          </form>
+          </div>
         </div>
 
         <div className="flex flex-col gap-[1rem] pt-[1.2rem] px-[2rem] w-1/2 h-full border-[1px] border-black/30">
@@ -120,35 +159,38 @@ function page() {
             <div className="h-[.1px] w-full bg-black/30" />
 
             <div className="pt-[1rem] flex flex-col gap-[.8rem]">
-              <div className="mt-[.4rem] text-[1.1rem] flex justify-between">
-                <div className="pl-[.6rem] flex gap-[.6rem]">
-                  <h2>12 Months Membershi</h2>
-                  <span>x</span>
-                  <h2>6</h2>
-                </div>
+              {checkoutItems?.items?.map((item, index) => {
+                return (
+                  <div
+                    key={index}
+                    className="mt-[.4rem] text-[1.1rem] flex justify-between"
+                  >
+                    <div className="pl-[.6rem] flex gap-[.6rem]">
+                      <h2>{item.name}</h2>
+                      <span>x</span>
+                      <h2>{item.quantity}</h2>
+                    </div>
 
-                <div className="flex gap-[.2rem]">
-                  <span>$</span> <h2>300</h2>
-                </div>
-              </div>
-
-              <div className="mt-[.4rem] text-[1.1rem] flex justify-between">
-                <div className="pl-[.6rem] flex gap-[.6rem]">
-                  <h2>12 Months Membershi</h2>
-                  <span>x</span>
-                  <h2>6</h2>
-                </div>
-
-                <div className="flex gap-[.2rem]">
-                  <span>$</span> <h2>300</h2>
-                </div>
-              </div>
+                    <div className="flex gap-[.2rem]">
+                      <span>$</span> <h2>{item?.price * item?.quantity}</h2>
+                    </div>
+                  </div>
+                );
+              })}
 
               <div className="pl-[.6rem] mt-[1rem] text-[1rem] flex justify-between font-semibold">
                 <h2>Subtotal</h2>
 
                 <div className="flex gap-[.2rem]">
-                  <span>$</span> <h2>300</h2>
+                  <span>$</span> <h2>{checkoutItems?.SubTotal}</h2>
+                </div>
+              </div>
+
+              <div className="pl-[.6rem] mt-[1rem] text-[1rem] flex justify-between font-semibold">
+                <h2>GST</h2>
+
+                <div className="flex gap-[.2rem]">
+                  <span>$</span> <h2>{3.5}</h2>
                 </div>
               </div>
             </div>
@@ -159,7 +201,7 @@ function page() {
               <h2>Total</h2>
 
               <div className="flex text-[1.4rem] gap-[.2rem]">
-                <span>$</span> <h2>300</h2>
+                <span>$</span> <h2>{checkoutItems?.SubTotal + 3.5}</h2>
               </div>
             </div>
 
@@ -172,6 +214,7 @@ function page() {
                   type="checkbox"
                   name=""
                   id=""
+                  required
                 />
                 <h2>
                   I have read and agree to the website{" "}
@@ -195,9 +238,9 @@ function page() {
             </div>
           </div>
         </div>
-      </div>
+      </form>
     </div>
   );
 }
 
-export default page;
+export default Page;

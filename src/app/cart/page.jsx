@@ -3,12 +3,13 @@ import React, { useState, useContext, useEffect } from "react";
 import CartPageCard from "../components/CartPageCard";
 import { Context } from "../Context/Index.jsx";
 import { FaArrowRight } from "react-icons/fa";
-
+import { useRouter } from "next/navigation";
+import Cookies from "js-cookie";
 function Page() {
-  const { cart } = useContext(Context);
+  const { cart, checkoutItems, setCheckoutItems } = useContext(Context);
 
   const [total, setTotal] = useState(0);
-
+  const router = useRouter();
   useEffect(() => {}, [cart]);
 
   useEffect(() => {
@@ -42,10 +43,7 @@ function Page() {
         )}
 
         {cart?.length > 0 && (
-          <div
-            onClick={() => handelAllCartAddOrder()}
-            className="mt-[1rem]  flex-col cursor-pointer text-black  p-[1.8rem] flex gap-[1.4rem] rounded-[.2rem]  w-[26rem] border-[.1rem] border-black"
-          >
+          <div className="mt-[1rem]  flex-col cursor-pointer text-black  p-[1.8rem] flex gap-[1.4rem] rounded-[.2rem]  w-[26rem] border-[.1rem] border-black">
             <h2 className="text-[1.3rem] font-bold ">CART TOTALS</h2>
 
             <div className="flex flex-col gap-[2rem]">
@@ -54,18 +52,28 @@ function Page() {
                   <div className="font-semibold">Sub Total :</div>
                   <div className="font-medium ">$ {total}</div>
                 </div>
-                <div className="flex justify-between ">
+                {/* <div className="flex justify-between ">
                   <div className="font-semibold">Gst :</div>
                   <div className="font-medium ">$ 13</div>
-                </div>
+                </div> */}
               </div>
 
               <div className="pt-[1rem] flex justify-between items-center border-t-[.1rem] border-black">
                 <div className="font-semibold ">Total :</div>
-                <div className="font-medium text-[1.4rem]">$ {total + 13}</div>
+                <div className="font-medium text-[1.4rem]">$ {total}</div>
               </div>
             </div>
-            <button className="mt-[.4rem] flex justify-center items-center gap-[2rem] h-[3.4rem] text-[.8rem] text-white bg-black">
+            <button
+              onClick={() => {
+                router.push("/checkout");
+                setCheckoutItems({ items: cart, SubTotal: total });
+                Cookies.set(
+                  "checkout-data",
+                  JSON.stringify({ items: cart, SubTotal: total })
+                );
+              }}
+              className="mt-[.4rem] flex justify-center items-center gap-[2rem] h-[3.4rem] text-[.8rem] text-white bg-black"
+            >
               <h2 className="font-semibold tracking-[.1rem]">
                 {" "}
                 PROCEED TO CHECKOUT
