@@ -17,29 +17,29 @@ function CartPageCard({ ProductData }) {
 
   return (
     <>
-      <div className="h-fit max-sm:h-fit flex max-sm:flex-wrap gap-[3rem] max-sm:gap-[1rem] pb-[1.5rem] max-sm:pb-[2rem] border-b-[.5px]  border-black/50">
-        <div className="flex gap-[1rem] h-full w-fit max-sm:w-[13rem] ">
+      <div className="h-fit max-sm:h-fit flex max-sm:flex-col gap-[3rem] max-sm:gap-[1rem] pb-[1.5rem] max-sm:pb-[2rem] border-b-[.5px]  border-black/50">
+        <div className="flex max-sm:flex-col gap-[1rem] h-full w-fit max-sm:w-full ">
           <div
             onClick={() => navigator.push(`/course/${productId}`)}
-            className="cursor-pointer select-none h-fit w-[19rem]"
+            className="cursor-pointer select-none h-fit w-[19rem] max-sm:w-fit "
           >
             <Image
               src={image}
               alt=""
               height={2}
               width={300}
-              className="h-fit"
+              className="h-fit  max-sm:w-[32rem]"
             />
           </div>
 
-          <div className="flex flex-col gap-[.2rem] w-[24rem]">
+          <div className="flex flex-col gap-[.2rem] w-[24rem]  max-sm:w-full">
             <h2
               onClick={() => navigator.push(`/course/${productId}`)}
-              className="cursor-pointer text-[1.1rem] font-normal w-[24rem] max-sm:w-[16rem]  truncate ..."
+              className="cursor-pointer text-[1.1rem] font-normal w-[24rem] max-sm:w-full  truncate ..."
             >
               {name}
             </h2>
-            <h2 className="text-[.9rem] font-normal w-[24rem] max-sm:w-[16rem]  ">
+            <h2 className="text-[.9rem] font-normal w-[24rem] max-sm:w-full  ">
               {description}
             </h2>
 

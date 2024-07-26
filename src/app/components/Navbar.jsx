@@ -24,7 +24,7 @@ function Navbar() {
     },
     {
       name: "ABOUT US",
-      path: "/about",
+      path: "/#about",
     },
     {
       name: "COURSE",
@@ -68,12 +68,10 @@ function Navbar() {
     },
   ];
 
-  if (pathname.match(/^\/admin/)) {
-    return null;
-  }
-
   // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
+    if (pathname.match(/^\/admin/)) return;
+
     const handleScroll = () => {
       if (window.scrollY > 600) {
         setBgColor("bg-black");
@@ -84,6 +82,12 @@ function Navbar() {
 
     if (pathname === "/") {
       window.addEventListener("scroll", handleScroll);
+      // Ensure the background color is correct on initial load
+      if (window.scrollY > 600) {
+        setBgColor("bg-black");
+      } else {
+        setBgColor("bg-transparent backdrop-blur-[5px] max-sm:bg-black");
+      }
     } else {
       setBgColor("bg-black");
     }
@@ -92,6 +96,10 @@ function Navbar() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, [pathname]);
+
+  if (pathname.match(/^\/admin/)) {
+    return null;
+  }
 
   return (
     <nav

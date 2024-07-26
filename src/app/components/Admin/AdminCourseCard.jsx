@@ -21,12 +21,18 @@ function AdminCourseCard({ data }) {
 
   return (
     <div className=" w-full border-b-[.2rem] border-black cursor-pointer h-fit">
-      <div className="flex gap-[2rem]">
-        <Image src={image} height={300} width={300} alt="" />
+      <div className="flex max-sm:flex-col gap-[2rem] max-sm:gap-[1rem]">
+        <Image
+          src={image}
+          height={300}
+          width={300}
+          alt=""
+          className="max-sm:w-[32rem]"
+        />
         <div className="flex flex-col gap-[.4rem] w-full">
           <h2 className="text-[1.2rem] font-semibold">{name}</h2>
           <p>{description}</p>
-          <div className="flex gap-[1rem]">
+          <div className="flex overflow-x-auto gap-[1rem]">
             {isMembership ? (
               membership?.map((item) => {
                 return (
@@ -75,16 +81,16 @@ function AdminCourseCard({ data }) {
         </div>
       </div>
 
-      <div className="mt-[.8rem] py-[.8rem] flex items-center justify-end gap-[2rem] border-t-[.1rem] border-black/30">
+      <div className="mt-[.8rem] py-[.8rem] flex items-center justify-end max-sm:justify-center gap-[2rem] border-t-[.1rem] border-black/30">
         <Link
           href={`courses/update/${_id}`}
-          className="cursor-pointer h-[2.4rem] w-[8rem] flex  justify-center items-center gap-[.6rem] rounded-[.4rem] text-[1rem]  tracking-[1px] font-normal bg-green-500 hover:bg-green-600 text-white"
+          className="cursor-pointer h-[2.4rem] w-[8rem] max-sm:w-1/2 max-sm:h-[2.8rem] flex  justify-center items-center gap-[.6rem] rounded-[.4rem] text-[1rem]  tracking-[1px] font-normal bg-green-500 hover:bg-green-600 text-white"
         >
           Update
         </Link>
         <button
           onClick={() => handelDeleteCourse(_id)}
-          className="cursor-pointer h-[2.4rem] w-[8rem] flex  justify-center items-center gap-[.6rem] rounded-[.4rem] text-[1rem]  tracking-[1px] font-normal bg-red-500 hover:bg-red-600 text-white"
+          className="cursor-pointer h-[2.4rem] w-[8rem] max-sm:h-[2.8rem] max-sm:w-1/2 flex  justify-center items-center gap-[.6rem] rounded-[.4rem] text-[1rem]  tracking-[1px] font-normal bg-red-500 hover:bg-red-600 text-white"
         >
           Remove
         </button>

@@ -75,7 +75,7 @@ function Page() {
   return (
     <>
       {membershipMenu && (
-        <div className=" flex justify-center items-center fixed top-0 bottom-0 left-[15rem] right-0 z-20  h-screen bg-slate-400/10 backdrop-blur-[2px]">
+        <div className=" flex justify-center items-center fixed top-0 bottom-0 left-[15rem] max-sm:left-0 right-0 z-20  h-screen bg-slate-400/10 backdrop-blur-[2px]">
           <form
             onSubmit={(e) => handelAddPack(e)}
             className="flex flex-col gap-[1rem] p-[2rem] rounded-[.4rem] h-fit w-[30rem] shadow-md bg-white"
@@ -252,10 +252,10 @@ function Page() {
                 <div className="border-t-[.1rem] pt-[1rem] border-black/30 flex flex-col gap-[1rem] ">
                   <div className="text-[1.1rem] font-semibold">Membership</div>
 
-                  <div className="flex  gap-[1rem]">
+                  <div className="flex max-sm:overflow-x-auto max-sm:w-full gap-[1rem] max-sm:pb-[1rem]">
                     <div
                       onClick={() => setMembershipMenu(!membershipMenu)}
-                      className="cursor-pointer flex rounded-[.4rem] justify-center items-center h-[5.1rem] w-[8rem] bg-slate-100"
+                      className="cursor-pointer flex rounded-[.4rem] justify-center items-center h-[5.1rem] w-[8rem] min-w-[8rem] bg-slate-100"
                     >
                       <FaPlus className="text-[2rem] text-black/50" />
                     </div>
@@ -314,7 +314,7 @@ function Page() {
                   </button>
                 </div>
 
-                <div className="w-[30rem] flex flex-col gap-[.4rem]">
+                <div className="w-[30rem] max-sm:w-full flex flex-col gap-[.4rem]">
                   {formData?.benefits?.map((item) => {
                     return (
                       <div

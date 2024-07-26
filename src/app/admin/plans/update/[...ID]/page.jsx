@@ -54,9 +54,11 @@ function Page({ params }) {
     <div className="relative flex w-full h-fit">
       <SideMenu />
 
-      <div className="flex flex-col item-between gap-[2rem]  py-[2rem] px-[4rem] absolute left-[15rem] h-screen max-sm:left-0 right-0 ">
+      <div className="flex flex-col item-between gap-[2rem] py-[2rem] max-sm:pt-[.8rem] px-[4rem] max-sm:px-[1rem] absolute left-[15rem] h-screen max-sm:min-h-screen max-sm:max-h-fit max-sm:left-0 right-0 ">
         <div className="flex flex-col gap-[2rem] h-full">
-          <h2 className="text-[1.4rem] font-semibold">Add New Plan</h2>
+          <h2 className="text-[1.4rem] max-sm:text-end max-sm: font-semibold">
+            Add New Plan
+          </h2>
 
           <form
             onSubmit={(e) => handelSubmit(e)}
@@ -102,7 +104,7 @@ function Page({ params }) {
                 </button>
               </div>
 
-              <div className="w-[30rem] flex flex-col gap-[.4rem]">
+              <div className="w-[30rem] max-sm:w-full flex flex-col gap-[.4rem]">
                 {formData?.benefits?.map((item) => {
                   return (
                     <div
@@ -136,7 +138,7 @@ function Page({ params }) {
                 Delete
               </button>
 
-              <Link href="/admin/courses">
+              <Link href="/admin/plans">
                 <button className="cursor-pointer flex items-center px-[2rem] h-[2.6rem] w-fit rounded-[.4rem] text-[1.1rem] font-semibold text-white bg-red-500">
                   Cancel
                 </button>

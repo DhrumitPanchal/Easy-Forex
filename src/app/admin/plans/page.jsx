@@ -17,7 +17,7 @@ function Page() {
     <div className="relative flex w-full h-fit">
       <SideMenu />
 
-      <div className="absolute left-[15rem] max-sm:left-0 right-0 ">
+      <div className="absolute max-sm:h-fit max-sm:pb-[2rem] left-[15rem] max-sm:left-0 right-0 ">
         <div className="px-[2rem] max-sm:px-[1rem] py-[1rem] flex justify-between flex-row-reverse max-sm:flex-col max-sm:gap-[1rem]">
           <Link
             href={"/admin/plans/add"}
@@ -45,7 +45,7 @@ function Page() {
               <Link
                 href={`/admin/plans/update/${item?._id}`}
                 key={item?._id}
-                className="flex flex-col items-center w-[18rem] border-[1px] border-black/20"
+                className="cursor-pointer flex flex-col items-center w-[18rem] max-sm:w-full border-[1px] border-black/20"
               >
                 <div
                   className={`h-[3rem] w-full  flex justify-center items-center font-light text-white  ${

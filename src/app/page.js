@@ -132,12 +132,18 @@ export default function Home() {
                 Easy Forex Pips
               </h2>
               <div className="mt-[2rem] flex gap-[2rem]">
-                <button className="h-[3.4rem] w-[9.6rem] rounded-[1.6rem] ">
+                <a
+                  href="#about"
+                  className="flex justify-center items-center h-[3.4rem] w-[9.6rem] rounded-[1.6rem] "
+                >
                   Features
-                </button>
-                <button className="h-[3.4rem] w-[9.6rem] rounded-[1.6rem] border-[1px] border-red-400">
+                </a>
+                <a
+                  href="#vipPlans"
+                  className="flex justify-center items-center h-[3.4rem] w-[9.6rem] rounded-[1.6rem] border-[1px] border-red-400"
+                >
                   VIP Plans
-                </button>
+                </a>
               </div>
             </div>
           </div>
@@ -237,8 +243,8 @@ export default function Home() {
           <button className="mt-[.8rem] h-[2.6rem] w-[16rem] rounded-[.4rem] tracking-[.2px] text-[.8rem] text-white bg-[#ff695d]">
             GET 12 MONTHS PROMO NOW!
           </button>
+          <div id="about"></div>
         </section>
-
         <div className="flex justify-center h-[11rem] max-sm:h-fit w-full bg-[#fff3f2]">
           <div className="flex max-sm:flex-col gap-[8rem] max-sm:gap-[3rem] max-sm:py-[2rem]">
             <div className="flex flex-col items-center justify-center">
@@ -493,6 +499,7 @@ export default function Home() {
           height={1200}
           alt=""
         />
+        <div id="vipPlans"></div>
       </section>
 
       <section className="flex flex-col gap-[2rem] items-center py-[4rem]">

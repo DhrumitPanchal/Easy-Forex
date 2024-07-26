@@ -22,26 +22,27 @@ function Page({ items, total }) {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handelSubmit = () => {
+  const handelSubmit = (e) => {
+    e.preventDefault();
     handelPayment();
   };
   useEffect(() => {}, [checkoutItems]);
   return (
-    <div className="flex justify-center items-center w-full pt-[7rem] pb-[3rem] px-[8rem] h-screen">
+    <div className="flex  justify-center items-center w-full pt-[7rem] max-sm:pt-[6rem] pb-[3rem] px-[8rem] max-sm:px-[2rem] h-screen max-sm:h-fit">
       <form
-        onSubmit={() => handelSubmit()}
-        className="flex gap-[6rem] w-full h-full "
+        onSubmit={(e) => handelSubmit(e)}
+        className="flex max-sm:flex-col gap-[6rem] max-sm:gap-[2rem]  w-full h-full "
       >
-        <div className="overflow-hidden flex flex-col gap-[2rem] w-1/2 h-full border-[2px] rounded-[.6rem]  border-black">
+        <div className="overflow-hidden flex flex-col gap-[2rem] w-1/2 max-sm:pb-[2rem] max-sm:w-full h-full border-[2px] rounded-[.6rem]  border-black">
           <div className="pl-[2rem] h-[3.8rem] flex items-center w-full text-white bg-black">
             <h2 className=" text-[1.2rem] tracking-[.2px] font-medium">
               Billing Details
             </h2>
           </div>
 
-          <div action="" className="px-[2rem] flex flex-col gap-[1.4rem]">
-            <div className="flex gap-[3rem] w-full">
-              <div className="flex gap-[.2rem] flex-col w-1/2">
+          <div className="px-[2rem] max-sm:px-[1rem] flex flex-col gap-[1.4rem]">
+            <div className="flex max-sm:flex-col gap-[3rem] max-sm:gap-[1.4rem] w-full">
+              <div className="flex gap-[.2rem] flex-col w-1/2 max-sm:w-full">
                 <label className="text-[.9rem] text-black/70" htmlFor="name">
                   First name
                 </label>
@@ -56,7 +57,7 @@ function Page({ items, total }) {
                 />
               </div>
 
-              <div className="flex gap-[.2rem] flex-col w-1/2">
+              <div className="flex gap-[.2rem] flex-col w-1/2 max-sm:w-full">
                 <label className="text-[.9rem] text-black/70" htmlFor="name">
                   Last name
                 </label>
@@ -148,7 +149,7 @@ function Page({ items, total }) {
           </div>
         </div>
 
-        <div className="flex flex-col gap-[1rem] pt-[1.2rem] px-[2rem] w-1/2 h-full border-[1px] border-black/30">
+        <div className="flex flex-col gap-[1rem] pt-[1.2rem] px-[2rem] max-sm:px-[1rem] w-1/2 max-sm:w-full h-full border-[1px] border-black/30">
           <h2 className=" text-[1.2rem] tracking-[.2px] font-semibold">
             Your Order
           </h2>
@@ -227,7 +228,7 @@ function Page({ items, total }) {
                 </h2>
               </div>
 
-              <button className="flex justify-center items-center h-[3rem] w-[50%] rounded-[.4rem] bg-[#ffd138] hover:bg-[#f2ba36] transition-colors duration-150">
+              <button className="flex justify-center items-center h-[3rem] w-[50%] max-sm:w-full rounded-[.4rem] bg-[#ffd138] hover:bg-[#f2ba36] transition-colors duration-150">
                 <Image
                   src={"/Images/paypal.png"}
                   height={20}

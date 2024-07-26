@@ -171,8 +171,6 @@ export default function MyContext(props) {
   const handelPayment = async () => {
     try {
       const { data } = await axios.post(BaseURL + "/payment");
-      console.log("check link");
-      console.table(data);
       window.open(data?.approvalUrl, "_self");
     } catch (error) {
       toast.error(error?.response?.data?.message);

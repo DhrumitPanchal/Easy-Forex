@@ -278,10 +278,10 @@ function Page({ params }) {
                 <div className="border-t-[.1rem] pt-[1rem] border-black/30 flex flex-col gap-[1rem] ">
                   <div className="text-[1.1rem] font-semibold">Membership</div>
 
-                  <div className="flex  gap-[1rem]">
+                  <div className="flex max-sm:overflow-x-auto max-sm:w-full  gap-[1rem]">
                     <div
                       onClick={() => setMembershipMenu(!membershipMenu)}
-                      className="cursor-pointer flex rounded-[.4rem] justify-center items-center h-[5.1rem] w-[8rem] bg-slate-100"
+                      className="cursor-pointer flex rounded-[.4rem] justify-center items-center h-[5.1rem] w-[8rem] max-sm:min-w-[8rem] bg-slate-100"
                     >
                       <FaPlus className="text-[2rem] text-black/50" />
                     </div>
@@ -344,7 +344,7 @@ function Page({ params }) {
                   </button>
                 </div>
 
-                <div className="w-[30rem] flex flex-col gap-[.4rem]">
+                <div className="w-[30rem] max-sm:w-full flex flex-col gap-[.4rem]">
                   {formData?.benefits?.map((item, index) => {
                     return (
                       <div
