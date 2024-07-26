@@ -37,7 +37,7 @@ export async function POST(req) {
     const plan = await Plan.findOne({ months: months });
     if (plan) {
       return NextResponse.json(
-        { message: "course already exist" },
+        { message: "Plan already exist" },
         { status: 403 }
       );
     }
@@ -82,7 +82,7 @@ export async function PUT(req) {
     const newPlan = await Plan.findByIdAndUpdate(ID, planData, { new: true });
 
     return NextResponse.json(
-      { message: "Course Updated", plan: newPlan },
+      { message: "Plan Updated", plan: newPlan },
       { status: 200 }
     );
   } catch (error) {

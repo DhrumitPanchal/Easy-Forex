@@ -10,7 +10,7 @@ const planSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  benefits: [{ type: String, unique: true }],
+  benefits: [{ type: String }],
 });
 
 export const Plan = mongoose.models.Plan || mongoose.model("Plan", planSchema);
