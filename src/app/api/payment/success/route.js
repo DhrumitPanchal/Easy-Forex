@@ -68,13 +68,9 @@ export async function GET(req) {
       await payment.save();
 
       // Redirect based on success
-      return NextResponse.redirect(
-        "http://localhost:3000/payment/?status=success"
-      );
+      return NextResponse.redirect("http://localhost:3000/payment/success");
     } else {
-      return NextResponse.redirect(
-        "http://localhost:3000/payment/?status=failed"
-      );
+      return NextResponse.redirect("http://localhost:3000/payment/failed");
     }
   } catch (error) {
     console.error("Error executing payment:", error);

@@ -3,27 +3,26 @@
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import { useSearchParams } from "next/navigation";
-function Page() {
-  const searchParams = useSearchParams();
+function Page({ params }) {
+  const { status } = params;
 
-  const [status, setStatus] = useState("");
+  const [paymentStatus, setPaymentStatus] = useState("");
 
   useEffect(() => {
-    const search = searchParams.get("status");
-    search === "success" && setStatus("success");
-    search === "failed" && setStatus("failed");
-  }, [searchParams]);
+    status[0] === "success" && setPaymentStatus("success");
+    status[0] === "failed" && setPaymentStatus("failed");
+}, [status]);
+
   return (
     <div className="flex items-center justify-center w-full h-screen">
       <div
         className={`h-[20rem] w-[26rem] flex flex-col gap-[2rem] rounded-[.8rem] items-center justify-end border-[.2rem] ${
-          status === "success"
+          paymentStatus === "success"
             ? "border-[#30ba7b]/50 bg-[#30ba7b]/10"
             : "border-[#e11b1c]/50 bg-[#e11b1c]/10"
         }`}
       >
-        {status === "success" ? (
+        {paymentStatus === "success" ? (
           <Image
             src={"/Images/checked.png"}
             height={70}
@@ -43,12 +42,14 @@ function Page() {
         <div className="flex flex-col items-center ">
           <h2
             className={`text-[1.4rem] font-semibold  ${
-              status === "success" ? "text-[#30ba7b]" : "text-[#e11b1c]"
+              paymentStatus === "success" ? "text-[#30ba7b]" : "text-[#e11b1c]"
             }`}
           >
-            {status === "success" ? " Payment Successful" : "Payment Failed"}
+            {paymentStatus === "success"
+              ? " Payment Successful"
+              : "Payment Failed"}
           </h2>
-          {status === "success" ? (
+          {paymentStatus === "success" ? (
             <p className="text-green-600">Check your email to access courses</p>
           ) : (
             <p className="text-red-600">Payment failed for some reason</p>

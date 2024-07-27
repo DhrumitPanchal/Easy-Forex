@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 export async function GET(req) {
   try {
     // Inform the user that the payment was canceled
-    return NextResponse.redirect("/payment/?status=failed");
+    return NextResponse.redirect("/payment/failed");
   } catch (error) {
     console.error("Error handling payment cancellation:", error);
     return NextResponse.json(
