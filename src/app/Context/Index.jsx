@@ -168,10 +168,16 @@ export default function MyContext(props) {
 
   // handelPayment --------------------------------------------------------------------
 
-  const handelPayment = async () => {
+  const handelPayment = async (payer_Info, items, subTotal) => {
     try {
-      const { data } = await axios.post(BaseURL + "/payment");
-      window.open(data?.approvalUrl, "_self");
+      const { data } = await axios.post(BaseURL + "/payment", {
+        payer_Info,
+        items,
+        subTotal,
+      });
+      if (data?.approvalUrl) {
+        window.location.href = data.approvalUrl; // Redirect to PayPal for payment
+      }
     } catch (error) {
       toast.error(error?.response?.data?.message);
     }

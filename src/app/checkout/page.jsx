@@ -24,7 +24,7 @@ function Page({ items, total }) {
 
   const handelSubmit = (e) => {
     e.preventDefault();
-    handelPayment();
+    handelPayment(formData, checkoutItems?.items, checkoutItems?.SubTotal);
   };
   useEffect(() => {}, [checkoutItems]);
   return (
@@ -88,7 +88,8 @@ function Page({ items, total }) {
                   value={formData?.country}
                   required
                 >
-                  {country_list.map((item) => {
+                  <option value="">Select Country/Region</option>
+                  {country_list.map((item, index) => {
                     return (
                       <option key={item?.name} value={item?.name}>
                         {item?.name}
@@ -187,13 +188,13 @@ function Page({ items, total }) {
                 </div>
               </div>
 
-              <div className="pl-[.6rem] mt-[1rem] text-[1rem] flex justify-between font-semibold">
+              {/* <div className="pl-[.6rem] mt-[1rem] text-[1rem] flex justify-between font-semibold">
                 <h2>GST</h2>
 
                 <div className="flex gap-[.2rem]">
                   <span>$</span> <h2>{3.5}</h2>
                 </div>
-              </div>
+              </div> */}
             </div>
 
             <div className="h-[.1px] w-full bg-black/30" />
@@ -202,7 +203,7 @@ function Page({ items, total }) {
               <h2>Total</h2>
 
               <div className="flex text-[1.4rem] gap-[.2rem]">
-                <span>$</span> <h2>{checkoutItems?.SubTotal + 3.5}</h2>
+                <span>$</span> <h2>{checkoutItems?.SubTotal}</h2>
               </div>
             </div>
 

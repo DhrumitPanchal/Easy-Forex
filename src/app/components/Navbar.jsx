@@ -35,27 +35,15 @@ function Navbar() {
       path: "/cart",
     },
     {
-      name: "FOREX SIGNALS PLANS",
-      path: "/forexsignalsplans",
+      name: "SIGNALS",
+      path: "/",
       Children: [
-        { name: "Signals History", path: "" },
-        { name: "VIP Instruction", path: "" },
+        { name: "Signals History", path: "/" },
+        { name: "VIP Instruction", path: "/" },
+        { name: "XAUUSD Signals History", path: "/" },
+        { name: "INDICES Signals History", path: "/" },
+        { name: "OIL Signals History", path: "/" },
       ],
-    },
-    {
-      name: "XAUUSD SIGNALS",
-      path: "xauusdsignals",
-      Children: [{ name: "XAUUSD Signals History", path: "" }],
-    },
-    {
-      name: "INDICES SIGNALS",
-      path: "indicessignals",
-      Children: [{ name: "INDICES Signals History", path: "" }],
-    },
-    {
-      name: "OIL SIGNALS",
-      path: "oilsignals",
-      Children: [{ name: "OIL Signals History", path: "" }],
     },
     {
       name: "TELEGRAM TO MT5",
@@ -97,7 +85,7 @@ function Navbar() {
     };
   }, [pathname]);
 
-  if (pathname.match(/^\/admin/)) {
+  if (pathname.match(/^\/admin/) || pathname.match(/^\/payment/)) {
     return null;
   }
 
@@ -138,18 +126,21 @@ function Navbar() {
           </button>
         </div>
 
-        <div className="flex w-full h-full max-sm:flex-col max-sm:mt-[6rem] max-sm:px-[.8rem]">
+        <div className="flex w-full h-full gap-[1rem] max-sm:flex-col max-sm:mt-[6rem] max-sm:px-[.8rem]">
           {NavItems?.map((item) => {
             return (
               <Link
                 key={item.path}
                 onClick={() => {
                   setMenuOpen(!menuOpen);
-                  setActiveSection(item.path);
+                  setActiveSection(item.name);
                 }}
-                className={`px-[.8rem] py-[.6rem] flex items-center gap-[.6rem] text-white transition-colors duration-200 ${
-                  activeSection === item?.name && "text-red-500"
-                } hover:text-slate-300 text-[.8rem] max-sm:text-[1.2rem] font-medium max-sm:border-b-[.1px] max-sm:border-white/60`}
+                className={`${
+                  item?.Children && "relative group h-fit"
+                } px-[.2rem] pt-[.6rem] pb-[.2rem] flex items-center gap-[.6rem] text-white  transition-colors duration-200 ${
+                  activeSection === item?.name &&
+                  "border-b-[.11rem] border-white"
+                } hover:text-slate-300 text-[.9rem]  max-sm:text-[1.2rem] font-medium max-sm:border-b-[.1px] max-sm:border-white/60`}
                 href={item?.path}
               >
                 {item?.name}
