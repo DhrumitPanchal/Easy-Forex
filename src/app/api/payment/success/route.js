@@ -3,6 +3,7 @@ import paypal from "paypal-rest-sdk";
 import { Payment } from "../model"; // Adjust the path as needed
 import { promisify } from "util";
 import { Connect } from "../../Connect";
+import { SendMail } from "../nodemailer";
 // Configure PayPal
 paypal.configure({
   mode: process.env.NEXT_PUBLIC_PAYPAL_MODE,
@@ -40,9 +41,7 @@ export async function GET(req) {
       const { payer, transactions } = paymentDetails;
       const { payer_info } = payer;
       const { item_list } = transactions[0];
-      console.log("check payer : ");
-      console.table(payer);
-      console.log(payer);
+
       const paymentData = {
         payer_Info: {
           first_name: payer_info.first_name || "",
@@ -67,6 +66,10 @@ export async function GET(req) {
       const payment = new Payment(paymentData);
       await payment.save();
 
+      const courses = item_list?.items?.map((e) => {
+        return `${e.name} `;
+      });
+      SendMail(courses, payer_info?.first_name + " " + payer_info?.last_name);
       // Redirect based on success
       return NextResponse.redirect("http://localhost:3000/payment/success");
     } else {
