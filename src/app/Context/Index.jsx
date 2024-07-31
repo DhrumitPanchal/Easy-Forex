@@ -13,6 +13,7 @@ export default function MyContext(props) {
   const [courseData, setCourseData] = useState(null);
   const [plansData, setPlansData] = useState(null);
   const [cart, setCart] = useState([]);
+  const [payments, setPayments] = useState([]);
   const [checkoutItems, setCheckoutItems] = useState({});
   const BaseURL = process.env.NEXT_PUBLIC_BACK_END_URL;
 
@@ -183,10 +184,22 @@ export default function MyContext(props) {
     }
   };
 
+  // handel get all payments
+
+  const handelGetAllPayments = async () => {
+    try {
+      const { data } = await axios.get(BaseURL + "/payment");
+      setPayments(data);
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
+    }
+  };
+
   useEffect(() => {
     getAllCourses();
     getAllPlans();
     handelGetCartData();
+    handelGetAllPayments();
 
     const checkoutData = Cookies.get("checkout-data");
     checkoutData && setCheckoutItems(JSON.parse(checkoutData));
@@ -201,6 +214,7 @@ export default function MyContext(props) {
         courseData,
         plansData,
         checkoutItems,
+        payments,
         setCheckoutItems,
         handelAddCourse,
         handelUpdateCourse,

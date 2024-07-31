@@ -29,11 +29,11 @@ function SideMenu() {
           </Link>
         </div>
         <Link
-          href={"/admin/order"}
+          href={"/admin/payments"}
           onClick={() => setOpenMenu(!openMenu)}
           className="cursor-pointer px-[1rem] py-[.6rem] h-fit w-full border-b-[1px] border-black/50 text-[1.2rem] transition-colors duration-300 text-black/50 font-bold hover:bg-black/10"
         >
-          Orders
+          Payments
         </Link>
         <Link
           href={"/admin/courses"}

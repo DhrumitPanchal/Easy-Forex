@@ -34,10 +34,10 @@ function Footer() {
             </h2>
             <div className="flex flex-col mt-[.6rem] text-[1rem] tracking-[.1rem] font-light">
               <Link href="/">Home</Link>
-              <Link href="/">Products</Link>
-              <Link href="/">Terms and Conditions</Link>
-              <Link href="/products">Privacy Policy</Link>
-              <Link href="cart">Contact US</Link>
+              <Link href="/course">courses</Link>
+              <Link href="/termsandconditions">Terms and Conditions</Link>
+              <Link href="/privacypolicy">Privacy Policy</Link>
+              <Link href="contact">Contact US</Link>
             </div>
           </div>
 

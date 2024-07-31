@@ -1,7 +1,8 @@
 import paypal from "paypal-rest-sdk";
 import { NextResponse } from "next/server";
 import { promisify } from "util";
-
+import { Payment } from "./model";
+import { Connect } from "../Connect";
 // Configure PayPal
 paypal.configure({
   mode: process.env.NEXT_PUBLIC_PAYPAL_MODE, //sandbox or live
@@ -13,6 +14,19 @@ paypal.configure({
 const createPaymentAsync = promisify(
   paypal.payment.create.bind(paypal.payment)
 );
+
+export async function GET(req) {
+  Connect();
+  try {
+    const payments = await Payment.find({});
+    return NextResponse.json(payments, { status: 200 });
+  } catch (error) {
+    return NextResponse.json(
+      { message: "Server Error", error },
+      { status: 500 }
+    );
+  }
+}
 
 export async function POST(req) {
   try {

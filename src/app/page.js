@@ -595,6 +595,7 @@ export default function Home() {
             );
           })}
         </div>
+        <div id="testimonials"></div>
       </section>
 
       <section className="flex flex-col gap-[3rem] items-center pt-[4rem] pb-[2rem] bg-[#242b32]">

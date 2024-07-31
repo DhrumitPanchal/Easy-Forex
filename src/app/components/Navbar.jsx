@@ -1,14 +1,17 @@
 "use client";
 
 import Image from "next/image";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Link from "next/link";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { useRouter, usePathname } from "next/navigation";
-import { IoIosArrowDown } from "react-icons/io";
+import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
+import { Context } from "../Context/Index";
 
 function Navbar() {
+  const { cart } = useContext(Context);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [signalMenu, setSignalMenu] = useState(false);
   const [activeSection, setActiveSection] = useState("HOME");
   const [bgColor, setBgColor] = useState(
     "bg-transparent backdrop-blur-[5px] max-sm:bg-black"
@@ -46,13 +49,13 @@ function Navbar() {
       ],
     },
     {
-      name: "TELEGRAM TO MT5",
-      path: "telegramtomt5",
+      name: "CONTACT US",
+      path: "/contact",
     },
 
     {
       name: "TESTIMONIALS & REVIEWS",
-      path: "testimonials",
+      path: "/#testimonials",
     },
   ];
 
@@ -129,23 +132,81 @@ function Navbar() {
         <div className="flex w-full h-full gap-[1rem] max-sm:flex-col max-sm:mt-[6rem] max-sm:px-[.8rem]">
           {NavItems?.map((item) => {
             return (
-              <Link
-                key={item.path}
+              <div
+                key={item?.name}
                 onClick={() => {
-                  setMenuOpen(!menuOpen);
+                  item.name !== "SIGNALS" && setMenuOpen(!menuOpen);
                   setActiveSection(item.name);
+                  item?.name !== "SIGNALS"
+                    ? router.push(item.path)
+                    : setSignalMenu(!signalMenu);
                 }}
                 className={`${
-                  item?.Children && "relative group h-fit"
-                } px-[.2rem] pt-[.6rem] pb-[.2rem] flex items-center gap-[.6rem] text-white  transition-colors duration-200 ${
+                  item?.Children ? "relative " : "group"
+                } cursor-pointer px-[.2rem] pt-[.6rem] pb-[.2rem] flex items-center gap-[.6rem] text-white  transition-colors duration-200 ${
                   activeSection === item?.name &&
                   "border-b-[.11rem] border-white"
-                } hover:text-slate-300 text-[.9rem]  max-sm:text-[1.2rem] font-medium max-sm:border-b-[.1px] max-sm:border-white/60`}
+                }  text-[.9rem]  max-sm:text-[1.2rem] font-medium max-sm:border-b-[.1px] max-sm:border-white/60`}
                 href={item?.path}
               >
-                {item?.name}
-                {item.Children && <IoIosArrowDown className="text-[1rem]" />}
-              </Link>
+                {item?.name === "CART" && cart.length > 0 && (
+                  <div className=" h-[1.2rem] w-[1.2rem] max-sm:h-[1.6rem] max-sm:w-[1.6rem]  flex items-center justify-center text-[.9rem] max-sm:text-[1.2rem] max-sm:ml-[rem] rounded-full bg-white/20   ">
+                    {cart?.length}
+                  </div>
+                )}
+
+                <div className="flex gap-[.6rem] max-sm:flex-col max-sm:items-start items-center group-hover:text-slate-300">
+                  <div className="flex gap-[.6rem] items-center">
+                    {" "}
+                    {item?.name}
+                    {item.Children && (
+                      <div>
+                        {signalMenu ? (
+                          <IoIosArrowUp className="text-[1rem]" />
+                        ) : (
+                          <IoIosArrowDown className="text-[1rem]" />
+                        )}
+                      </div>
+                    )}
+                  </div>
+
+                  {item?.name === "SIGNALS" && (
+                    <div className="hidden max-sm:block">
+                      {signalMenu && (
+                        <div className="flex flex-col">
+                          {item?.Children?.map((e) => {
+                            return <div key={e.name}>{e?.name}</div>;
+                          })}
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </div>
+
+                {item?.name === "SIGNALS"
+                  ? signalMenu && (
+                      <div
+                        className={`max-sm:hidden absolute max-sm:relative flex flex-col gap-[.2rem] top-[2.8rem]  w-[13rem] font-light px-[.8rem] py-[.4rem] ${
+                          bgColor === "bg-black"
+                            ? "bg-black text-white/60"
+                            : "bg-black/30 "
+                        }`}
+                      >
+                        {item?.Children?.map((e) => {
+                          return (
+                            <div
+                              className="hover:text-white text-white/70"
+                              onClick={() => router.push("/")}
+                              key={e.name}
+                            >
+                              {e.name}
+                            </div>
+                          );
+                        })}
+                      </div>
+                    )
+                  : null}
+              </div>
             );
           })}
         </div>
