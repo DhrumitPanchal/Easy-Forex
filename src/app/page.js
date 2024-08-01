@@ -351,7 +351,7 @@ export default function Home() {
         <div className="h-[.1px] w-[80%] bg-black" />
 
         <section className="py-[2rem] w-full">
-          <h1 className="text-center text-[1.6rem] font-bold">
+          <h1 className="text-center text-[1.6rem] px-[1rem] font-bold">
             Turn yourself into a WINNER with our PREMIUM program
           </h1>
 
@@ -428,7 +428,7 @@ export default function Home() {
             Latest Analysis{" "}
           </h1>
 
-          <table className="w-[70%] border-[1px] border-black">
+          <table className="w-[70%] max-sm:w-[90%] border-[1px] border-black">
             <thead>
               <tr className=" bg-slate-200">
                 {tableHading?.map((item, index) => {

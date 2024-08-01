@@ -44,13 +44,13 @@ function CartPageCard({ ProductData }) {
             </h2>
 
             <div className="hidden mt-[.4rem] max-sm:flex gap-[1rem] w-[6rem]">
-              <h2 className="font-normal">₹{price}.00</h2>
+              <h2 className="font-normal">${price}.00</h2>
             </div>
           </div>
         </div>
 
         <div className="max-sm:hidden flex gap-[1rem] w-[6rem]">
-          <h2 className="font-normal">₹{price}.00</h2>
+          <h2 className="font-normal">${price}.00</h2>
         </div>
 
         <div className="max-sm:mt-[.6rem] w-[7rem] flex gap-[1rem]">
@@ -80,7 +80,7 @@ function CartPageCard({ ProductData }) {
         </div>
 
         <div className=" max-sm:mt-[.6rem] w-[8rem] font-semibold ">
-          <span>Total :</span> ₹{price * productQuantity}
+          <span>Total :</span> ${price * productQuantity}
           .00
         </div>
 

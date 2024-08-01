@@ -111,7 +111,7 @@ function Navbar() {
       <div
         className={`flex max-sm:fixed max-sm:top-0 ${
           menuOpen ? "max-sm:left-0" : "max-sm:-left-[100%]"
-        } max-sm:h-screen max-sm:w-full max-sm:justify-center max-sm:bg-black max-sm:items-center max-sm:flex-col max-sm:text-[1.3rem] max-sm:gap-[.6rem]  max-sm:z-[50] gap-[1rem] text-[1.1rem] font-semibold tracking-[.5px] transition-all duration-300`}
+        } max-sm:h-screen max-sm:w-full max-sm:justify-center max-sm:bg-[#242b32] max-sm:items-center max-sm:flex-col max-sm:text-[1.3rem] max-sm:gap-[.6rem]  max-sm:z-[50] gap-[1rem] text-[1.1rem] font-semibold tracking-[.5px] transition-all duration-300`}
       >
         <div className="px-[1.2rem] pr-[1.6rem] py-[.8rem] absolute top-0 justify-between hidden max-sm:flex max-sm:w-full ">
           <Image
@@ -150,12 +150,6 @@ function Navbar() {
                 }  text-[.9rem]  max-sm:text-[1.2rem] font-medium max-sm:border-b-[.1px] max-sm:border-white/60`}
                 href={item?.path}
               >
-                {item?.name === "CART" && cart.length > 0 && (
-                  <div className=" h-[1.2rem] w-[1.2rem] max-sm:h-[1.6rem] max-sm:w-[1.6rem]  flex items-center justify-center text-[.9rem] max-sm:text-[1.2rem] max-sm:ml-[rem] rounded-full bg-white/20   ">
-                    {cart?.length}
-                  </div>
-                )}
-
                 <div className="flex gap-[.6rem] max-sm:flex-col max-sm:items-start items-center group-hover:text-slate-300">
                   <div className="flex gap-[.6rem] items-center">
                     {" "}
@@ -172,9 +166,13 @@ function Navbar() {
                   </div>
 
                   {item?.name === "SIGNALS" && (
-                    <div className="hidden max-sm:block">
+                    <div
+                      className={`hidden max-sm:block ${
+                        signalMenu ? "max-sm:block" : "max-sm:hidden"
+                      }`}
+                    >
                       {signalMenu && (
-                        <div className="flex flex-col">
+                        <div className="flex flex-col pb-[.4rem] gap-[.4rem]">
                           {item?.Children?.map((e) => {
                             return <div key={e.name}>{e?.name}</div>;
                           })}
@@ -183,6 +181,12 @@ function Navbar() {
                     </div>
                   )}
                 </div>
+
+                {item?.name === "CART" && cart.length > 0 && (
+                  <div className=" h-[1.2rem] w-[1.2rem] max-sm:h-[1.6rem] max-sm:w-[1.6rem]  flex items-center justify-center text-[.9rem] max-sm:text-[1.2rem] max-sm:ml-[rem] rounded-full bg-white/20   ">
+                    {cart?.length}
+                  </div>
+                )}
 
                 {item?.name === "SIGNALS"
                   ? signalMenu && (

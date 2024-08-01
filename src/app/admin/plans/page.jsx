@@ -23,12 +23,12 @@ function Page() {
             href={"/admin/plans/add"}
             className="self-end cursor-pointer h-[2.4rem] w-[11rem] flex  justify-center items-center gap-[.6rem] rounded-[.4rem] text-[1rem]  tracking-[1px] font-normal bg-black text-white"
           >
-            <FaPlus className="text-[1.2rem] text-white " />
-            <h2>Add Course</h2>
+            <FaPlus className="text-[1.2rem] text-white" />
+            <h2>Add Plan</h2>
           </Link>
           <div className="flex gap-[1rem]">
             <input
-              placeholder="Search Product"
+              placeholder="Search Membership"
               type="text"
               className="px-[.8rem] h-[2.4rem] max-sm:w-full w-[25rem] border-[2px] rounded-[.4rem] text-[1.2rem] border-black/70 focus:border-black focus:border-[2.4px] placeholder:text-black/70"
             />
