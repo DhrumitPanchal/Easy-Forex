@@ -1,23 +1,22 @@
 import { NextResponse } from "next/server";
 import paypal from "paypal-rest-sdk";
-import { Payment } from "../model"; // Adjust the path as needed
+import { Payment } from "../model";
 import { promisify } from "util";
 import { Connect } from "../../Connect";
-import { SendMail } from "../nodemailer";
-// Configure PayPal
+import { SendPerchesMail } from "../../SendMail";
+
 paypal.configure({
   mode: process.env.NEXT_PUBLIC_PAYPAL_MODE,
   client_id: process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID,
   client_secret: process.env.NEXT_PUBLIC_PAYPAL_SECRET,
 });
 
-// Convert the execute method to return a promise
 const executePaymentAsync = promisify(
   paypal.payment.execute.bind(paypal.payment)
 );
 
 export async function GET(req) {
-  await Connect(); // Ensure DB connection
+  await Connect();
 
   try {
     const { searchParams } = new URL(req.url);
@@ -31,12 +30,10 @@ export async function GET(req) {
       );
     }
 
-    // Execute the payment
     const paymentDetails = await executePaymentAsync(paymentId, {
       payer_id: payerId,
     });
 
-    // Check payment status
     if (paymentDetails.state === "approved") {
       const { payer, transactions } = paymentDetails;
       const { payer_info } = payer;
@@ -47,8 +44,8 @@ export async function GET(req) {
           first_name: payer_info.first_name || "",
           last_name: payer_info.last_name || "",
           country: payer_info.country_code || "",
-          town_Ci: payer_info.shipping_address?.city || "", // Adjust field as needed
-          //   phone: payer_info.shipping_address?.phone || "", // Remove non-digits or set as empty string
+          town_Ci: payer_info.shipping_address?.city || "",
+
           email: payer_info.email || "",
         },
         items: item_list.items.map((item) => ({
@@ -62,15 +59,17 @@ export async function GET(req) {
         subTotal: parseFloat(transactions[0].amount.total) || 0,
       };
 
-      // Store payment details in the database
       const payment = new Payment(paymentData);
       await payment.save();
 
       const courses = item_list?.items?.map((e) => {
         return `${e.name} `;
       });
-      SendMail(courses, payer_info?.first_name + " " + payer_info?.last_name);
-      // Redirect based on success
+      SendPerchesMail(
+        courses,
+        payer_info?.first_name + " " + payer_info?.last_name
+      );
+
       return NextResponse.redirect("http://localhost:3000/payment/success");
     } else {
       return NextResponse.redirect("http://localhost:3000/payment/failed");
