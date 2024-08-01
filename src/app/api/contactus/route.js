@@ -4,8 +4,6 @@ import { transporter } from "../payment/nodemailerConfig";
 
 export async function POST(req) {
   const { subject, message, name, email } = await req.json();
-  console.log("checking data oo");
-  console.table({ subject, message, name, email });
   try {
     const info = await transporter.sendMail({
       from: "East-Forex Web",
