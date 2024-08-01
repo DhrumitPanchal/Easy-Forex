@@ -14,7 +14,7 @@ function Navbar() {
   const [signalMenu, setSignalMenu] = useState(false);
   const [activeSection, setActiveSection] = useState("HOME");
   const [bgColor, setBgColor] = useState(
-    "bg-transparent backdrop-blur-[5px] max-sm:bg-black"
+    "bg-transparent backdrop-blur-[5px] max-sm:bg-[#242b32]"
   );
 
   const router = useRouter();
@@ -65,9 +65,9 @@ function Navbar() {
 
     const handleScroll = () => {
       if (window.scrollY > 600) {
-        setBgColor("bg-black");
+        setBgColor("bg-[#242b32]");
       } else {
-        setBgColor("bg-transparent backdrop-blur-[5px] max-sm:bg-black");
+        setBgColor("bg-transparent backdrop-blur-[5px] max-sm:bg-[#242b32]");
       }
     };
 
@@ -75,12 +75,12 @@ function Navbar() {
       window.addEventListener("scroll", handleScroll);
       // Ensure the background color is correct on initial load
       if (window.scrollY > 600) {
-        setBgColor("bg-black");
+        setBgColor("bg-[#242b32]");
       } else {
-        setBgColor("bg-transparent backdrop-blur-[5px] max-sm:bg-black");
+        setBgColor("bg-transparent backdrop-blur-[5px] max-sm:bg-[#242b32]");
       }
     } else {
-      setBgColor("bg-black");
+      setBgColor("bg-[#242b32]");
     }
 
     return () => {
@@ -94,7 +94,7 @@ function Navbar() {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 pt-[.6rem] z-40 w-full flex justify-between items-center px-[2rem] max-sm:px-[2rem] py-[.2rem] ${bgColor} transition-colors duration-300`}
+      className={`fixed top-0 left-0 right-0 py-[.6rem] z-40 w-full flex justify-between items-center px-[2rem] max-sm:px-[2rem]  ${bgColor} `}
     >
       <a
         href="#home"
@@ -136,7 +136,7 @@ function Navbar() {
                 key={item?.name}
                 onClick={() => {
                   item.name !== "SIGNALS" && setMenuOpen(!menuOpen);
-                  setActiveSection(item.name);
+                  item.name !== "SIGNALS" && setActiveSection(item.name);
                   item?.name !== "SIGNALS"
                     ? router.push(item.path)
                     : setSignalMenu(!signalMenu);
@@ -144,8 +144,9 @@ function Navbar() {
                 className={`${
                   item?.Children ? "relative " : "group"
                 } cursor-pointer px-[.2rem] pt-[.6rem] pb-[.2rem] flex items-center gap-[.6rem] text-white  transition-colors duration-200 ${
-                  activeSection === item?.name &&
-                  "border-b-[.11rem] border-white"
+                  activeSection === item?.name && item.name !== "SIGNALS"
+                    ? "border-b-[.11rem] border-white"
+                    : ""
                 }  text-[.9rem]  max-sm:text-[1.2rem] font-medium max-sm:border-b-[.1px] max-sm:border-white/60`}
                 href={item?.path}
               >
@@ -186,9 +187,9 @@ function Navbar() {
                 {item?.name === "SIGNALS"
                   ? signalMenu && (
                       <div
-                        className={`max-sm:hidden absolute max-sm:relative flex flex-col gap-[.2rem] top-[2.8rem]  w-[13rem] font-light px-[.8rem] py-[.4rem] ${
-                          bgColor === "bg-black"
-                            ? "bg-black text-white/60"
+                        className={`max-sm:hidden absolute max-sm:relative flex flex-col gap-[.3rem] top-[3.8rem] rounded-sm w-[13rem] font-medium px-[.8rem] py-[.8rem] ${
+                          bgColor === "bg-[#242b32]"
+                            ? "bg-[#242b32] text-white/80"
                             : "bg-black/30 "
                         }`}
                       >

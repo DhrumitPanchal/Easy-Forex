@@ -1,12 +1,11 @@
-import { NextRequest, NextResponse } from "next/server";
-import { SendContactUsMail } from "../SendMail";
+import { NextResponse } from "next/server";
 import { transporter } from "../payment/nodemailerConfig";
 
 export async function POST(req) {
   const { subject, message, name, email } = await req.json();
 
   try {
-    const info = await transporter.sendMail({
+    await transporter.sendMail({
       from: '"Easy-Forex ContactUs" dhrumit6789@gmail.com',
       to: "dhrumitpanchal789@gmail.com",
       subject: subject,
