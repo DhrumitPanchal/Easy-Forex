@@ -38,7 +38,7 @@ function Page() {
           </div>
         </div>
 
-        <div className="mx-[1.6rem] px-[1rem] flex justify-between bg-black text-white py-[.6rem] tracking-[.05rem]  text-[1.2rem] ">
+        <div className="max-sm:hidden mx-[1.6rem] max-sm:mx-[1rem] px-[1rem]  flex justify-between bg-black text-white py-[.6rem] tracking-[.05rem]  text-[1.2rem] ">
           <h2 className="w-3/4">Item Details</h2>
           <h2 className="w-1/4 "> Payer Info</h2>
         </div>
