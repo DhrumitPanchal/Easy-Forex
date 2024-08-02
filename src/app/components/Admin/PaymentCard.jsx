@@ -37,7 +37,7 @@ function PaymentCard({ data }) {
         </div>
 
         <div className="flex flex-col gap-[.4rem] w-2/5 text-[1.1rem] font-semibold">
-          <h2>Name : {payer_Info?.name + " " + payer_Info?.first_name}</h2>
+          <h2>Name : {payer_Info?.first_name + " " + payer_Info?.last_name}</h2>
           <h2>Country : {payer_Info?.country}</h2>
           <h2>Town/City : {payer_Info?.town_Ci}</h2>
           <h2>Email: {payer_Info?.email}</h2>
