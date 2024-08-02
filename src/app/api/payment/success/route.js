@@ -60,7 +60,7 @@ export async function GET(req) {
       };
 
       const payment = new Payment(paymentData);
-      await payment.save();
+      const newPayment = await payment.save();
 
       const courses = item_list?.items?.map((e) => {
         return `${e.name} `;

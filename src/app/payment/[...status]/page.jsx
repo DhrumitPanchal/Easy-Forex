@@ -2,16 +2,23 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { Context } from "@/app/Context/Index";
+import Cookies from "js-cookie";
 function Page({ params }) {
   const { status } = params;
+  const { cart, setCart } = useContext(Context);
 
   const [paymentStatus, setPaymentStatus] = useState("");
 
   useEffect(() => {
     status[0] === "success" && setPaymentStatus("success");
     status[0] === "failed" && setPaymentStatus("failed");
-}, [status]);
+
+    status[0] === "success" && setCart([]);
+    Cookies.remove("cart-products");
+    Cookies.remove("checkout-data");
+  }, [status]);
 
   return (
     <div className="flex items-center justify-center w-full h-screen">

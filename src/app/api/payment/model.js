@@ -1,5 +1,9 @@
 import mongoose from "mongoose";
 
+const getCurrentTime = () => {
+  const currentDate = Date.now();
+  return currentDate;
+};
 const paymentSchema = new mongoose.Schema({
   payer_Info: {
     first_name: {
@@ -16,7 +20,7 @@ const paymentSchema = new mongoose.Schema({
     },
     town_Ci: {
       type: String,
-      required: true, // Make optional
+      required: true,
     },
     // phone: {
     //   type: Number,
@@ -46,6 +50,10 @@ const paymentSchema = new mongoose.Schema({
       },
     ],
     required: true,
+  },
+  paymentDate: {
+    type: Number,
+    default: () => getCurrentTime(),
   },
   subTotal: {
     type: Number,

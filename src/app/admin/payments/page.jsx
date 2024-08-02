@@ -7,11 +7,12 @@ import { Context } from "@/app/Context/Index";
 import { FaPlus } from "react-icons/fa";
 import { FaMagnifyingGlass } from "react-icons/fa6";
 import Image from "next/image";
+import PaymentCard from "@/app/components/Admin/PaymentCard";
 function Page() {
   const { payments } = useContext(Context);
 
   useEffect(() => {}, [payments]);
-  return (  
+  return (
     <div className="relative flex w-full h-full ">
       <SideMenu />
 
@@ -37,17 +38,15 @@ function Page() {
           </div>
         </div>
 
-        <div className="px-[1.6rem] pt-[1.4rem] pb-[2rem] flex flex-col gap-[2rem]">
-          <div>
-            <div>
-              <Image
-                src="https://res.cloudinary.com/dth6uqovu/image/upload/v1721920197/sodnyipo3t2ygfawt55f.jpg"
-                height={100}
-                width={100}
-                alt=""
-              />
-            </div>
-          </div>
+        <div className="mx-[1.6rem] px-[1rem] flex justify-between bg-black text-white py-[.6rem] tracking-[.05rem]  text-[1.2rem] ">
+          <h2 className="w-3/4">Item Details</h2>
+          <h2 className="w-1/4 "> Payer Info</h2>
+        </div>
+
+        <div className="pb-[2rem]">
+          {payments?.map((item) => {
+            return <PaymentCard key={item?._id} data={item} />;
+          })}
         </div>
       </div>
     </div>

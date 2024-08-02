@@ -189,7 +189,7 @@ export default function MyContext(props) {
   const handelGetAllPayments = async () => {
     try {
       const { data } = await axios.get(BaseURL + "/payment");
-      setPayments(data);
+      setPayments(data.reverse());
     } catch (error) {
       toast.error(error?.response?.data?.message);
     }
@@ -203,7 +203,6 @@ export default function MyContext(props) {
 
     const checkoutData = Cookies.get("checkout-data");
     checkoutData && setCheckoutItems(JSON.parse(checkoutData));
-    console.log("cheking data : " + checkoutData);
   }, []);
 
   return (
