@@ -15,6 +15,8 @@ const executePaymentAsync = promisify(
   paypal.payment.execute.bind(paypal.payment)
 );
 
+const success_redirect_URL = process.env.NEXT_PUBLIC_SUCCESS_REDIRECT;
+const failed_redirect_URL = process.env.NEXT_PUBLIC_FAILED_REDIRECT;
 export async function GET(req) {
   await Connect();
 
@@ -70,13 +72,9 @@ export async function GET(req) {
         payer_info?.first_name + " " + payer_info?.last_name
       );
 
-      return NextResponse.redirect(
-        "https://easy-forex.vercel.app/payment/success"
-      );
+      return NextResponse.redirect(success_redirect_URL);
     } else {
-      return NextResponse.redirect(
-        "https://easy-forex.vercel.app/payment/failed"
-      );
+      return NextResponse.redirect(failed_redirect_URL);
     }
   } catch (error) {
     console.error("Error executing payment:", error);

@@ -11,6 +11,10 @@ paypal.configure({
 });
 
 // Convert the create method to return a promise
+
+const success_redirect_URL = process.env.NEXT_PUBLIC_SUCCESS_REDIRECT;
+const failed_redirect_URL = process.env.NEXT_PUBLIC_FAILED_REDIRECT;
+
 const createPaymentAsync = promisify(
   paypal.payment.create.bind(paypal.payment)
 );
@@ -62,8 +66,8 @@ export async function POST(req) {
         payer_info: validPayerInfo,
       },
       redirect_urls: {
-        return_url: "http://localhost:3000/api/payment/success",
-        cancel_url: "http://localhost:3000/api/payment/failed",
+        return_url: success_redirect_URL,
+        cancel_url: failed_redirect_URL,
       },
       transactions: [
         {

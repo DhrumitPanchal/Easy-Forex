@@ -37,14 +37,14 @@ function Page({ params }) {
           <p className="text-green-600">Check your email to access courses</p>
         </div>
 
-        <dir className="mb-[1.4rem] text-[.8rem]">
+        <div className="mb-[1.4rem] text-[.8rem]">
           <Link
             href={"/"}
             className="font-medium underline underline-offset-4 landing-[2rem]"
           >
             Back to Home
           </Link>
-        </dir>
+        </div>
       </div>
     </div>
   );
