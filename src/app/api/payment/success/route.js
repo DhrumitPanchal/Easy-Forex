@@ -72,9 +72,9 @@ export async function GET(req) {
         payer_info?.first_name + " " + payer_info?.last_name
       );
 
-      return NextResponse.redirect(success_redirect_URL);
+      return NextResponse.redirect("https://easy-forex.vercel.app/payment/success");
     } else {
-      return NextResponse.redirect(failed_redirect_URL);
+      return NextResponse.redirect("https://easy-forex.vercel.app/payment/failed");
     }
   } catch (error) {
     console.error("Error executing payment:", error);
