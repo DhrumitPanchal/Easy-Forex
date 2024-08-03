@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
 
-const failed_redirect_URL = process.env.NEXT_PUBLIC_FAILED_REDIRECT;
 export async function GET(req) {
   try {
     // Inform the user that the payment was canceled
