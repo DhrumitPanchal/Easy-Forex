@@ -88,7 +88,11 @@ function Navbar() {
     };
   }, [pathname]);
 
-  if (pathname.match(/^\/admin/) || pathname.match(/^\/payment/)) {
+  if (
+    pathname.match(/^\/admin/) ||
+    pathname.match(/^\/payment/) ||
+    pathname.match(/^\/forgotpassword/)
+  ) {
     return null;
   }
 

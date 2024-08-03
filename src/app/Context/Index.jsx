@@ -202,7 +202,11 @@ export default function MyContext(props) {
         password,
       });
       console.log("checking data ");
-      Cookies.set("access-token", data?.access_Token);
+      var inThreeMinutes = new Date(new Date().getTime() + 30 * 60 * 1000);
+      console.log("time  :  " + inThreeMinutes);
+      Cookies.set("access-token", data?.access_Token, {
+        expires: inThreeMinutes,
+      });
       toast.success(data?.message);
       router.push("/admin/courses");
     } catch (error) {
@@ -220,6 +224,29 @@ export default function MyContext(props) {
       } else {
         router.push("/admin");
       }
+    }
+  };
+
+  const handelSendForgotPasswordEmail = async (email) => {
+    try {
+      await axios.post(BaseURL + "/auth/forgotpassword", { email });
+      toast.success("Reset password link sent to your email");
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
+      alert(error?.response?.data?.message);
+    }
+  };
+
+  const handelSendChangePassword = async (password, confirmPassword, token) => {
+    try {
+      await axios.put(BaseURL + "/auth/forgotpassword", {
+        newPassword: password,
+        confirmPassword,
+        token,
+      });
+      toast.success("password changed");
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
     }
   };
 
@@ -247,6 +274,8 @@ export default function MyContext(props) {
         plansData,
         checkoutItems,
         payments,
+        handelSendForgotPasswordEmail,
+        handelSendChangePassword,
         setCheckoutItems,
         handelAddCourse,
         handelUpdateCourse,

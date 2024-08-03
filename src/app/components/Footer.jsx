@@ -11,7 +11,11 @@ import { usePathname } from "next/navigation";
 
 function Footer() {
   const pathname = usePathname();
-  if (pathname.match(/^\/admin/) || pathname.match(/^\/payment/)) {
+  if (
+    pathname.match(/^\/admin/) ||
+    pathname.match(/^\/payment/) ||
+    pathname.match(/^\/forgotpassword/)
+  ) {
     return null;
   }
   return (

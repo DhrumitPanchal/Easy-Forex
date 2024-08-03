@@ -42,11 +42,7 @@ export async function POST(req) {
         ...checkUserExist,
       };
 
-      const token = await jwt.sign(
-        Payload,
-        process.env.NEXT_PUBLIC_JWT_SECRET,
-        { expiresIn: "2m" }
-      );
+      const token = await jwt.sign(Payload, process.env.NEXT_PUBLIC_JWT_SECRET);
       const newObject = {
         access_Token: token,
         message: "login successfully",

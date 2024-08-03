@@ -2,6 +2,7 @@
 
 import React, { useState, useContext } from "react";
 import { Context } from "../Context/Index";
+import Link from "next/link";
 function Page() {
   const { handelAdminLogin } = useContext(Context);
 
@@ -48,6 +49,12 @@ function Page() {
             className="px-[1rem] py-[.2rem] w-full rounded-[.4rem] border-[2px] font-normal text-[1.2rem] text-white border-white/20 placeholder:text-white/50 focus:border-white/50 bg-transparent "
             placeholder="Password"
           />
+          <Link
+            href={"/forgotpassword"}
+            className="cursor-pointer text-end text-white text-[.9rem] underline"
+          >
+            Forgot password?
+          </Link>
 
           <button
             type="submit"
