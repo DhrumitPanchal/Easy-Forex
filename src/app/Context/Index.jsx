@@ -3,7 +3,7 @@
 import React, { createContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import axios from "axios";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import Cookies from "js-cookie";
 
 export const Context = createContext(null);
@@ -16,7 +16,7 @@ export default function MyContext(props) {
   const [payments, setPayments] = useState([]);
   const [checkoutItems, setCheckoutItems] = useState({});
   const BaseURL = process.env.NEXT_PUBLIC_BACK_END_URL;
-
+  const pathname = usePathname();
   // get all products ---------------------------------------------
   const getAllCourses = async () => {
     try {
@@ -195,7 +195,36 @@ export default function MyContext(props) {
     }
   };
 
+  const handelAdminLogin = async (email, password) => {
+    try {
+      const { data } = await axios.post(BaseURL + "/auth/admin", {
+        email,
+        password,
+      });
+      console.log("checking data ");
+      Cookies.set("access-token", data?.access_Token);
+      toast.success(data?.message);
+      router.push("/admin/courses");
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
+    }
+  };
+
+  const handelAdminAccess = () => {
+    if (pathname.match(/^\/admin/)) {
+      const token = Cookies.get("access-token");
+      if (token) {
+        if (pathname === "/admin") {
+          router.push("/admin/courses");
+        }
+      } else {
+        router.push("/admin");
+      }
+    }
+  };
+
   useEffect(() => {
+    handelAdminAccess();
     getAllCourses();
     getAllPlans();
     handelGetCartData();
@@ -204,6 +233,10 @@ export default function MyContext(props) {
     const checkoutData = Cookies.get("checkout-data");
     checkoutData && setCheckoutItems(JSON.parse(checkoutData));
   }, []);
+
+  useEffect(() => {
+    handelAdminAccess();
+  }, [pathname]);
 
   return (
     <Context.Provider
@@ -225,6 +258,7 @@ export default function MyContext(props) {
         handelRemoveFromCart,
         handelUpdateCartData,
         handelPayment,
+        handelAdminLogin,
       }}
     >
       {props.children}

@@ -1,9 +1,9 @@
 "use client";
 
 import React, { useState, useContext } from "react";
-import { Context } from "../Context/Index.jsx";
+import { Context } from "../Context/Index";
 function Page() {
-  const { handelAdminAccess } = useContext(Context);
+  const { handelAdminLogin } = useContext(Context);
 
   const [formData, setFromData] = useState({
     email: "",
@@ -16,7 +16,7 @@ function Page() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    handelAdminAccess(formData.email, formData.password);
+    handelAdminLogin(formData.email, formData.password);
   }
 
   return (
