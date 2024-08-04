@@ -233,7 +233,6 @@ export default function MyContext(props) {
       toast.success("Reset password link sent to your email");
     } catch (error) {
       toast.error(error?.response?.data?.message);
-      alert(error?.response?.data?.message);
     }
   };
 
