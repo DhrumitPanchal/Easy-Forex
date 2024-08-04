@@ -5,7 +5,7 @@ import jwt from "jsonwebtoken";
 import { transporter } from "../../payment/nodemailerConfig";
 import bcrypt from "bcryptjs";
 Connect();
-
+const frontend_URL = process.env.NEXT_PUBLIC_FRONTEND_URL;
 export async function POST(req) {
   const { email } = await req.json();
   console.log("check for request :  " + email);
@@ -26,7 +26,7 @@ export async function POST(req) {
       { expiresIn: "5m" }
     );
 
-    const resetLink = `http://localhost:3000/forgotpassword?token=${token}`;
+    const resetLink = `${NEXT_PUBLIC_FRONTEND_URL}/forgotpassword?token=${token}`;
 
     const mailOptions = {
       from: '"Maddison Foo Koch 👻" dhrumit6789@gmail.com',
