@@ -4,7 +4,8 @@ import React, { useState, useContext, useEffect } from "react";
 import { Context } from "../Context/Index";
 import axios from "axios";
 import { useSearchParams } from "next/navigation";
-function Page() {
+import { Suspense } from "react";
+function ForgotPasswordPage() {
   const { handelSendForgotPasswordEmail, handelSendChangePassword } =
     useContext(Context);
   const [loading, setLoading] = useState(false);
@@ -135,6 +136,14 @@ function Page() {
         )}
       </div>
     </section>
+  );
+}
+
+function Page() {
+  return (
+    <Suspense>
+      <ForgotPasswordPage />
+    </Suspense>
   );
 }
 
