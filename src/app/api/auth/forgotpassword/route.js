@@ -26,7 +26,7 @@ export async function POST(req) {
       { expiresIn: "5m" }
     );
 
-    const resetLink = `${NEXT_PUBLIC_FRONTEND_URL}/forgotpassword?token=${token}`;
+    const resetLink = `${frontend_URL}/forgotpassword?token=${token}`;
 
     const mailOptions = {
       from: '"Maddison Foo Koch 👻" dhrumit6789@gmail.com',

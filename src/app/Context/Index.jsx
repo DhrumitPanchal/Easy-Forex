@@ -231,8 +231,10 @@ export default function MyContext(props) {
     try {
       await axios.post(BaseURL + "/auth/forgotpassword", { email });
       toast.success("Reset password link sent to your email");
+      return "email sended";
     } catch (error) {
       toast.error(error?.response?.data?.message);
+      return "NA";
     }
   };
 
@@ -244,8 +246,10 @@ export default function MyContext(props) {
         token,
       });
       toast.success("password changed");
+      return "password changed";
     } catch (error) {
       toast.error(error?.response?.data?.message);
+      return "NA";
     }
   };
 
@@ -267,6 +271,7 @@ export default function MyContext(props) {
   return (
     <Context.Provider
       value={{
+        router,
         cart,
         setCart,
         courseData,
