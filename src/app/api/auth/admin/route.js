@@ -25,7 +25,6 @@ export async function POST(req) {
     if (!checkUserExist) {
       return NextResponse.json({ message: "Admin not exist" }, { status: 404 });
     }
-    console.log("checking data : " + checkUserExist);
     if (checkUserExist?.userType !== "admin") {
       return NextResponse.json(
         { message: "you don't have admin access" },
@@ -56,7 +55,6 @@ export async function POST(req) {
       );
     }
   } catch (error) {
-    console.log("error : " + error.message);
     return NextResponse.json(
       { message: "server error", error },
       { status: 500 }

@@ -8,7 +8,6 @@ Connect();
 const frontend_URL = process.env.NEXT_PUBLIC_FRONTEND_URL;
 export async function POST(req) {
   const { email } = await req.json();
-  console.log("check for request :  " + email);
   if (!email) {
     return NextResponse.json({ message: "email is required" }, { status: 404 });
   }
@@ -44,7 +43,6 @@ export async function POST(req) {
       { status: 200 }
     );
   } catch (error) {
-    console.log("error : " + error.message);
     return NextResponse.json(
       { message: "server error", error },
       { status: 500 }
@@ -90,8 +88,6 @@ export async function PUT(req) {
 
     return NextResponse.json({ message: "Password updated successfully" });
   } catch (error) {
-    console.log(error.message);
-
     if (error.name === "TokenExpiredError") {
       return NextResponse.json(
         { message: "Token has expired" },
