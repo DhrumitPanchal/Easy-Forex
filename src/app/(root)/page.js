@@ -1,14 +1,15 @@
 /* eslint-disable react/no-unescaped-entities */
 "use client";
+
 import Image from "next/image";
 import { FaStar } from "react-icons/fa6";
-import { toast } from "react-toastify";
-import { Context } from "./Context/Index";
+import { Context } from "../Context/Index";
 import { useContext } from "react";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
+
 export default function Home() {
-  const { plansData, checkoutItems, setCheckoutItems } = useContext(Context);
+  const { plansData, setCheckoutItems } = useContext(Context);
   const router = useRouter();
   const tableHading = [
     "Currency Pair",

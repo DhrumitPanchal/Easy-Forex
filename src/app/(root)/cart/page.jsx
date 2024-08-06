@@ -6,7 +6,7 @@ import { FaArrowRight } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 function Page() {
-  const { cart, checkoutItems, setCheckoutItems } = useContext(Context);
+  const { cart, setCheckoutItems } = useContext(Context);
 
   const [total, setTotal] = useState(0);
   const router = useRouter();

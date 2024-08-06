@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useContext } from "react";
-import { Context } from "../Context/Index";
+import { Context } from "@/app/Context/Index";
 import Link from "next/link";
 function Page() {
   const { handelAdminLogin } = useContext(Context);

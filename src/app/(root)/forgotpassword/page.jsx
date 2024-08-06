@@ -4,7 +4,6 @@ import React, { useState, useContext, useEffect } from "react";
 import { Context } from "../Context/Index";
 import { useSearchParams } from "next/navigation";
 import { Suspense } from "react";
-import { useRouter } from "next/router";
 function ForgotPasswordPage() {
   const { handelSendForgotPasswordEmail, handelSendChangePassword, router } =
     useContext(Context);
