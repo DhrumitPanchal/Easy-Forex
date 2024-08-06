@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useContext, useEffect } from "react";
-import { Context } from "../Context/Index";
+import { Context } from "@/app/Context/Index";
 import { useSearchParams } from "next/navigation";
 import { Suspense } from "react";
 function ForgotPasswordPage() {
