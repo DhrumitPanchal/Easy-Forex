@@ -2,8 +2,8 @@
 
 import React, { useState, useContext } from "react";
 import { FaMagnifyingGlass } from "react-icons/fa6";
-import CourseCard from "../components/CourseCard";
-import { Context } from "../Context/Index";
+import CourseCard from "@/app/components/CourseCard";
+import { Context } from "@/app/Context/Index";
 function Page() {
   const { courseData } = useContext(Context);
 

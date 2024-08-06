@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useContext, useEffect } from "react";
-import CartPageCard from "../components/CartPageCard";
-import { Context } from "../Context/Index.jsx";
+import CartPageCard from "@/app/components/CartPageCard.jsx";
+import { Context } from "@/app/Context/Index";
 import { FaArrowRight } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";

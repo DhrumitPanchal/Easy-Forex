@@ -2,9 +2,9 @@
 
 import React, { useContext, useEffect, useState } from "react";
 import Link from "next/link";
-import country_list from "../components/country_list";
+import country_list from "@/app/components/country_list";
 import Image from "next/image";
-import { Context } from "../Context/Index";
+import { Context } from "@/app/Context/Index";
 
 function Page({ items, total }) {
   const { handelPayment, checkoutItems } = useContext(Context);
