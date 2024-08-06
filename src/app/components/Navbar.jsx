@@ -7,7 +7,6 @@ import { FaBars, FaTimes } from "react-icons/fa";
 import { useRouter, usePathname } from "next/navigation";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { Context } from "../Context/Index";
-
 function Navbar() {
   const { cart } = useContext(Context);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -25,10 +24,10 @@ function Navbar() {
       name: "HOME",
       path: "/",
     },
-    {
-      name: "ABOUT US",
-      path: "/#about",
-    },
+    // {
+    //   name: "ABOUT US",
+    //   path: "/#about",
+    // },
     {
       name: "COURSE",
       path: "/course",
@@ -88,6 +87,10 @@ function Navbar() {
     };
   }, [pathname]);
 
+  useEffect(() => {
+    setSignalMenu(false);
+  }, [pathname]);
+
   if (
     pathname.match(/^\/admin/) ||
     pathname.match(/^\/payment/) ||
@@ -140,7 +143,6 @@ function Navbar() {
                 key={item?.name}
                 onClick={() => {
                   item.name !== "SIGNALS" && setMenuOpen(!menuOpen);
-                  item.name !== "SIGNALS" && setActiveSection(item.name);
                   item?.name !== "SIGNALS"
                     ? router.push(item.path)
                     : setSignalMenu(!signalMenu);
@@ -148,7 +150,7 @@ function Navbar() {
                 className={`${
                   item?.Children ? "relative " : "group"
                 } cursor-pointer px-[.2rem] pt-[.6rem] pb-[.2rem] flex items-center gap-[.6rem] text-white  transition-colors duration-200 ${
-                  activeSection === item?.name && item.name !== "SIGNALS"
+                  pathname === item?.path && item.name !== "SIGNALS"
                     ? "border-b-[.11rem] border-white"
                     : ""
                 }  text-[.9rem]  max-sm:text-[1.2rem] font-medium max-sm:border-b-[.1px] max-sm:border-white/60`}
