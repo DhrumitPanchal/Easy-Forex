@@ -23,8 +23,8 @@ export async function GET(req) {
 
   try {
     const { searchParams } = new URL(req.url);
-    const paymentId = searchParams.get("paymentId");
-    const payerId = searchParams.get("PayerID");
+    const paymentId = searchParams?.get("paymentId");
+    const payerId = searchParams?.get("PayerID");
 
     if (!paymentId || !payerId) {
       return NextResponse.json(
