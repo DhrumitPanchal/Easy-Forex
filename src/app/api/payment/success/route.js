@@ -20,12 +20,10 @@ const failed_redirect_URL = process.env.NEXT_PUBLIC_FAILED_REDIRECT;
 
 export async function GET(req) {
   await Connect();
-
+  const { searchParams } = new URL(req.url);
+  const paymentId = searchParams?.get("paymentId");
+  const payerId = searchParams?.get("PayerID");
   try {
-    const { searchParams } = new URL(req.url);
-    const paymentId = searchParams?.get("paymentId");
-    const payerId = searchParams?.get("PayerID");
-
     if (!paymentId || !payerId) {
       return NextResponse.json(
         { message: "Missing paymentId or payerId" },
