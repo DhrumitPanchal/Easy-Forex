@@ -1,7 +1,7 @@
-import { NextResponse } from "next/server";
 import paypal from "paypal-rest-sdk";
-import { Payment } from "../model";
+import { NextResponse } from "next/server";
 import { promisify } from "util";
+import { Payment } from "../model";
 import { Connect } from "../../Connect";
 import { SendPerchesMail } from "../../SendMail";
 
@@ -17,6 +17,7 @@ const executePaymentAsync = promisify(
 
 const success_redirect_URL = process.env.NEXT_PUBLIC_SUCCESS_REDIRECT;
 const failed_redirect_URL = process.env.NEXT_PUBLIC_FAILED_REDIRECT;
+
 export async function GET(req) {
   await Connect();
 
@@ -41,43 +42,27 @@ export async function GET(req) {
       const { payer_info } = payer;
       const { item_list } = transactions[0];
 
-      const paymentData = {
-        payer_Info: {
-          first_name: payer_info.first_name || "",
-          last_name: payer_info.last_name || "",
-          country: payer_info.country_code || "",
-          town_Ci: payer_info.shipping_address?.city || "",
+      // Update the payment status to "success"
+      await Payment.findOneAndUpdate(
+        { paymentId },
+        { $set: { status: "success" } }
+      );
 
-          email: payer_info.email || "",
-        },
-        items: item_list.items.map((item) => ({
-          productId: item.sku || "",
-          name: item.name || "",
-          description: item.description || "",
-          price: parseFloat(item.price) || 0,
-          quantity: parseInt(item.quantity) || 0,
-          image: item.image_url || "",
-        })),
-        subTotal: parseFloat(transactions[0].amount.total) || 0,
-      };
-
-      const payment = new Payment(paymentData);
-      const newPayment = await payment.save();
-
-      const courses = item_list?.items?.map((e) => {
-        return `${e.name} `;
-      });
+      const courses = item_list.items.map((e) => `${e.name} `);
       SendPerchesMail(
         courses,
-        payer_info?.first_name + " " + payer_info?.last_name
+        `${payer_info.first_name} ${payer_info.last_name}`
       );
 
       return NextResponse.redirect(success_redirect_URL);
     } else {
+      // Delete the payment data from the database if the payment failed
+      await Payment.findOneAndDelete({ paymentId });
       return NextResponse.redirect(failed_redirect_URL);
     }
   } catch (error) {
     console.error("Error executing payment:", error);
+    await Payment.findOneAndDelete({ paymentId });
     return NextResponse.json(
       { message: "Error executing payment", error },
       { status: 500 }

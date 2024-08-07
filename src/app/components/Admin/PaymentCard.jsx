@@ -4,7 +4,7 @@ import { Context } from "@/app/Context/Index";
 import { formatDistanceToNow } from "date-fns";
 
 function PaymentCard({ data }) {
-  const { payer_Info, items, subTotal, paymentDate } = data;
+  const { payer_Info, items, subTotal, paymentDate, status, paymentId } = data;
   const { courseData } = useContext(Context);
 
   const findImageUrl = (productID) => {
@@ -47,6 +47,7 @@ function PaymentCard({ data }) {
           <h2>Country : {payer_Info?.country}</h2>
           <h2>Town/City : {payer_Info?.town_Ci}</h2>
           <h2>Email: {payer_Info?.email}</h2>
+          <h2>phone no : {payer_Info?.phone}</h2>
         </div>
       </div>
 

@@ -6,7 +6,6 @@ import Link from "next/link";
 import { Context } from "@/app/Context/Index";
 import { FaPlus } from "react-icons/fa";
 import { FaMagnifyingGlass } from "react-icons/fa6";
-import Image from "next/image";
 import PaymentCard from "@/app/components/Admin/PaymentCard";
 function Page() {
   const { payments } = useContext(Context);

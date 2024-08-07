@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { types } from "util";
 
 const getCurrentTime = () => {
   const currentDate = Date.now();
@@ -22,10 +23,10 @@ const paymentSchema = new mongoose.Schema({
       type: String,
       required: true,
     },
-    // phone: {
-    //   type: Number,
-    //   required: true, // Make optional
-    // },
+    phone: {
+      type: Number,
+      required: true, // Make optional
+    },
     email: {
       type: String,
       required: true,
@@ -51,6 +52,12 @@ const paymentSchema = new mongoose.Schema({
     ],
     required: true,
   },
+  status: {
+    type: String,
+    enum: ["pending", "success", "failed"],
+    required: true,
+  },
+  paymentId: { type: String, required: true, unique: true },
   paymentDate: {
     type: Number,
     default: () => getCurrentTime(),

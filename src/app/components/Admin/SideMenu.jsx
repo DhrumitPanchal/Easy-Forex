@@ -6,10 +6,17 @@ import Link from "next/link";
 import Cookies from "js-cookie";
 import { Context } from "@/app/Context/Index";
 import { BiLogOut } from "react-icons/bi";
+import { usePathname } from "next/navigation";
 
 function SideMenu() {
   const [openMenu, setOpenMenu] = useState(false);
   const { router } = useContext(Context);
+  const path = usePathname();
+
+  if (path === "/admin") {
+    return;
+  }
+
   return (
     <div className="relative flex w-screen h-screen overflow-x-hidden ">
       <FaBars
@@ -64,7 +71,7 @@ function SideMenu() {
           }}
           className=" cursor-pointer h-[2.4rem] w-[11rem] flex  justify-center items-center gap-[.6rem] rounded-[.4rem] text-[1rem]  tracking-[1px] font-normal bg-black text-white"
         >
-          <BiLogOut className="text-[1.2rem]"/>
+          <BiLogOut className="text-[1.2rem]" />
           <h2>Logout</h2>
         </button>
       </aside>
