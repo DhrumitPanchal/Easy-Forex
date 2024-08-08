@@ -40,7 +40,7 @@ function Footer() {
               <Link href="/">Home</Link>
               <Link href="/course">courses</Link>
               <Link href="/termsandconditions">Terms and Conditions</Link>
-              <Link href="/privacypolicy">Privacy Policy</Link>
+              <Link href="/privacy-policy">Privacy Policy</Link>
               <Link href="contact">Contact US</Link>
             </div>
           </div>
