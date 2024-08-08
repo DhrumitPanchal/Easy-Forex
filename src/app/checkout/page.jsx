@@ -5,7 +5,7 @@ import Link from "next/link";
 import country_list from "../components/country_list";
 import Image from "next/image";
 import { Context } from "../Context/Index";
-
+import { toast } from "react-toastify";
 function Page({ items, total }) {
   const { handelPayment, checkoutItems } = useContext(Context);
 
@@ -17,6 +17,7 @@ function Page({ items, total }) {
     phone: undefined,
     email: "",
   });
+  const [loading, setLoading] = useState(false);
 
   const handelInput = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -24,6 +25,11 @@ function Page({ items, total }) {
 
   const handelSubmit = (e) => {
     e.preventDefault();
+    if (!checkoutItems?.items) {
+      return toast.error("not selected any checkout item");
+    }
+    console.log(checkoutItems?.items);
+    setLoading(true);
     handelPayment(formData, checkoutItems?.items, checkoutItems?.SubTotal);
   };
   useEffect(() => {}, [checkoutItems]);
@@ -126,6 +132,7 @@ function Page({ items, total }) {
                   type="tel"
                   name="phone"
                   id="name"
+                  pattern="[0-9]{10}"
                   onChange={(e) => handelInput(e)}
                   value={formData?.phone}
                   required
@@ -215,10 +222,10 @@ function Page({ items, total }) {
                   className="h-[1.1rem] w-[1.1rem] "
                   type="checkbox"
                   name=""
-                  id=""
+                  id="checkbox"
                   required
                 />
-                <h2>
+                <label htmlFor="checkbox">
                   I have read and agree to the website{" "}
                   <Link
                     className="text-red-500 underline"
@@ -226,16 +233,32 @@ function Page({ items, total }) {
                   >
                     terms and conditions.{" "}
                   </Link>
-                </h2>
+                </label>
               </div>
 
-              <button className="flex justify-center items-center h-[3rem] w-[50%] max-sm:w-full rounded-[.4rem] bg-[#ffd138] hover:bg-[#f2ba36] transition-colors duration-150">
-                <Image
-                  src={"/Images/paypal.png"}
-                  height={20}
-                  width={80}
-                  alt=""
-                />
+              <button
+                type="submit"
+                className={`flex justify-center items-center h-[3rem] w-[50%] max-sm:w-full rounded-[.4rem] ${
+                  loading ? "bg-[#f2ba36]" : "bg-[#ffd138] hover:bg-[#f2ba36]"
+                } transition-colors duration-150`}
+              >
+                {loading ? (
+                  <div
+                    class="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-e-transparent align-[-0.125em] text-surface motion-reduce:animate-[spin_1.5s_linear_infinite] dark:text-white"
+                    role="status"
+                  >
+                    <span class="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">
+                      Loading...
+                    </span>
+                  </div>
+                ) : (
+                  <Image
+                    src={"/Images/paypal.png"}
+                    height={20}
+                    width={80}
+                    alt=""
+                  />
+                )}
               </button>
             </div>
           </div>

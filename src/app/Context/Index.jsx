@@ -171,7 +171,6 @@ export default function MyContext(props) {
 
   const handelPayment = async (payer_Info, items, subTotal) => {
     console.log("payment data ");
-    console.table({ payer_Info, items, subTotal });
     try {
       const { data } = await axios.post(BaseURL + "/payment", {
         payer_Info,
@@ -247,6 +246,7 @@ export default function MyContext(props) {
         confirmPassword,
         token,
       });
+      Cookies.remove("access-token");
       toast.success("password changed");
       return "password changed";
     } catch (error) {

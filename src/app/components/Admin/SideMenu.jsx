@@ -43,21 +43,33 @@ function SideMenu() {
             <Link
               href={"/admin/payments"}
               onClick={() => setOpenMenu(!openMenu)}
-              className="cursor-pointer px-[1rem] py-[.6rem] h-fit w-full border-b-[1px] border-black/50 text-[1.2rem] transition-colors duration-300 text-black/50 font-bold hover:bg-black/10"
+              className={`${
+                path === "/admin/payments"
+                  ? "bg-gradient-to-r from-slate-600/30 to-slate-300/5 text-black"
+                  : "text-black/50"
+              } cursor-pointer px-[1rem] py-[.6rem] h-fit w-full border-b-[1px] border-black/50 text-[1.2rem] transition-colors duration-300  font-bold hover:bg-black/10`}
             >
               Payments
             </Link>
             <Link
               href={"/admin/courses"}
               onClick={() => setOpenMenu(!openMenu)}
-              className="cursor-pointer px-[1rem] py-[.6rem] h-fit w-full border-b-[1px] border-black/50 text-[1.2rem] transition-colors duration-300 text-black/50 font-bold hover:bg-black/10"
+              className={`${
+                path === "/admin/courses"
+                  ? "bg-gradient-to-r from-slate-600/30 to-slate-300/5 text-black"
+                  : "text-black/50"
+              } cursor-pointer px-[1rem] py-[.6rem] h-fit w-full border-b-[1px] border-black/50 text-[1.2rem] transition-colors duration-300  font-bold hover:bg-black/10`}
             >
               Courses
             </Link>
             <Link
               href={"/admin/plans"}
               onClick={() => setOpenMenu(!openMenu)}
-              className="cursor-pointer px-[1rem] py-[.6rem] h-fit w-full border-b-[1px] border-black/50 text-[1.2rem] transition-colors duration-300 text-black/50 font-bold hover:bg-black/10"
+              className={`${
+                path === "/admin/plans"
+                  ? "bg-gradient-to-r from-slate-600/30 to-slate-300/5 text-black"
+                  : "text-black/50"
+              } cursor-pointer px-[1rem] py-[.6rem] h-fit w-full border-b-[1px] border-black/50 text-[1.2rem] transition-colors duration-300  font-bold hover:bg-black/10`}
             >
               Plans
             </Link>
