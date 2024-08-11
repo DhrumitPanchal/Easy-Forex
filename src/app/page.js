@@ -129,7 +129,7 @@ export default function Home() {
                 Trading Education end Tools
               </h4>
               <h2 className="text-[4.6rem] max-sm:text-[2.6rem] font-semibold leading-[4.2rem]">
-                Easy Forex Pips
+                ProForexTrading
               </h2>
               <div className="mt-[2rem] flex gap-[2rem]">
                 <a
@@ -172,7 +172,7 @@ export default function Home() {
               Free Forex Training
             </h1>
             <p className="text-center text-secondaryColor ">
-              Easy Forex Pips is a powerful Forex trading analysis tool that
+              Pro Forex Trading is a powerful Forex trading analysis tool that
               provides subscribers with trading analysis and education, all in
               Real- Time, assisting you in your trading plan to achieve great
               results in Forex trading.

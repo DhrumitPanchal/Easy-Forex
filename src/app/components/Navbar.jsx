@@ -11,7 +11,6 @@ function Navbar() {
   const { cart } = useContext(Context);
   const [menuOpen, setMenuOpen] = useState(false);
   const [signalMenu, setSignalMenu] = useState(false);
-  const [activeSection, setActiveSection] = useState("HOME");
   const [bgColor, setBgColor] = useState(
     "bg-transparent backdrop-blur-[5px] max-sm:bg-[#242b32]"
   );
@@ -101,13 +100,14 @@ function Navbar() {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 py-[.6rem] z-40 w-full flex justify-between items-center px-[2rem] max-sm:px-[2rem]  ${bgColor} `}
+      className={`fixed top-0 left-0 right-0 py-[.8rem] z-40 w-full flex justify-between items-center px-[2rem] max-sm:px-[2rem]  ${bgColor} `}
     >
       <a
         href="#home"
-        className="cursor-pointer flex items-center gap-[.6rem] text-[1.4rem] text-secondaryColor font-bold"
+        className="cursor-pointer flex items-center gap-[1rem] text-[1.4rem] text-secondaryColor font-bold"
       >
-        <Image alt="" src={"/Images/Logo.png"} height={50} width={50} />{" "}
+        <Image alt="" src={"/Images/LOGO.svg"} height={50} width={50} />{" "}
+        <h2 className="text-[1.2rem] text-[#d9af50]">PROFOREXTRADING</h2>
       </a>
 
       <FaBars
@@ -124,7 +124,7 @@ function Navbar() {
           <Image
             className=""
             alt=""
-            src={"/Images/Logo.png"}
+            src={"/Images/LOGO.svg"}
             height={50}
             width={50}
           />{" "}
@@ -149,9 +149,9 @@ function Navbar() {
                 }}
                 className={`${
                   item?.Children ? "relative " : "group"
-                } cursor-pointer px-[.2rem] pt-[.6rem] pb-[.2rem] flex items-center gap-[.6rem] text-white  transition-colors duration-200 ${
+                } cursor-pointer px-[.2rem] pt-[.6rem] pb-[.1rem] flex items-center gap-[.6rem] text-white  transition-colors duration-200 ${
                   pathname === item?.path && item.name !== "SIGNALS"
-                    ? "border-b-[.11rem] border-white"
+                    ? "border-b-[1.5px] border-white"
                     : ""
                 }  text-[.9rem]  max-sm:text-[1.2rem] font-medium max-sm:border-b-[.1px] max-sm:border-white/60`}
                 href={item?.path}

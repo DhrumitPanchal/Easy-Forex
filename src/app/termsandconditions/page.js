@@ -23,8 +23,8 @@ function Page() {
           error, emotional induced errors, news surprises and earnings releases.
         </p>
         <p>
-          Easy Forex is an educational site and a platform for exchanging
-          Forex information. Easy Forex takes no responsibility for loss
+          Pro Forex Trading is an educational site and a platform for exchanging
+          Forex information. Pro Forex Trading takes no responsibility for loss
           incurred as a result of our trading ideas. By signing up as a member,
           you acknowledge that we are not providing financial advice and that
           you are making a decision to copy our trading ideas(analysis) on your
@@ -38,16 +38,16 @@ function Page() {
         </p>
 
         <p>
-          All content that made by Easy Forex are for educational and
+          All content that made by Pro Forex Trading are for educational and
           informational purposes only. All comments should not be construed as
           investment advice regarding the purchase or sale of any securities or
           financial instrument of any kind. Please consult with your financial
           adviser before making an investment decision regarding any securities
-          or financial Instruments mentioned by Easy Forex. Any software or
-          automated trading system purchased from Easy Forex is purchased
+          or financial Instruments mentioned by Pro Forex Trading. Any software or
+          automated trading system purchased from Pro Forex Trading is purchased
           as a tool only, and by executing a software tool or automated trading
-          system purchased from Easy Forex, you assume full responsibility
-          for any gains or losses you may experience. Easy Forex assumes no
+          system purchased from Pro Forex Trading, you assume full responsibility
+          for any gains or losses you may experience. Pro Forex Trading assumes no
           responsibility for your trading and investment results.
         </p>
         <p>
@@ -56,37 +56,37 @@ function Page() {
         </p>
         <p>
           This website and all information is intended for educational purposes
-          only and does not give financial advice. Easy Forex is not a
+          only and does not give financial advice. Pro Forex Trading is not a
           service to provide legal and financial advice; any information
           provided here is only the personal opinion of the author (not advice
           or financial advice in any sense, and in the sense of any act,
           ordinance or law of any country) and must not be used for financial
-          activities. Easy Forex does not offer, operate or provide
+          activities. Pro Forex Trading does not offer, operate or provide
           financial, brokerage, commercial or investment services and is not a
-          financial advisor. Rather, Easy Forex is an educational site and
+          financial advisor. Rather, Pro Forex Trading is an educational site and
           a platform for exchanging Forex information. Whenever information is
           disclosed, whether express or implied, about profit or revenue, it is
           not a guarantee. No method or trading system ensures that it will
           generate a profit, so always remember that trade can lead to a loss.
           Trading responsibility, whether resulting in profits or losses, is
-          yours and you must agree not to hold Easy Forex or other
+          yours and you must agree not to hold Pro Forex Trading or other
           information providers that are responsible in any way whatsoever. The
           use of the system means that the user accepts Disclaimer and Terms of
           Use.
         </p>
 
         <p>
-          Easy Forex is not represented as a registered investment
+          Pro Forex Trading is not represented as a registered investment
           consultant or brokerage dealer nor offers to buy or sell any of the
           financial instruments mentioned in the service offered.
         </p>
 
         <p>
-          While Easy Forex believes that the content provided is accurate,
+          While Pro Forex Trading believes that the content provided is accurate,
           there are no explicit or implied warranties of accuracy. The
-          information provided is believed to be reliable; Easy Forex does
+          information provided is believed to be reliable; Pro Forex Trading does
           not guarantee the accuracy or completeness of the information
-          provided. Third parties refer to Easy Forex to provide technology
+          provided. Third parties refer to Pro Forex Trading to provide technology
           and information if a third party fails, and then there is a risk that
           the information may be delayed or not delivered at all.
         </p>
@@ -94,7 +94,7 @@ function Page() {
           All information and comments contained on this website, including but
           not limited to, opinions, analyzes, news, prices, research, and
           general, do not constitute investment advice or an invitation to buy
-          or sell any type of instrument. Easy Forex assumes no
+          or sell any type of instrument. Pro Forex Trading assumes no
           responsibility for any loss or damage that may result, directly or
           indirectly, from the use or dependence on such information.
         </p>
@@ -110,7 +110,7 @@ function Page() {
           The information and opinions contained in the site are provided for
           information only and for educational reasons, should never be
           considered as direct or indirect advice to open a trading account and
-          / or invest money in Forex trading with any Forex company . Easy Forex
+          / or invest money in Forex trading with any Forex company . Pro Forex Trading
           Pips assumes no responsibility for any decisions taken by the user to
           create a merchant account with any of the brokers listed on this
           website. Anyone who decides to set up a merchant account or use the
@@ -136,7 +136,7 @@ function Page() {
           your goals, past experience and risk level. The opinions and data
           contained on this site should not be considered as suggestions or
           advice for the sale or purchase of currency or other instruments. Past
-          results do not show or guarantee future results. Neither Easy Forex
+          results do not show or guarantee future results. Neither Pro Forex Trading
           Pips nor its affiliates ensure the accuracy of the content provided on
           this Site. You explicitly agree that viewing, visiting or using this
           website is at your own risk.
@@ -144,7 +144,7 @@ function Page() {
 
         <h2 className="font-semibold">Analysis and Tools</h2>
         <p>
-          By using Easy Forex tools, you are agreeing that you are using
+          By using Pro Forex Trading tools, you are agreeing that you are using
           the service at your own risks. We are neither a registered investment
           advisor nor a broker-dealer. There is an extremely high level of risks
           involved in forex trading and so you should only use your risk capital
@@ -162,7 +162,7 @@ function Page() {
         <h2 className="font-semibold">Disclaimer & Warranties</h2>
 
         <p>
-          The services will be provided “as is”. Easy Forex does not cover
+          The services will be provided “as is”. Pro Forex Trading does not cover
           warranties that concern the availability and usefulness of
           information. Any damage or loss that is caused because of omission or
           misrepresentation, deletion, delay, defect, disruption and so on is
@@ -173,7 +173,7 @@ function Page() {
         </p>
 
         <p>
-          Easy Forex and our payment processing service providers are not
+          Pro Forex Trading and our payment processing service providers are not
           liable for you or your third party transactions for any direct,
           indirect or other incidental damage that can be caused due to service
           unavailability or failure to access the service.
@@ -205,7 +205,7 @@ function Page() {
         <h2 className="font-semibold">Copyrights or Trademarks</h2>
 
         <p>
-          Easy Forex is the owner and authorized of any trademark that
+          Pro Forex Trading is the owner and authorized of any trademark that
           appears on the website. We are also the copyright owner of the content
           and information listed here unless it is otherwise indicated. You
           should not download or save any part of the content or take a
@@ -219,7 +219,7 @@ function Page() {
         <h2 className="font-semibold">Links</h2>
 
         <p>
-          Easy Forex have not reviewed all the sites that are linked to us
+          Pro Forex Trading have not reviewed all the sites that are linked to us
           and we are not responsible for contents posted on the linked websites.
           The presence of any link does not mean that we endorse what the other
           websites have to say.
