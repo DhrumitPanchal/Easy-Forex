@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import Link from "next/link";
 import { FaPlus } from "react-icons/fa";
 import { FaMagnifyingGlass } from "react-icons/fa6";
@@ -9,8 +9,27 @@ import SideMenu from "@/app/components/Admin/SideMenu";
 import { Context } from "@/app/Context/Index";
 function Page() {
   const { courseData } = useContext(Context);
+  const [search, setSearch] = useState("");
+  const [data, setData] = useState([]);
 
-  useEffect(() => {}, [courseData]);
+  const handelSearch = (e) => {
+    setSearch(e.target.value);
+    const lowerSearch = e.target.value.toLowerCase();
+    console.log("search is : " + e.target.value);
+
+    if (e.target.value === "") {
+      setData(courseData);
+    }
+    const filteredData = courseData?.filter((item) =>
+      item?.name.toLowerCase().includes(lowerSearch)
+    );
+
+    setData(filteredData);
+  };
+
+  useEffect(() => {
+    setData(courseData);
+  }, [courseData]);
   return (
     <div className="relative flex w-full h-full ">
       <SideMenu />
@@ -26,6 +45,8 @@ function Page() {
           </Link>
           <div className="flex gap-[1rem]">
             <input
+              onChange={(e) => handelSearch(e)}
+              value={search}
               placeholder="Search Course"
               type="text"
               className="px-[.8rem] h-[2.4rem] max-sm:w-full w-[25rem] border-[2px] rounded-[.4rem] text-[1.2rem] border-black/70 focus:border-black focus:border-[2.4px] placeholder:text-black/70"
@@ -38,7 +59,7 @@ function Page() {
         </div>
 
         <div className="px-[1.6rem] pt-[1.4rem] pb-[2rem] flex flex-col gap-[2rem]">
-          {courseData?.map((item) => {
+          {data?.map((item) => {
             return <AdminCourseCard key={item} data={item} />;
           })}
         </div>

@@ -18,9 +18,9 @@ function CourseCard({ data }) {
       </div>
 
       <div>
-        <h4 className="text-[.7rem] max-sm:text-[.9rem ] text-black/60">
+        {/* <h4 className="text-[.7rem] max-sm:text-[.9rem ] text-black/60">
           FOREX MEMBERSHIP
-        </h4>
+        </h4> */}
         <h2 className="text-[1rem] max-sm:text-[1.4rem] capitalize font-medium">
           {data?.name}
         </h2>

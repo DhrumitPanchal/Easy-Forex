@@ -1,18 +1,32 @@
 "use client";
 
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { FaMagnifyingGlass } from "react-icons/fa6";
 import CourseCard from "../components/CourseCard";
 import { Context } from "../Context/Index";
 function Page() {
   const { courseData } = useContext(Context);
-
   const [search, setSearch] = useState("");
+  const [data, setData] = useState([]);
 
   const handelSearch = (e) => {
     setSearch(e.target.value);
-    console.log(search);
+    const lowerSearch = e.target.value.toLowerCase();
+    console.log("search is : " + e.target.value);
+
+    if (e.target.value === "") {
+      setData(courseData);
+    }
+    const filteredData = courseData?.filter((item) =>
+      item?.name.toLowerCase().includes(lowerSearch)
+    );
+
+    setData(filteredData);
   };
+
+  useEffect(() => {
+    setData(courseData);
+  }, [courseData]);
 
   return (
     <>
@@ -38,7 +52,7 @@ function Page() {
           {/* {filterIsActive
             ? filtProducts?.map((e) => <CourseCard key={e._id} data={e} />)
             : productData?.map((e) => <CourseCard key={e._id} data={e} />)} */}
-          {courseData?.map((item) => (
+          {data?.map((item) => (
             <CourseCard key={item?._id} data={item} />
           ))}
         </div>

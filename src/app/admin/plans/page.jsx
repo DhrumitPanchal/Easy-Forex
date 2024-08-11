@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import SideMenu from "@/app/components/Admin/SideMenu";
 import { FaMagnifyingGlass } from "react-icons/fa6";
 import { FaPlus } from "react-icons/fa";
@@ -8,11 +8,28 @@ import { Context } from "@/app/Context/Index.jsx";
 import Link from "next/link";
 function Page() {
   const { plansData } = useContext(Context);
+  const [search, setSearch] = useState("");
+  const [data, setData] = useState([]);
+
+  const handelSearch = (e) => {
+    setSearch(e.target.value);
+    console.log(
+      "search is : " + e.target.value + " - " + typeof e.target.value
+    );
+
+    if (e.target.value === "" || e.target.value.length === "0") {
+      setData(plansData);
+    }
+    const filteredData = plansData?.filter((item) => {
+      return item?.months == e.target.value || item?.price == e.target.value;
+    });
+
+    setData(filteredData);
+  };
 
   useEffect(() => {
-    console.log(plansData);
+    setData(plansData);
   }, [plansData]);
-
   return (
     <div className="relative flex w-full h-fit">
       <SideMenu />
@@ -30,6 +47,8 @@ function Page() {
             <input
               placeholder="Search Membership"
               type="text"
+              onChange={(e) => handelSearch(e)}
+              value={search}
               className="px-[.8rem] h-[2.4rem] max-sm:w-full w-[25rem] border-[2px] rounded-[.4rem] text-[1.2rem] border-black/70 focus:border-black focus:border-[2.4px] placeholder:text-black/70"
             />
             <div className="cursor-pointer h-[2.4rem] w-[8rem]  max-sm:w-fit max-sm:px-[.8rem] flex justify-center items-center gap-[.6rem] rounded-[.4rem] text-[1.1rem]  tracking-[1px] font-normal bg-black text-white">
@@ -40,7 +59,7 @@ function Page() {
         </div>
         {/* ------------------------------------------------------------------------------- */}
         <div className="px-[2rem] mt-[1rem] flex flex-wrap max-sm:flex-col max-sm:items-center  gap-[2rem] w-full ">
-          {plansData?.map((item, index) => {
+          {data?.map((item, index) => {
             return (
               <Link
                 href={`/admin/plans/update/${item?._id}`}
