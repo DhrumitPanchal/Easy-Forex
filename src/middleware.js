@@ -1,28 +1,29 @@
 import { NextResponse } from "next/server";
 import { jwtVerify } from "jose";
-import { toast } from "react-toastify";
 export async function middleware(req) {
   const { pathname } = req.nextUrl;
 
   if (
     pathname.includes("/api/auth") ||
     pathname.includes("/api/payment") ||
-    pathname.includes("cloudinary")
+    pathname.includes("cloudinary") ||
+    pathname === "/admin"
   ) {
     return NextResponse.next();
   }
 
-  if (req.method === "GET") {
+  if (req.method === "GET" && pathname.includes("/api/")) {
     return NextResponse.next();
   }
 
   const token = req.cookies.get("access-token");
 
   if (!token) {
-    return NextResponse.json(
-      { message: "please login again" },
-      { status: 404 }
-    );
+    // return NextResponse.json(
+    //   { message: "please login again" },
+    //   { status: 404 }
+    // );
+    return NextResponse.redirect("http://localhost:3000/admin");
   }
 
   try {
@@ -49,5 +50,5 @@ export async function middleware(req) {
 }
 
 export const config = {
-  matcher: "/api/:path*",
+  matcher: ["/admin/:path*", "/api/:path*"],
 };

@@ -215,18 +215,18 @@ export default function MyContext(props) {
     }
   };
 
-  const handelAdminAccess = () => {
-    if (pathname.match(/^\/admin/)) {
-      const token = Cookies.get("access-token");
-      if (token) {
-        if (pathname === "/admin") {
-          router.push("/admin/courses");
-        }
-      } else {
-        router.push("/admin");
-      }
-    }
-  };
+  // const handelAdminAccess = () => {
+  //   if (pathname.match(/^\/admin/)) {
+  //     const token = Cookies.get("access-token");
+  //     if (token) {
+  //       if (pathname === "/admin") {
+  //         router.push("/admin/courses");
+  //       }
+  //     } else {
+  //       router.push("/admin");
+  //     }
+  //   }
+  // };
 
   const handelSendForgotPasswordEmail = async (email) => {
     try {
@@ -256,7 +256,7 @@ export default function MyContext(props) {
   };
 
   useEffect(() => {
-    handelAdminAccess();
+    // handelAdminAccess();
     getAllCourses();
     getAllPlans();
     handelGetCartData();
@@ -267,7 +267,7 @@ export default function MyContext(props) {
   }, []);
 
   useEffect(() => {
-    handelAdminAccess();
+    // handelAdminAccess();
   }, [pathname]);
 
   return (
