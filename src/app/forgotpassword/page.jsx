@@ -60,7 +60,7 @@ function ForgotPasswordPage() {
       {status === "email sended" && (
         <div
           onClick={() => setStatus("NA")}
-          className="p-[4rem] max-sm:p-[2rem] w-[30rem] flex flex-col justify-between items-center h-[21.4rem] max-sm:mx-[2rem] max-sm:w-full rounded-[1rem] bg-black"
+          className="p-[4rem] max-sm:p-[2rem] w-[30rem] flex flex-col justify-between items-center h-[21.4rem] max-sm:h-[16rem] max-sm:mx-[2rem] max-sm:w-full rounded-[1rem] bg-black"
         >
           <h3 className="text-white text-[1.4rem] font-medium text-center">
             Email sent successfully. Please check your inbox for further
@@ -79,7 +79,7 @@ function ForgotPasswordPage() {
       {status === "password changed" && (
         <div
           onClick={() => setStatus("NA")}
-          className="p-[4rem] max-sm:p-[2rem] w-[30rem] flex flex-col justify-between items-center h-[21.4rem] max-sm:mx-[2rem] max-sm:w-full rounded-[1rem] bg-black"
+          className="p-[4rem] max-sm:p-[2rem] w-[30rem] flex flex-col justify-between items-center h-[21.4rem] max-sm:h-[16rem] max-sm:mx-[2rem] max-sm:w-full rounded-[1rem] bg-black"
         >
           <h3 className="text-white text-[1.4rem] font-medium text-center">
             Password changed successfully. You can now login with your new

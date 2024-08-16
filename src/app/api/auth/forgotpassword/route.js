@@ -27,6 +27,7 @@ export async function POST(req) {
 
     const resetLink = `${frontend_URL}/forgotpassword?token=${token}`;
 
+    console.log("check email : " + email);
     const mailOptions = {
       from: '"Maddison Foo Koch 👻" dhrumit6789@gmail.com',
       to: email,
@@ -34,7 +35,14 @@ export async function POST(req) {
       html: `<p>You requested for a password reset, kindly use this <a href="${resetLink}">link</a> to reset your password. This link will expire in 5 minutes.</p>`,
     };
 
-    transporter.sendMail(mailOptions);
+    try {
+      await transporter.sendMail(mailOptions);
+    } catch (mailError) {
+      return NextResponse.json(
+        { message: "Failed to send email", error: mailError.message },
+        { status: 500 }
+      );
+    }
 
     return NextResponse.json(
       {
