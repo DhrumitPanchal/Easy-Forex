@@ -14,7 +14,7 @@ function PaymentCard({ data }) {
   };
   return (
     <div className="mx-[1.6rem] max-sm:mx-[1rem] mt-[1rem] px-[1rem] pt-[1rem] pb-[.4rem] border-[.15rem] rounded-[.4rem] border-black  flex flex-col">
-      <div className="flex justify-between w-full max-sm:flex-col">
+      <div className="flex justify-between w-full max-sm:flex-col max-sm:gap-[1rem]">
         <div className="flex flex-col gap-[1rem] w-3/4 max-sm:w-full">
           {items?.map((e) => {
             const url = findImageUrl(e?.productId);
@@ -42,7 +42,7 @@ function PaymentCard({ data }) {
           })}
         </div>
 
-        <div className="flex flex-col gap-[.4rem] w-2/5 max-sm:w-full text-[1.1rem] font-semibold">
+        <div className="flex flex-col gap-[.4rem] max-sm:gap-0 max-sm:text-[.9rem] w-2/5 max-sm:w-full text-[1.1rem] font-semibold">
           <h2>Name : {payer_Info?.first_name + " " + payer_Info?.last_name}</h2>
           <h2>Country : {payer_Info?.country}</h2>
           <h2>Town/City : {payer_Info?.town_Ci}</h2>
