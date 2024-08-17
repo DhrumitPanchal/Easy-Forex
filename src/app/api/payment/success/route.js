@@ -41,7 +41,7 @@ export async function GET(req) {
       const { item_list } = transactions[0];
 
       // Update the payment status to "success"
-      await Payment.findOneAndUpdate(
+      const update = await Payment.findOneAndUpdate(
         { paymentId },
         { $set: { status: "success" } }
       );
@@ -49,7 +49,8 @@ export async function GET(req) {
       const courses = item_list.items.map((e) => `${e.name} `);
       SendPerchesMail(
         courses,
-        `${payer_info.first_name} ${payer_info.last_name}`
+        `${payer_info.first_name} ${payer_info.last_name}`,
+        update?.payer_Info?.email
       );
 
       return NextResponse.redirect(success_redirect_URL);

@@ -1,7 +1,7 @@
 import { transporter } from "./payment/nodemailerConfig";
 
-export async function SendPerchesMail(course, userName) {
-  console.table({ course, userName });
+export async function SendPerchesMail(course, userName, Email) {
+  console.table({ course, userName, Email });
 
   const message = `<p>
     Dear ${userName}, <br /><br />
@@ -11,7 +11,7 @@ export async function SendPerchesMail(course, userName) {
     course: Course Access: <br /><br />
     You can access the course materials and engage with fellow learners
     through our exclusive Telegram channel. Click the link below to join: 
-    <a href="https://www.dhrumitpanchal.me">channel link</a><br /><br />
+    <a href="https://proforextrading.vercel.app">channel link</a><br /><br />
     <b>What to Expect:</b><br />
     Comprehensive lessons designed to enhance your trading skills<br />
     Exclusive tips and strategies from industry experts<br />
@@ -20,15 +20,15 @@ export async function SendPerchesMail(course, userName) {
     We are confident that this course will provide you with valuable insights
     and help you achieve your trading goals.<br /><br />
     If you have any questions or need further assistance, please do not
-    hesitate to reach out to us at [Support Email].<br /><br />
+    hesitate to reach out to us at proforextrading.official@gmail.com.<br /><br />
     Thank you for choosing [Your Company Name]. We look forward to
     supporting you on your trading journey!<br /><br />
-    Best regards,<br />Your Name<br />Your Position<br />Your Company Name<br />Company Contact Information<br />Company Website
+    Best regards,<br />ProForexTrading Team<br /><a href="https://proforextrading.vercel.app">https://proforextrading.vercel.app</a><br />ProForexTrading<br />Company Contact Information<br />
   </p>`;
 
   const info = await transporter.sendMail({
-    from: '"Maddison Foo Koch 👻" dhrumit6789@gmail.com',
-    to: "dhrumitpanchal789@gmail.com",
+    from: '"ProForexTrading" proforextrading.official@gmail.com',
+    to: Email,
     subject:
       "Welcome to the course - Here's Your Access to Our Exclusive Content",
     html: message,

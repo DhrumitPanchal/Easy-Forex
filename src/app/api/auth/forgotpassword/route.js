@@ -29,7 +29,7 @@ export async function POST(req) {
 
     console.log("check email : " + email);
     const mailOptions = {
-      from: '"Maddison Foo Koch 👻" dhrumit6789@gmail.com',
+      from:  '"ProForexTrading" proforextrading.official@gmail.com',
       to: email,
       subject: "Password Reset",
       html: `<p>You requested for a password reset, kindly use this <a href="${resetLink}">link</a> to reset your password. This link will expire in 5 minutes.</p>`,
