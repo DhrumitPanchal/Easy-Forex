@@ -4,7 +4,6 @@ import Footer from "./components/Footer";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import MyContext from "./Context/Index";
-
 export const metadata = {
   title: "ProForexTrading",
   description:
@@ -19,11 +18,11 @@ export default function RootLayout({ children }) {
       <head>
         <meta charset="utf-8" />
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <link rel="icon" sizes="any" href="/Images/favicon.png" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="robots" content="layout, follow" />
         <meta name="language" content="English" />
         <meta name="revisit-after" content="30 days" />
+        <link rel="icon" sizes="any" href="/Images/favicon.png" />
         <link rel="apple-touch-icon" sizes="any" href="/Images/favicon.png" />
         <link rel="manifest" href="./manifest.json" />
       </head>
