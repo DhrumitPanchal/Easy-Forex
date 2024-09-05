@@ -2,7 +2,7 @@ import { transporter } from "./payment/nodemailerConfig";
 
 export async function SendPerchesMail(course, userName, Email) {
   console.table({ course, userName, Email });
-
+ 
   const message = `<p>
     Dear ${userName}, <br /><br />
     Congratulations on purchasing our <b>${course}</b>! We are thrilled to have you

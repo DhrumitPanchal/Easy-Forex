@@ -3,7 +3,6 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
 import MyContext from "./Context/Index";
 
 export const metadata = {
@@ -26,6 +25,7 @@ export default function RootLayout({ children }) {
         <meta name="language" content="English" />
         <meta name="revisit-after" content="30 days" />
         <link rel="apple-touch-icon" sizes="any" href="/Images/favicon.png" />
+        <link rel="manifest" href="./manifest.json" />
       </head>
       <body>
         <MyContext>

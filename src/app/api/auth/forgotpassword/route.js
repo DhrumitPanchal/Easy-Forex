@@ -14,10 +14,10 @@ export async function POST(req) {
 
   try {
     const checkUserExist = await Admin.findOne({ email });
-
+ 
     if (!checkUserExist) {
       return NextResponse.json({ message: "Admin not exist" }, { status: 404 });
-    }
+    } 
 
     const token = jwt.sign(
       { id: checkUserExist._id },
